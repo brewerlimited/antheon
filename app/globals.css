@@ -14,8 +14,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 * {
@@ -33,7 +33,7 @@ body {
     radial-gradient(circle at 68% 6%, rgba(203, 168, 107, 0.08), transparent 26rem),
     linear-gradient(180deg, #08090a 0%, #0b0c0d 45%, #08090a 100%);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Inter, Arial, Helvetica, sans-serif;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   text-rendering: geometricPrecision;
 }
 
