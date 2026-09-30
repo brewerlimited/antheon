@@ -1,0 +1,20 @@
+{
+  "name": "antheon-preview-intimate-detail",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node ../../scripts/import-react-previews.mjs intimate-detail"
+  },
+  "dependencies": {
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "@base-ui/react": "1.7.0",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "tailwind-merge": "3.6.0",
+    "lucide-react": "1.31.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.27.3"
+  }
+}

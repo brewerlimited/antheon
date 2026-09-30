@@ -1,0 +1,137 @@
+/* Directional choreography. The resting layout is unchanged. */
+main { overflow-x: clip; }
+.hero-line { display: block; overflow: clip; padding: .08em .07em .13em 0; margin: -.08em -.07em -.13em 0; }
+.hero-line > span { display: block; transform-origin: 0 70%; }
+.commercial-image::after, .detail-image::after, .service-hero-image::after { pointer-events: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  :root { --side-travel: 100px; --card-travel: 55px; --motion-ease: cubic-bezier(.16, 1, .3, 1); }
+
+  .js .reveal {
+    transition: opacity .8s ease, transform 1.25s var(--motion-ease);
+    transition-delay: calc(var(--i, 0) * 110ms);
+  }
+  .js .reveal[data-motion="left"] { transform: translate3d(calc(-1 * var(--side-travel)), 12px, 0); }
+  .js .reveal[data-motion="right"] { transform: translate3d(var(--side-travel), 12px, 0); }
+  .js .reveal[data-motion="fan"] {
+    transform: translate3d(calc(var(--enter-direction) * var(--card-travel)), 45px, 0) rotate(calc(var(--enter-direction) * 2.5deg)) scale(.96);
+    transform-origin: 50% 90%;
+  }
+  .js .reveal.visible { opacity: 1; transform: none; }
+  .js .reveal:focus-within { opacity: 1; transform: none; transition: none; }
+
+  /* Sweep a solid curtain off the image, independently of its parallax transform. */
+  .js [data-motion="curtain"] { position: relative; isolation: isolate; }
+  .js .reveal[data-motion="curtain"] { opacity: 1; transform: none; }
+  .js [data-motion="curtain"]::after {
+    content: ''; position: absolute; inset: 0; z-index: 2;
+    background: var(--charcoal); transform: scaleX(1); transform-origin: right;
+    transition: transform 1.35s var(--motion-ease) .12s;
+  }
+  .js .detail-image[data-motion="curtain"]::after { background: var(--accent); transform-origin: left; }
+  .js [data-motion="curtain"].visible::after { transform: scaleX(0); }
+  .js .service-card .card-image, .js .project-card .project-photo {
+    clip-path: inset(0 18% 0 0);
+    transition: clip-path 1.3s var(--motion-ease);
+    transition-delay: calc(var(--i, 0) * 110ms);
+  }
+  .js .service-card.visible .card-image, .js .project-card.visible .project-photo,
+  .js .service-card:focus-within .card-image, .js .project-card:focus-within .project-photo { clip-path: inset(0); }
+
+  .hero-content > h1 { animation: none; }
+  .hero-line > span { animation: titleSweep 1.15s var(--motion-ease) both; --line-start: -110px; }
+  .hero-line:nth-child(1) > span { animation-delay: .08s; }
+  .hero-line:nth-child(2) > span { --line-start: 130px; animation-delay: .2s; transform-origin: 100% 70%; }
+  .hero-line:nth-child(3) > span { --line-start: -85px; animation-delay: .32s; }
+  .hero-content > .eyebrow { animation: sideSweep .9s var(--motion-ease) .1s both; }
+  .hero-content > p { animation: sideSweep 1s var(--motion-ease) .5s both; }
+  .hero-content > .hero-actions { animation: none; }
+  .hero-actions > a { animation: sideSweep 1s var(--motion-ease) .63s backwards; }
+  .hero-actions > a:nth-child(2) { animation-delay: .77s; }
+  .hero-image { animation: cinematicSettle 2s var(--motion-ease) both; }
+  .experience-badge { transition: rotate .5s var(--motion-ease); }
+  .about-image:not(.visible) .experience-badge { rotate: -10deg; }
+
+  .mobile-menu[open] { animation: menuSideSweep .55s var(--motion-ease) both; }
+  .mobile-menu[open] nav a { animation: sideSweep .65s var(--motion-ease) both; }
+  .mobile-menu[open] nav a:nth-child(1) { animation-delay: .1s; }
+  .mobile-menu[open] nav a:nth-child(2) { animation-delay: .15s; }
+  .mobile-menu[open] nav a:nth-child(3) { animation-delay: .2s; }
+  .mobile-menu[open] nav a:nth-child(4) { animation-delay: .25s; }
+  .mobile-menu[open] nav a:nth-child(5) { animation-delay: .3s; }
+  .mobile-menu[open] nav a:nth-child(6) { animation-delay: .35s; }
+
+  @keyframes titleSweep {
+    from { opacity: 0; transform: translate3d(var(--line-start), 90%, 0) skewX(-7deg); }
+    to { opacity: 1; transform: translate3d(0, 0, 0) skewX(0); }
+  }
+  @keyframes sideSweep {
+    from { opacity: 0; translate: -55px 0; }
+    to { opacity: 1; translate: 0 0; }
+  }
+  @keyframes cinematicSettle {
+    from { transform: scale(1.12) translateX(2%); }
+    to { transform: scale(1) translateX(0); }
+  }
+  @keyframes menuSideSweep {
+    from { opacity: 0; clip-path: inset(0 0 0 100%); }
+    to { opacity: 1; clip-path: inset(0); }
+  }
+
+  @media (max-width: 760px) {
+    :root { --side-travel: 35px; --card-travel: 22px; }
+    .hero-line > span { --line-start: -40px; }
+    .hero-line:nth-child(2) > span { --line-start: 45px; }
+    .hero-line:nth-child(3) > span { --line-start: -30px; }
+    .js .reveal[data-motion="fan"] { transform: translate3d(calc(var(--enter-direction) * var(--card-travel)), 25px, 0) rotate(calc(var(--enter-direction) * 1deg)); }
+    .js .reveal.visible { transform: none; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-line { overflow: visible; }
+  .js .reveal, .hero-line > span { opacity: 1; transform: none; translate: none; }
+  .js [data-motion="curtain"]::after { content: none; }
+  .experience-badge { rotate: none; }
+}
+
+/* A slow, uninterrupted three-photograph background reel. */
+.hero-reel { position: absolute; inset: 0; z-index: -3; overflow: hidden; }
+.hero-reel .hero-image { z-index: 0; opacity: 0; animation: none; object-position: var(--reel-position, center); transition: opacity 2.4s ease-in-out; }
+.hero-reel .hero-image.is-active { z-index: 2; opacity: 1; }
+.hero-reel .hero-image.is-leaving { z-index: 1; opacity: 1; }
+.hero-bottom { display: grid; grid-template-columns: 1fr auto 1fr; gap: 28px; align-items: center; }
+.scroll-link .scroll-label { font-size: 12px; }
+.hero-bottom > .hero-reel-controls { display: flex; align-items: center; gap: 7px; }
+.hero-reel-controls[hidden], .reel-pause[hidden] { display: none !important; }
+.hero-reel-controls button { display: grid; place-items: center; width: 34px; height: 36px; padding: 0; border: 0; border-bottom: 1px solid #ffffff40; border-radius: 0; background: transparent; color: #eee3e0; font-size: 12px; letter-spacing: .5px; transition: color .3s ease, border-color .3s ease, background .3s ease; }
+.hero-reel-controls .reel-choice[aria-pressed="true"] { color: white; border-bottom: 2px solid white; }
+.hero-reel-controls button:hover { color: white; background: #ffffff12; border-color: white; }
+.hero-reel-controls button:disabled { opacity: .3; cursor: default; }
+.hero-reel-controls .reel-pause { border: 1px solid #ffffff60; border-radius: 50%; width: 36px; margin-left: 6px; font-size: 15px; }
+.hero-caption { justify-self: end; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-reel .hero-image.is-active, .hero-reel .hero-image.is-leaving { animation: reelDrift 11s linear both; }
+  .hero-reel.is-paused .hero-image { animation-play-state: paused; }
+  @keyframes reelDrift { from { transform: scale(1.055); } to { transform: scale(1); } }
+}
+@media (max-width: 760px) {
+  .hero-reel .hero-image { object-position: var(--reel-mobile-position, 58% center); }
+  .hero-bottom { grid-template-columns: 1fr auto; gap: 12px; }
+  .hero-reel-controls button { width: 27px; height: 34px; }
+  .hero-reel-controls .reel-pause { width: 34px; margin-left: 2px; }
+  .hero-bottom > .hero-reel-controls { gap: 5px; }
+  .scroll-link { gap: 14px; }
+}
+@media (max-width: 390px) { .scroll-link .scroll-label { display: none; } }
+
+/* Non-link text shifts in colour without gaining a clickable appearance. */
+.hover-ink { --text-hover: #b4201b; }
+.hover-ink-light { --text-hover: #ffaaa2; }
+.hover-ink-accent { --text-hover: #fff; }
+@media (hover: hover) and (pointer: fine) {
+  .hover-ink, .hover-ink .muted, .hover-ink em { transition: color .4s ease; }
+  .js .reveal.hover-ink { transition: opacity .8s ease calc(var(--i, 0) * 110ms), transform 1.25s var(--motion-ease, ease) calc(var(--i, 0) * 110ms), color .4s ease; }
+  .hover-ink:hover, .hover-ink:hover .muted, .hover-ink:hover em { color: var(--text-hover); }
+}

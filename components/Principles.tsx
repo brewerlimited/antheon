@@ -26,7 +26,7 @@ export function Principles() {
     <section className="section compact-section" aria-labelledby="principles-title">
       <div className="site-container principles-layout">
         <div>
-          <p className="section-label">04 / How We Work</p>
+          <p className="section-label">05 / How We Work</p>
           <h2 id="principles-title" className="section-title">
             Clarity
             <br />

@@ -5,7 +5,7 @@ export function Contact() {
     <section className="section contact-section" id="contact" aria-labelledby="contact-title">
       <div className="site-container contact-layout">
         <div>
-          <p className="section-label">05 / Contact</p>
+          <p className="section-label">06 / Contact</p>
           <h2 id="contact-title" className="section-title">
             Have something
             <br />
@@ -29,7 +29,7 @@ export function Contact() {
               LinkedIn <span aria-hidden="true">↗</span>
             </a>
           ) : (
-            <span className="text-link text-link-muted">LinkedIn ↗</span>
+            null
           )}
         </div>
       </div>

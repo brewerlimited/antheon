@@ -16,7 +16,7 @@ export const ventures = [
     category: "Construction Technology",
     description:
       "Commercial management software developed for specialist construction subcontractors, designed to improve the identification, preparation and recovery of contractual change.",
-    href: "",
+    href: "https://commercialcopilot.co.uk",
   },
   {
     name: "ClearQuote",
@@ -24,7 +24,7 @@ export const ventures = [
     category: "Business Software",
     description:
       "A simple feedback platform helping service businesses understand why prospective customers accept, reject or ignore quotations.",
-    href: "",
+    href: "https://clearquote.uk",
   },
   {
     name: "Anthēon Outdoor",
@@ -32,7 +32,7 @@ export const ventures = [
     category: "Outdoor Design",
     description:
       "A design-led concept exploring a more accessible way for homeowners to visualise and plan premium outdoor spaces.",
-    href: "",
+    href: "https://antheonoutdoor.co.uk",
   },
   {
     name: "GetYourPrint",
@@ -55,6 +55,6 @@ export const navigation = [
   { label: "About", href: "#about" },
   { label: "Ventures", href: "#ventures" },
   { label: "Digital", href: "#digital" },
-  { label: "Work", href: "#work" },
+  { label: "Web Design", href: "/web-design" },
   { label: "Contact", href: "#contact" },
 ];

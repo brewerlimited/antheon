@@ -15,27 +15,27 @@ export function Ventures() {
         </Reveal>
 
         <div className="venture-list">
-          {ventures.map((venture) => (
-            <article className="venture-row" key={venture.name}>
+          {ventures.map((venture) => {
+            const content = <>
               <div className="venture-mark" aria-hidden="true">
                 {venture.mark}
               </div>
               <div className="venture-main">
                 <h3>{venture.name}</h3>
                 <p>{venture.category}</p>
+                {venture.href ? <span className="venture-link">Visit website <span aria-hidden="true">↗</span></span> : null}
               </div>
               <p className="venture-description">{venture.description}</p>
-              {venture.href ? (
-                <a href={venture.href} className="venture-link">
-                  View Venture <span aria-hidden="true">↗</span>
-                </a>
-              ) : (
-                <span className="venture-link venture-link-muted" aria-label="Venture link to be added">
-                  View Venture <span aria-hidden="true">↗</span>
-                </span>
-              )}
-            </article>
-          ))}
+            </>;
+
+            return venture.href ? (
+              <a key={venture.name} href={venture.href} className="venture-row venture-row-linked"
+                target="_blank" rel="noopener noreferrer"
+                aria-label={`${venture.name} — visit website (opens in a new tab)`}>
+                {content}
+              </a>
+            ) : <article className="venture-row" key={venture.name}>{content}</article>;
+          })}
         </div>
       </div>
     </section>

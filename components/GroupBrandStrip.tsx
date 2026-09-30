@@ -17,9 +17,12 @@ export function GroupBrandStrip() {
         <div className="gold-rule" aria-hidden="true" />
         <p>GROUP</p>
         <div className="venture-rail" aria-label="Anthēon Group ventures">
-          {ventures.map((venture) => (
-            <span key={venture.name}>{venture.name}</span>
-          ))}
+          {ventures.map((venture) => venture.href ? (
+            <a key={venture.name} href={venture.href} target="_blank" rel="noopener noreferrer"
+              aria-label={`${venture.name} — visit website (opens in a new tab)`}>
+              {venture.name} <span aria-hidden="true">↗</span>
+            </a>
+          ) : <span key={venture.name}>{venture.name}</span>)}
         </div>
       </div>
     </section>

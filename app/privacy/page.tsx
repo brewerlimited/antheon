@@ -7,7 +7,7 @@ export default function PrivacyPage() {
   return (
     <>
       <Header />
-      <main className="privacy-page">
+      <main id="main-content" className="privacy-page" tabIndex={-1}>
         <section className="site-container privacy-content" aria-labelledby="privacy-title">
           <p className="section-label">Privacy</p>
           <h1 id="privacy-title" className="section-title">Privacy Notice</h1>

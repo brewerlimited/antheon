@@ -1,0 +1,4 @@
+import {HomeSections} from './home-sections';
+import {HeroShowcase} from './experience';
+import { ArrowUpRight,MapPin,HeartHandshake,Layers } from 'lucide-react';
+export default function Home(){return <main id="main" className="home-page"><HeroShowcase/><div className="wrap trust-strip"><span><MapPin/>Across Ireland & the UK</span><span><HeartHandshake/>A personal approach, from start to finish</span><span><Layers/>Marquees, furniture & finishing touches</span></div><section id="discover" className="wrap section intro"><div><div className="eyebrow">Room for something extraordinary</div><h2>Your occasion.<br/><em>Beautifully made.</em></h2></div><div><p>From a wedding in the garden to a grandstand at the races, the right space changes everything. We create bespoke marquee settings around you, your guests and the way you want to celebrate.</p><a className="text-link" href="/marquees">Find your perfect space<ArrowUpRight/></a></div></section><HomeSections/></main>}

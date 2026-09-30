@@ -15,7 +15,7 @@ export function Footer() {
         </div>
         <div className="footer-links">
           <a href="/privacy">Privacy</a>
-          {siteLinks.linkedin ? <a href={siteLinks.linkedin}>LinkedIn</a> : <span>LinkedIn</span>}
+          {siteLinks.linkedin ? <a href={siteLinks.linkedin}>LinkedIn</a> : null}
           <a href={`mailto:${siteLinks.email}`}>Email</a>
         </div>
       </div>

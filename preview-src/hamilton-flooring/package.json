@@ -1,0 +1,7 @@
+{
+  "name": "antheon-hamilton-preview-source",
+  "private": true,
+  "type": "module",
+  "scripts": { "build": "node ../../scripts/build-hamilton-preview.mjs" },
+  "devDependencies": { "esbuild": "0.27.3" }
+}

@@ -11,6 +11,7 @@ export function Hero() {
           alt=""
           fill
           priority
+          loading="eager"
           sizes="100vw"
           className="hero-image"
         />
@@ -39,8 +40,8 @@ export function Hero() {
             <a href="#about" className="button button-primary">
               Explore the Group <span aria-hidden="true">↓</span>
             </a>
-            <a href="#contact" className="button button-secondary">
-              Work with Anthēon <span aria-hidden="true">↗</span>
+            <a href="#work" className="button button-secondary">
+              View our work <span aria-hidden="true">↓</span>
             </a>
           </div>
         </Reveal>
