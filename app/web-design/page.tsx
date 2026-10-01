@@ -38,7 +38,7 @@ export default function WebDesignPage() {
               <p className="section-label">Your next project / A clear investment</p>
               <h2 className="section-title" id="pricing-title">Designed for you.<br /><span>Looked after by us.</span></h2>
             </div>
-            <p className="pricing-intro">A complete website, from the first design to launch. Then ongoing care to keep things running smoothly.</p>
+            <p className="pricing-intro">A complete website, ongoing care and support for your visibility in search. From the first design to what comes next.</p>
           </div>
         </Reveal>
         <Reveal delay="short">
@@ -55,8 +55,7 @@ export default function WebDesignPage() {
                   <li>Website setup &amp; launch</li>
                 </ul>
               </article>
-              <span className="pricing-plus" aria-hidden="true">+</span>
-              <article className="pricing-offer pricing-offer-care" aria-labelledby="website-care-title">
+              <article className="pricing-offer" aria-labelledby="website-care-title">
                 <p className="pricing-step"><span>02</span> Ongoing care</p>
                 <h3 id="website-care-title">Management &amp; hosting</h3>
                 <p className="pricing-amount"><span className="pricing-value">£35</span><span className="pricing-cadence">per month</span></p>
@@ -67,9 +66,20 @@ export default function WebDesignPage() {
                   <li>Website updates &amp; maintenance</li>
                 </ul>
               </article>
+              <article className="pricing-offer" aria-labelledby="website-seo-title">
+                <p className="pricing-step"><span>03</span> Search visibility</p>
+                <h3 id="website-seo-title">SEO Monitoring &amp; Optimisation</h3>
+                <p className="pricing-amount"><span className="pricing-value">£149</span><span className="pricing-cadence">per month</span></p>
+                <p className="pricing-description">Helping your website get found.</p>
+                <ul className="pricing-inclusions">
+                  <li>SEO performance monitoring</li>
+                  <li>Search visibility reviews</li>
+                  <li>Ongoing website optimisation</li>
+                </ul>
+              </article>
             </div>
             <div className="pricing-footer">
-              <div><p>One website. Taken care of.</p><span>£695 one-off, plus £35 per month.</span></div>
+              <div><p>One website. Taken care of.</p><span>Website: £695 one-off, plus £35 per month.</span><span>SEO Monitoring &amp; Optimisation: £149 per month.</span></div>
               <a className="button button-primary" href={`mailto:${siteLinks.email}?subject=Website%20design%20enquiry`}>Discuss your website <span aria-hidden="true">↗</span></a>
             </div>
           </div>
