@@ -42,6 +42,20 @@ export const concepts = [
     ],
   },
   {
+    slug: "surefix-interiors",
+    name: "Surefix Interiors",
+    category: "Interiors & Construction",
+    summary: "A bold, animated showcase for specialist interiors and craftsmanship.",
+    image: "/images/concepts/surefix-interiors-hero.webp",
+    imageAlt: "Surefix Interiors homepage concept with full-width interior photography, oversized typography and red accents.",
+    description: "A website design concept for Surefix Interiors, combining architectural photography, interactive service selectors and considered motion to showcase specialist interior work.",
+    decisions: [
+      "Full-width photography and bold typography establish a confident first impression.",
+      "Interactive service selectors connect each area of expertise with the work behind it.",
+      "Scroll reveals, subtle parallax and responsive hover states bring the page to life.",
+    ],
+  },
+  {
     slug: "hamilton-flooring",
     name: "Hamilton Flooring",
     category: "Commercial Flooring",
@@ -67,20 +81,6 @@ export const concepts = [
       "Distinctive typography establishes the business’s identity from the first screen.",
       "Project imagery connects the services to the spaces they help create.",
       "Considered motion adds depth without interrupting the path through the page.",
-    ],
-  },
-  {
-    slug: "hs-flooring",
-    name: "HS Flooring",
-    category: "Interiors & Flooring",
-    summary: "A refined, tactile direction for Harvey Simon Flooring.",
-    image: "/images/concepts/hs-flooring-hero.webp",
-    imageAlt: "Harvey Simon Flooring homepage concept with elegant interior photography and a curated material palette.",
-    description: "A website design concept for Harvey Simon Flooring, combining interior inspiration, material exploration and a more personal route to choosing a floor.",
-    decisions: [
-      "Interior photography puts the materials in the context of everyday spaces.",
-      "Interactive exploration makes the collection feel approachable and personal.",
-      "A restrained palette and careful spacing give the products room to speak.",
     ],
   },
 ] as const;

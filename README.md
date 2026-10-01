@@ -51,21 +51,26 @@ that preview's assets, and provides in-memory storage where sandboxed browser
 storage is unavailable. `next.config.ts` supplies the CORS and CSP headers
 needed for fonts, local gallery JSON and isolated scripts. Google Fonts are
 permitted for the static concepts that originally use them. Enquiries do not
-submit; the HS floor-finder advances locally through button controls.
+submit.
 
 These are the original six homepages adapted for viewing inside the portfolio:
-Intimate Detail, Eventco Marquees, Pride Flooring (red version), Hamilton
-Commercial Flooring, Anchor Flooring and Harvey Simon (HS) Flooring. Original
+Intimate Detail, Eventco Marquees, Pride Flooring (red version), Surefix Interiors,
+Hamilton Commercial Flooring and Anchor Flooring. Surefix replaces HS Flooring;
+the former HS concept URL redirects to the Surefix page. Original
 project folders and their hosting have not been changed.
 
 ### Maintaining previews
 
-- Static Pride, Anchor and HS previews are editable HTML/CSS/JS snapshots under
+- Static Pride and Anchor previews are editable HTML/CSS/JS snapshots under
   `public/previews/`; only homepage assets and interactions are included.
 - React preview source and per-preview build instructions are in `preview-src/`
   for Intimate Detail, Eventco and Hamilton. These isolated sources are excluded
   from the main Next.js type/lint checks; the shipped bundles are already built.
   Normal `npm run build` does not require their separate build dependencies.
+- Surefix preserves the original React/Vite homepage bundle and its motion code.
+  `scripts/import-surefix-preview.mjs` imports a built Surefix project into the
+  isolated preview, rebasing assets and retaining the images used by every
+  homepage service tab. The original project remains separate.
 - To add a design, add its packaged homepage, one 1440×1000 WebP thumbnail under
   `public/images/concepts/` and a record in `data/concepts.ts`. Keep the shared
   guard script before its application scripts and verify the sandboxed version.
