@@ -31,9 +31,49 @@ export default function WebDesignPage() {
         </div>
         <p className="concept-disclaimer">Independent design explorations. Shown as concepts, not commissioned client projects.</p>
       </section>
-      <section className="section site-container concept-enquiry" aria-labelledby="gallery-enquiry-title">
-        <div><p className="section-label">Your next project</p><h2 className="section-title" id="gallery-enquiry-title">Something distinctly yours.</h2></div>
-        <a className="button button-primary" href={`mailto:${siteLinks.email}?subject=Website%20design%20enquiry`}>Discuss your website <span aria-hidden="true">↗</span></a>
+      <section className="site-container website-pricing" id="pricing" aria-labelledby="pricing-title">
+        <Reveal>
+          <div className="pricing-heading">
+            <div>
+              <p className="section-label">Your next project / A clear investment</p>
+              <h2 className="section-title" id="pricing-title">Designed for you.<br /><span>Looked after by us.</span></h2>
+            </div>
+            <p className="pricing-intro">A complete website, from the first design to launch. Then ongoing care to keep things running smoothly.</p>
+          </div>
+        </Reveal>
+        <Reveal delay="short">
+          <div className="pricing-panel">
+            <div className="pricing-offers">
+              <article className="pricing-offer" aria-labelledby="website-setup-title">
+                <p className="pricing-step"><span>01</span> Design &amp; launch</p>
+                <h3 id="website-setup-title">Website design &amp; setup</h3>
+                <p className="pricing-amount"><span className="pricing-value">£695</span><span className="pricing-cadence">one-off</span></p>
+                <p className="pricing-description">Your business, brought to life online.</p>
+                <ul className="pricing-inclusions">
+                  <li>Full website design &amp; build</li>
+                  <li>Responsive across desktop, tablet &amp; mobile</li>
+                  <li>Website setup &amp; launch</li>
+                </ul>
+              </article>
+              <span className="pricing-plus" aria-hidden="true">+</span>
+              <article className="pricing-offer pricing-offer-care" aria-labelledby="website-care-title">
+                <p className="pricing-step"><span>02</span> Ongoing care</p>
+                <h3 id="website-care-title">Management &amp; hosting</h3>
+                <p className="pricing-amount"><span className="pricing-value">£35</span><span className="pricing-cadence">per month</span></p>
+                <p className="pricing-description">A little less on your to-do list.</p>
+                <ul className="pricing-inclusions">
+                  <li>Managed website hosting</li>
+                  <li>Ongoing website management</li>
+                  <li>Website updates &amp; maintenance</li>
+                </ul>
+              </article>
+            </div>
+            <div className="pricing-footer">
+              <div><p>One website. Taken care of.</p><span>£695 one-off, plus £35 per month.</span></div>
+              <a className="button button-primary" href={`mailto:${siteLinks.email}?subject=Website%20design%20enquiry`}>Discuss your website <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </Reveal>
       </section>
     </main>
     <Footer />
