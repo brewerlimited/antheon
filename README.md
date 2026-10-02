@@ -51,7 +51,7 @@ The main website permits search-engine indexing. Portfolio concept pages and emb
 - `components/motion-home.css` — layout, motion and responsive styling.
 - `app/globals.css` — existing inner-page styles with a coordinated blue palette.
 - `data/site.ts` and `data/concepts.ts` — preserved venture and portfolio content.
-- `public/images/motion/hero.webp` — original generated hero artwork.
+- `public/images/motion/hero-fibres.webp` — selected optical-fibre hero artwork, with the earlier arch preserved as `hero.webp`.
 - `components/VentureGallery.tsx` and `components/venture-gallery.css` — venture gallery and cursor interactions.
 - `public/images/motion/ventures/` — five generated venture scenes, optimised as WebP.
 - `docs/venture-image-prompts.json` — exact prompts used with the built-in image generator.
@@ -67,3 +67,7 @@ After the colour and logo-hold refinement, normal-speed desktop (1280 × 720) an
 ## Analytics integration
 
 Vercel Web Analytics is installed through `@vercel/analytics/next` in the root layout, covering page views and navigation across the Next.js pages. The privacy notice includes the analytics disclosure. This release includes the approved analytics integration, SVG icon fix and three-line scroll headline. After deployment, verify that Web Analytics is enabled for the Anthēon project and confirm page views arrive in its Analytics dashboard.
+
+## Fibre hero refinement
+
+The selected Connected Flow image uses a subtle SVG light overlay in `components/FibreParticles.tsx`. Nine points follow traced fibre paths (six on mobile), with crop coordinates matched to the image. Motion pauses offscreen, in hidden tabs, during the intro and for reduced-motion preferences. No new animation loop or WebGL context is added. The preceding scroll optimisation scopes updates to individual sections and skips unchanged values. The particle paths are traced through the fibre ribbon, including both turns and the upper strands.

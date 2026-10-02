@@ -7,6 +7,7 @@ import Image from "next/image";
 import { concepts } from "@/data/concepts";
 import { siteLinks } from "@/data/site";
 import { VentureGallery } from "./VentureGallery";
+import { FibreParticles } from "./FibreParticles";
 import "./motion-home.css";
 
 const services = [
@@ -30,12 +31,24 @@ export function MotionHome() {
     const mobile = window.matchMedia("(max-width: 800px)");
     const hero = page.querySelector<HTMLElement>(".motion-hero")!;
     const intro = page.querySelector<HTMLElement>(".motion-intro")!;
+    const heroStage = page.querySelector<HTMLElement>(".hero-stage")!;
+    const progressBar = page.querySelector<HTMLElement>(".motion-progress")!;
+    const lastStyles = new WeakMap<HTMLElement, Map<string, string>>();
+    const setMotion = (element: HTMLElement, property: string, value: number) => {
+      const rounded = value.toFixed(4);
+      let values = lastStyles.get(element);
+      if (!values) { values = new Map(); lastStyles.set(element, values); }
+      if (values.get(property) === rounded) return;
+      values.set(property, rounded);
+      element.style.setProperty(property, rounded);
+    };
+    let lastService = -1;
     const service = page.querySelector<HTMLElement>(".motion-services")!;
     const track = page.querySelector<HTMLElement>(".service-track")!;
     const words = Array.from(page.querySelectorAll<HTMLElement>(".intro-word"));
     const cards = Array.from(page.querySelectorAll<HTMLElement>(".motion-work-card"));
     let frame = 0;
-    let dimensions = { heroTop: 0, heroHeight: 0, introTop: 0, introHeight: 0, servicesTop: 0, serviceHeight: 0, viewport: 0, cardTops: [] as number[] };
+    let dimensions = { heroTop: 0, heroHeight: 0, introTop: 0, introHeight: 0, servicesTop: 0, serviceHeight: 0, viewport: 0, heroViewport: 0, trackWidth: 1, scrollRange: 1, cardTops: [] as number[] };
     const clamp = (n: number) => Math.max(0, Math.min(1, n));
     const measure = () => {
       const stack = page.querySelector<HTMLElement>(".motion-work-stack")!;
@@ -46,24 +59,24 @@ export function MotionHome() {
         naturalTop += card.offsetHeight + gap;
         return top;
       });
-      dimensions = { heroTop: hero.offsetTop, heroHeight: hero.offsetHeight, introTop: intro.offsetTop, introHeight: intro.offsetHeight, servicesTop: service.offsetTop, serviceHeight: service.offsetHeight, viewport: window.innerHeight, cardTops };
+      dimensions = { heroTop: hero.offsetTop, heroHeight: hero.offsetHeight, introTop: intro.offsetTop, introHeight: intro.offsetHeight, servicesTop: service.offsetTop, serviceHeight: service.offsetHeight, viewport: window.innerHeight, heroViewport: heroStage.clientHeight, trackWidth: track.clientWidth, scrollRange: Math.max(1, document.documentElement.scrollHeight - window.innerHeight), cardTops };
     };
     const update = () => {
       frame = 0;
       const y = window.scrollY;
       const d = dimensions;
-      const heroProgress = reduced.matches ? 0 : clamp((y - d.heroTop) / Math.max(1, d.heroHeight - d.viewport));
-      page.style.setProperty("--hero-progress", `${heroProgress}`);
+      const heroProgress = reduced.matches ? 0 : clamp((y - d.heroTop) / Math.max(1, d.heroHeight - d.heroViewport));
+      setMotion(hero, "--hero-progress", heroProgress);
       const introProgress = clamp((y - d.introTop + d.viewport * .66) / (d.introHeight * .8));
-      words.forEach((word, index) => word.style.setProperty("--word-opacity", reduced.matches ? "1" : `${.18 + .82 * clamp(introProgress * (words.length + 4) - index)}`));
+      words.forEach((word, index) => setMotion(word, "--word-opacity", reduced.matches ? 1 : .18 + .82 * clamp(introProgress * (words.length + 4) - index)));
       const serviceProgress = clamp((y - d.servicesTop) / Math.max(1, d.serviceHeight - d.viewport));
-      const index = mobile.matches || reduced.matches ? Math.round(track.scrollLeft / track.clientWidth) : Math.round(serviceProgress * 2);
-      setActiveService(index);
-      page.style.setProperty("--service-progress", `${serviceProgress}`);
-      page.style.setProperty("--page-progress", `${y / Math.max(1, document.documentElement.scrollHeight - d.viewport)}`);
+      const index = mobile.matches || reduced.matches ? Math.round(track.scrollLeft / Math.max(1, d.trackWidth)) : Math.round(serviceProgress * 2);
+      if (index !== lastService) { lastService = index; setActiveService(index); }
+      if (!mobile.matches && !reduced.matches) setMotion(service, "--service-progress", serviceProgress);
+      setMotion(progressBar, "--page-progress", y / d.scrollRange);
       cards.forEach((card, i) => {
         const p = reduced.matches || mobile.matches ? 0 : clamp((y - d.cardTops[i] + 110) / (d.viewport * .9));
-        card.style.setProperty("--card-progress", `${p}`);
+        setMotion(card, "--card-progress", p);
       });
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
@@ -125,7 +138,7 @@ export function MotionHome() {
     <main id="main-content" tabIndex={-1}>
       <section className="motion-hero" id="top" data-chapter="01 — INTRO" aria-labelledby="motion-hero-title">
         <div className="hero-stage">
-          <div className="hero-art"><Image src="/images/motion/hero.webp" alt="A monumental metal arch illuminated in blue on a dark volcanic landscape" fill priority sizes="100vw" /></div>
+          <div className="hero-art"><Image src="/images/motion/hero-fibres.webp" alt="Flowing optical fibres illuminated in electric blue and violet" fill priority sizes="(max-width: 800px) 178vh, 100vw" /><FibreParticles /></div>
           <div className="hero-shade" />
           <div className="motion-hero-copy"><p className="motion-eyebrow"><span className="tiny-cross" aria-hidden="true"><VectorIcon name="star" /></span> A VENTURE & DIGITAL DEVELOPMENT GROUP</p><h1 id="motion-hero-title">Ideas into<br /><em>what’s next.</em></h1><div className="hero-description"><span className="short-line" /><p>We build businesses, digital products<br />and experiences that move things forward.</p></div></div>
           <div className="hero-next" aria-hidden="true"><span>BEYOND</span><span>WHAT’S</span><span>EXPECTED.</span></div>
