@@ -1,5 +1,7 @@
 "use client";
 
+import { VectorIcon } from "@/components/VectorIcon";
+
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { createIntroScene } from "./intro-scene";
 import type { NavigationBrand } from "./navigation-brand";
@@ -298,7 +300,7 @@ export function IntroExperience({ children }: { children: ReactNode }) {
         <span className="intro-register intro-register-b">+<small>VECTOR FIELD</small></span>
       </div>
       <div className="intro-scan" aria-hidden="true" />
-      <button ref={skipRef} type="button" className="intro-skip" tabIndex={-1} onClick={() => finishRef.current(true)} aria-label="Skip intro">SKIP <span aria-hidden="true">→</span></button>
+      <button ref={skipRef} type="button" className="intro-skip" tabIndex={-1} onClick={() => finishRef.current(true)} aria-label="Skip intro">SKIP <span aria-hidden="true"><VectorIcon name="arrow-right" /></span></button>
     </div>}
   </>;
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { Viewport } from "next";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next";
 import { IntroBootstrap } from "@/components/intro/IntroBootstrap";
 import "./globals.css";
 
@@ -61,6 +62,7 @@ export default function RootLayout({
       <head><IntroBootstrap /></head>
       <body className={geist.variable}>
         {children}
+        <Analytics />
       </body>
     </html>
   );

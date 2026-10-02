@@ -1,3 +1,4 @@
+import { VectorIcon } from "@/components/VectorIcon";
 import { siteLinks } from "@/data/site";
 
 export function Contact() {
@@ -18,7 +19,7 @@ export function Contact() {
             directly with Anthēon Group.
           </p>
           <a className="email-link" href={`mailto:${siteLinks.email}`}>
-            {siteLinks.email} <span aria-hidden="true">↗</span>
+            {siteLinks.email} <span aria-hidden="true"><VectorIcon name="arrow-up-right" /></span>
           </a>
           <div className="contact-meta">
             <span>Buckinghamshire</span>
@@ -26,7 +27,7 @@ export function Contact() {
           </div>
           {siteLinks.linkedin ? (
             <a href={siteLinks.linkedin} className="text-link">
-              LinkedIn <span aria-hidden="true">↗</span>
+              LinkedIn <span aria-hidden="true"><VectorIcon name="arrow-up-right" /></span>
             </a>
           ) : (
             null

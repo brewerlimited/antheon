@@ -63,3 +63,7 @@ The six portfolio examples are independent design explorations, not claims of co
 ## Intro upgrade validation
 
 After the colour and logo-hold refinement, normal-speed desktop (1280 × 720) and mobile (390 × 844) previews completed in 4.95–4.96 seconds. In the local 120 Hz browser, measured animation callbacks averaged 120 fps with a p95 frame interval of 9.0ms or less. These are local browser measurements, not a guarantee for every device. The logo handoff measured zero pixel offset in position and dimensions on desktop and mobile, with no mobile overflow or browser console errors. TypeScript, targeted ESLint and production build checks passed. The preceding validation also checked breakpoint resize, session bypass, keyboard skip, reduced-motion startup gating and failed-hydration timeout; renderer cleanup was rechecked after this refinement. The intro is approved for production publication through the existing GitHub-to-Vercel integration.
+
+## Analytics integration
+
+Vercel Web Analytics is installed through `@vercel/analytics/next` in the root layout, covering page views and navigation across the Next.js pages. The privacy notice includes the analytics disclosure. This release includes the approved analytics integration, SVG icon fix and three-line scroll headline. After deployment, verify that Web Analytics is enabled for the Anthēon project and confirm page views arrive in its Analytics dashboard.

@@ -1,3 +1,4 @@
+import { VectorIcon } from "@/components/VectorIcon";
 import { ventures } from "@/data/site";
 import { Reveal } from "./Reveal";
 
@@ -23,7 +24,7 @@ export function Ventures() {
               <div className="venture-main">
                 <h3>{venture.name}</h3>
                 <p>{venture.category}</p>
-                {venture.href ? <span className="venture-link">Visit website <span aria-hidden="true">↗</span></span> : null}
+                {venture.href ? <span className="venture-link">Visit website <span aria-hidden="true"><VectorIcon name="arrow-up-right" /></span></span> : null}
               </div>
               <p className="venture-description">{venture.description}</p>
             </>;

@@ -1,3 +1,4 @@
+import { VectorIcon } from "@/components/VectorIcon";
 import Link from "next/link";
 import { featuredConcepts } from "@/data/concepts";
 import { ConceptCard } from "./ConceptCard";
@@ -23,7 +24,7 @@ export function SelectedWork() {
         </div>
         <div className="work-gallery-link">
           <p>Six directions. One considered approach.</p>
-          <Link className="button button-secondary" href="/web-design">View all website designs <span aria-hidden="true">↗</span></Link>
+          <Link className="button button-secondary" href="/web-design">View all website designs <span aria-hidden="true"><VectorIcon name="arrow-up-right" /></span></Link>
         </div>
         <p className="concept-disclaimer">Independent design explorations. Shown as concepts, not commissioned client projects.</p>
       </div>

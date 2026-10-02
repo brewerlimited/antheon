@@ -1,3 +1,4 @@
+import { VectorIcon } from "@/components/VectorIcon";
 const services = [
   {
     number: "01",
@@ -57,7 +58,7 @@ export function DigitalServices() {
         <div className="selected-row">
           <span>Selected engagements only</span>
           <a href="#contact">
-            Discuss a project <span aria-hidden="true">↗</span>
+            Discuss a project <span aria-hidden="true"><VectorIcon name="arrow-up-right" /></span>
           </a>
         </div>
       </div>

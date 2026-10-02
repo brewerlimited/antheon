@@ -1260,3 +1260,7 @@ section[id], [id$="-title"], #main-content { scroll-margin-top: 108px; }
 @media (prefers-reduced-motion: reduce) {
   .preview-controls button, .concept-live-label { transition: none; }
 }
+
+/* Fixed vector geometry prevents mobile emoji substitution. */
+.vector-icon { display: inline-block; width: 1em; height: 1em; flex-shrink: 0; vertical-align: -0.125em; }
+.tiny-cross, .intro-star, .work-asterisk { display: inline-flex; }

@@ -1,5 +1,7 @@
 "use client";
 
+import { VectorIcon } from "@/components/VectorIcon";
+
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Brand } from "./Brand";
@@ -131,7 +133,7 @@ export function Header() {
               </a>
             ))}
             <a href={sectionHref("#contact")} className="nav-cta">
-              Enquire <span aria-hidden="true">↗</span>
+              Enquire <span aria-hidden="true"><VectorIcon name="arrow-up-right" /></span>
             </a>
           </div>
 
@@ -165,7 +167,7 @@ export function Header() {
               </a>
             ))}
             <a href={sectionHref("#contact")} className="mobile-menu-cta" onClick={() => followSection("#contact")}>
-              Enquire <span aria-hidden="true">↗</span>
+              Enquire <span aria-hidden="true"><VectorIcon name="arrow-up-right" /></span>
             </a>
           </div>
         </div>

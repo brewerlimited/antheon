@@ -1,5 +1,7 @@
 "use client";
 
+import { VectorIcon } from "@/components/VectorIcon";
+
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { siteLinks, ventures } from "@/data/site";
@@ -124,7 +126,7 @@ export function VentureGallery() {
         const content = <>
           <div className="venture-tile-art"><Image src={`/images/motion/ventures/${artwork[index].src}.webp`} alt={artwork[index].alt} draggable={false} fill sizes={index === 0 ? "100vw" : "(max-width: 800px) 100vw, 50vw"} /></div>
           <div className="venture-tile-shade" />
-          <div className="venture-tile-top"><span>0{index + 1} / ANTHĒON GROUP</span><span>{venture.href ? "EXPLORE VENTURE" : "MEET THE VENTURE"}<b aria-hidden="true">+</b></span></div>
+          <div className="venture-tile-top"><span>0{index + 1} / ANTHĒON GROUP</span><span>{venture.href ? "EXPLORE VENTURE" : "MEET THE VENTURE"}<b aria-hidden="true"><VectorIcon name="plus" /></b></span></div>
           <div className="venture-tile-title"><h3>{venture.name}</h3><span>{venture.category}</span></div>
           <div className="venture-tile-description"><p>{venture.description}</p></div>
         </>;
@@ -135,7 +137,7 @@ export function VentureGallery() {
     <div ref={cursor} className="venture-cursor" aria-hidden="true"><div /></div>
     <dialog ref={dialog} className="venture-dialog" onCancel={() => setSelected(null)} onClose={() => setSelected(null)} aria-labelledby="venture-dialog-title">
       {selectedVenture && selected !== null ? <>
-        <button type="button" className="venture-dialog-close" onClick={closeDetails} aria-label="Close venture details">Close <span aria-hidden="true">×</span></button>
+        <button type="button" className="venture-dialog-close" onClick={closeDetails} aria-label="Close venture details">Close <span aria-hidden="true"><VectorIcon name="close" /></span></button>
         <div className="venture-dialog-image"><Image src={`/images/motion/ventures/${artwork[selected].src}.webp`} alt={artwork[selected].alt} width={1536} height={1024} sizes="(max-width: 800px) 100vw, 820px" /></div>
         <div className="venture-dialog-copy"><p className="motion-eyebrow">{selectedVenture.category}</p><h2 id="venture-dialog-title">{selectedVenture.name}</h2><p>{selectedVenture.description}</p><a className="motion-pill" href={`mailto:${siteLinks.email}?subject=${encodeURIComponent(`${selectedVenture.name} enquiry`)}`}>Discuss this venture <i aria-hidden="true" /></a></div>
       </> : null}

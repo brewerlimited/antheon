@@ -1,3 +1,4 @@
+import { VectorIcon } from "@/components/VectorIcon";
 import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -80,7 +81,7 @@ export default function WebDesignPage() {
             </div>
             <div className="pricing-footer">
               <div><p>One website. Taken care of.</p><span>Website: £695 one-off, plus £35 per month.</span><span>SEO Monitoring &amp; Optimisation: £149 per month.</span></div>
-              <a className="button button-primary" href={`mailto:${siteLinks.email}?subject=Website%20design%20enquiry`}>Discuss your website <span aria-hidden="true">↗</span></a>
+              <a className="button button-primary" href={`mailto:${siteLinks.email}?subject=Website%20design%20enquiry`}>Discuss your website <span aria-hidden="true"><VectorIcon name="arrow-up-right" /></span></a>
             </div>
           </div>
         </Reveal>

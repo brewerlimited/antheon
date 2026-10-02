@@ -1,5 +1,7 @@
 "use client";
 
+import { VectorIcon } from "@/components/VectorIcon";
+
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { concepts } from "@/data/concepts";
@@ -115,7 +117,7 @@ export function MotionHome() {
       <div className="header-actions"><a href="#contact" className="motion-pill">Let’s talk <i aria-hidden="true" /></a><button ref={menuButton} type="button" className="motion-menu-button" aria-haspopup="dialog" aria-expanded={menuOpen} aria-controls="motion-menu" aria-label="Open navigation" onClick={() => { menuRef.current?.showModal(); setMenuOpen(true); }}><span /><span /></button></div>
     </header>
     <dialog ref={menuRef} id="motion-menu" className="motion-menu" onCancel={() => setMenuOpen(false)} onClose={() => setMenuOpen(false)} aria-label="Site navigation">
-      <div className="menu-top"><span className="motion-brand">anthēon</span><button onClick={closeMenu} aria-label="Close navigation">Close <span aria-hidden="true">×</span></button></div>
+      <div className="menu-top"><span className="motion-brand">anthēon</span><button onClick={closeMenu} aria-label="Close navigation">Close <span aria-hidden="true"><VectorIcon name="close" /></span></button></div>
       <nav>{[["The group", "/#about"], ["What we do", "/#digital"], ["Selected work", "/#work"], ["Our ventures", "/#ventures"], ["Get in touch", "/#contact"]].map(([label, href], index) => <a href={href} key={href} onClick={closeMenu}><small>0{index + 1}</small>{label}</a>)}</nav>
       <a className="menu-email" href={`mailto:${siteLinks.email}`}>{siteLinks.email}</a>
     </dialog>
@@ -125,16 +127,16 @@ export function MotionHome() {
         <div className="hero-stage">
           <div className="hero-art"><Image src="/images/motion/hero.webp" alt="A monumental metal arch illuminated in blue on a dark volcanic landscape" fill priority sizes="100vw" /></div>
           <div className="hero-shade" />
-          <div className="motion-hero-copy"><p className="motion-eyebrow"><span className="tiny-cross" aria-hidden="true">✳</span> A VENTURE & DIGITAL DEVELOPMENT GROUP</p><h1 id="motion-hero-title">Ideas into<br /><em>what’s next.</em></h1><div className="hero-description"><span className="short-line" /><p>We build businesses, digital products<br />and experiences that move things forward.</p></div></div>
-          <div className="hero-next" aria-hidden="true"><span>BEYOND</span><span>EXPECTED.</span></div>
-          <div className="hero-bottom"><span>BUCKINGHAMSHIRE, UK<br /><b>INDEPENDENT. BY DESIGN.</b></span><a href="#about" className="scroll-orbit" aria-label="Scroll to discover Anthēon"><span>SCROLL<br />TO DISCOVER</span><i aria-hidden="true">↓</i></a><span className="hero-coordinate">VENTURES / DIGITAL / DESIGN<br /><b>EST. WITH INTENT.</b></span></div>
+          <div className="motion-hero-copy"><p className="motion-eyebrow"><span className="tiny-cross" aria-hidden="true"><VectorIcon name="star" /></span> A VENTURE & DIGITAL DEVELOPMENT GROUP</p><h1 id="motion-hero-title">Ideas into<br /><em>what’s next.</em></h1><div className="hero-description"><span className="short-line" /><p>We build businesses, digital products<br />and experiences that move things forward.</p></div></div>
+          <div className="hero-next" aria-hidden="true"><span>BEYOND</span><span>WHAT’S</span><span>EXPECTED.</span></div>
+          <div className="hero-bottom"><span>BUCKINGHAMSHIRE, UK<br /><b>INDEPENDENT. BY DESIGN.</b></span><a href="#about" className="scroll-orbit" aria-label="Scroll to discover Anthēon"><span>SCROLL<br />TO DISCOVER</span><i aria-hidden="true"><VectorIcon name="arrow-down" /></i></a><span className="hero-coordinate">VENTURES / DIGITAL / DESIGN<br /><b>EST. WITH INTENT.</b></span></div>
           <span className="hero-edge-label" aria-hidden="true">ANTHĒON / EXPLORING POSSIBILITY</span>
         </div>
       </section>
       <section className="motion-intro" id="about" data-chapter="02 — THE GROUP" aria-labelledby="intro-title">
-        <div className="intro-top"><p className="motion-eyebrow">01 / THE GROUP</p><span className="intro-star" aria-hidden="true">✳</span></div>
+        <div className="intro-top"><p className="motion-eyebrow">01 / THE GROUP</p><span className="intro-star" aria-hidden="true"><VectorIcon name="star" /></span></div>
         <h2 id="intro-title" aria-label="Different ideas. Shared ambition. We turn possibility into something real.">{"Different ideas. Shared ambition. We turn possibility into something real.".split(" ").map((word, i) => <span className="intro-word" key={i}>{word} </span>)}</h2>
-        <div className="intro-bottom motion-reveal"><span>THINK INDEPENDENTLY.<br />BUILD WITH INTENT.</span><p>Anthēon brings together ventures across software, services, design and consumer markets. From the first idea to the details that make it work, we build with a clear purpose.</p><a href="#ventures" className="motion-text-link">Discover the group <span aria-hidden="true">+</span></a></div>
+        <div className="intro-bottom motion-reveal"><span>THINK INDEPENDENTLY.<br />BUILD WITH INTENT.</span><p>Anthēon brings together ventures across software, services, design and consumer markets. From the first idea to the details that make it work, we build with a clear purpose.</p><a href="#ventures" className="motion-text-link">Discover the group <span aria-hidden="true"><VectorIcon name="plus" /></span></a></div>
       </section>
       <section className="motion-services" id="digital" data-chapter="03 — WHAT WE DO" aria-labelledby="services-title">
         <div className="services-stage">
@@ -147,13 +149,13 @@ export function MotionHome() {
         </div>
       </section>
       <section className="motion-work" id="work" data-chapter="04 — SELECTED WORK" aria-labelledby="work-title">
-        <div className="work-heading-new motion-reveal"><p className="motion-eyebrow">03 / SELECTED DESIGN EXPLORATIONS</p><h2 id="work-title">Different by<br /><em>design.</em><span className="work-asterisk" aria-hidden="true">✳</span></h2><div><p>A few of the ways we bring<br />a business to life online.</p><a href="/web-design" className="motion-text-link">All six concepts <span aria-hidden="true">+</span></a></div></div>
+        <div className="work-heading-new motion-reveal"><p className="motion-eyebrow">03 / SELECTED DESIGN EXPLORATIONS</p><h2 id="work-title">Different by<br /><em>design.</em><span className="work-asterisk" aria-hidden="true"><VectorIcon name="star" /></span></h2><div><p>A few of the ways we bring<br />a business to life online.</p><a href="/web-design" className="motion-text-link">All six concepts <span aria-hidden="true"><VectorIcon name="plus" /></span></a></div></div>
         <div className="motion-work-stack">{[concepts[0], concepts[1], concepts[4]].map((concept, index) => <a href={`/concepts/${concept.slug}`} className={`motion-work-card work-card-${index}`} key={concept.slug}>
-          <div className="work-card-image"><Image src={concept.image} alt={concept.imageAlt} width={1600} height={1000} sizes="(max-width: 800px) 95vw, 90vw" /></div><div className="work-card-bar"><span className="work-card-index">0{index + 1}</span><h3>{concept.name}</h3><span>{concept.category}<small>INDEPENDENT CONCEPT</small></span><span className="work-open">Explore <b aria-hidden="true">+</b></span></div>
+          <div className="work-card-image"><Image src={concept.image} alt={concept.imageAlt} width={1600} height={1000} sizes="(max-width: 800px) 95vw, 90vw" /></div><div className="work-card-bar"><span className="work-card-index">0{index + 1}</span><h3>{concept.name}</h3><span>{concept.category}<small>INDEPENDENT CONCEPT</small></span><span className="work-open">Explore <b aria-hidden="true"><VectorIcon name="plus" /></b></span></div>
         </a>)}</div><p className="motion-disclaimer">Independent design explorations, not commissioned client projects.</p>
       </section>
       <VentureGallery />
-      <section className="motion-contact" id="contact" data-chapter="06 — WHAT'S NEXT" aria-labelledby="contact-title"><div className="contact-glow" aria-hidden="true" /><div className="contact-top motion-reveal"><p className="motion-eyebrow">05 / START SOMETHING</p><p>A venture. A website. A better way of doing things.<br />Good things start with a conversation.</p></div><h2 id="contact-title" className="motion-reveal">Have something<br /><em>worth building?</em></h2><a href={`mailto:${siteLinks.email}`} className="contact-email">{siteLinks.email}<span aria-hidden="true">+</span></a><div className="contact-bottom"><span>BUCKINGHAMSHIRE, UNITED KINGDOM</span><a href="#top">BACK TO THE TOP ↑</a></div></section>
+      <section className="motion-contact" id="contact" data-chapter="06 — WHAT'S NEXT" aria-labelledby="contact-title"><div className="contact-glow" aria-hidden="true" /><div className="contact-top motion-reveal"><p className="motion-eyebrow">05 / START SOMETHING</p><p>A venture. A website. A better way of doing things.<br />Good things start with a conversation.</p></div><h2 id="contact-title" className="motion-reveal">Have something<br /><em>worth building?</em></h2><a href={`mailto:${siteLinks.email}`} className="contact-email">{siteLinks.email}<span aria-hidden="true"><VectorIcon name="plus" /></span></a><div className="contact-bottom"><span>BUCKINGHAMSHIRE, UNITED KINGDOM</span><a href="#top">BACK TO THE TOP <VectorIcon name="arrow-up" /></a></div></section>
     </main>
     <footer className="motion-footer"><div><span>© {new Date().getFullYear()} Anthēon Group</span><span>VENTURES. DIGITAL. DISTINCTLY ANTHĒON.</span><a href="/privacy">Privacy policy</a></div><a className="footer-wordmark" href="#top" aria-label="Anthēon — back to top">anthēon</a></footer>
   </div>;

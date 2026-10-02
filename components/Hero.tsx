@@ -1,3 +1,4 @@
+import { VectorIcon } from "@/components/VectorIcon";
 import Image from "next/image";
 import { heroImage } from "@/data/site";
 import { Reveal } from "./Reveal";
@@ -38,10 +39,10 @@ export function Hero() {
           </p>
           <div className="hero-actions" aria-label="Primary actions">
             <a href="#about" className="button button-primary">
-              Explore the Group <span aria-hidden="true">↓</span>
+              Explore the Group <span aria-hidden="true"><VectorIcon name="arrow-down" /></span>
             </a>
             <a href="#work" className="button button-secondary">
-              View our work <span aria-hidden="true">↓</span>
+              View our work <span aria-hidden="true"><VectorIcon name="arrow-down" /></span>
             </a>
           </div>
         </Reveal>
