@@ -12,12 +12,10 @@ const geist = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://antheon.co.uk"),
-  title: "Anthēon Group | Ventures, Digital Products & Web Design",
+  title: "Anthēon — Ideas into what’s next",
   description:
     "Anthēon Group is an independent UK venture and digital development group building businesses, digital products and selected web experiences for ambitious companies.",
-  alternates: {
-    canonical: "/",
-  },
+  robots: { index: true, follow: true },
   openGraph: {
     title: "Anthēon Group | Ventures, Digital Products & Web Design",
     description:

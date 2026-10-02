@@ -6,11 +6,11 @@
   --foreground: #f4f2ed;
   --muted: #929292;
   --muted-2: #b9b6ae;
-  --gold: #cba86b;
-  --gold-light: #dfc697;
-  --warm-white: #eadfc9;
+  --gold: #91acff;
+  --gold-light: #c0d0ff;
+  --warm-white: #dce5ff;
   --line: rgba(255, 255, 255, 0.1);
-  --line-strong: rgba(203, 168, 107, 0.36);
+  --line-strong: rgba(112, 149, 255, 0.36);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --duration: 240ms;
 }
@@ -34,7 +34,7 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at 68% 6%, rgba(203, 168, 107, 0.08), transparent 26rem),
+    radial-gradient(circle at 68% 6%, rgba(112, 149, 255, 0.08), transparent 26rem),
     linear-gradient(180deg, #08090a 0%, #0b0c0d 45%, #08090a 100%);
   color: var(--foreground);
   font-family: var(--font-geist), Arial, Helvetica, sans-serif;
@@ -55,7 +55,7 @@ button {
 }
 
 ::selection {
-  background: rgba(203, 168, 107, 0.32);
+  background: rgba(112, 149, 255, 0.32);
   color: var(--foreground);
 }
 
@@ -157,7 +157,7 @@ button {
 
 
 .nav-cta {
-  border: 1px solid rgba(203, 168, 107, 0.42);
+  border: 1px solid rgba(112, 149, 255, 0.42);
   padding: 0.78rem 1rem;
 }
 
@@ -221,7 +221,7 @@ button {
   position: absolute;
   inset: 78px 24px 24px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom-color: rgba(203, 168, 107, 0.18);
+  border-bottom-color: rgba(112, 149, 255, 0.18);
   pointer-events: none;
 }
 
@@ -267,7 +267,7 @@ button {
 .hero-copy {
   max-width: 650px;
   margin: 2.2rem 0 0;
-  color: rgba(244, 242, 237, 0.78);
+  color: rgba(236, 242, 255, 0.78);
   font-size: clamp(1rem, 1.28vw, 1.3rem);
   line-height: 1.72;
 }
@@ -320,7 +320,7 @@ button {
 
 .section-ruled .site-container {
   padding-bottom: clamp(1rem, 2vw, 1.8rem);
-  border-bottom: 1px solid rgba(203, 168, 107, 0.24);
+  border-bottom: 1px solid rgba(112, 149, 255, 0.24);
 }
 
 .two-column {
@@ -397,7 +397,7 @@ button {
   height: 56px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(203, 168, 107, 0.38);
+  border: 1px solid rgba(112, 149, 255, 0.38);
   color: var(--foreground);
   font-size: 0.78rem;
   letter-spacing: 0.16em;
@@ -525,7 +525,7 @@ button {
 .principle-item {
   min-height: 232px;
   padding: 1.65rem 1.35rem 0;
-  border-left: 1px solid rgba(203, 168, 107, 0.26);
+  border-left: 1px solid rgba(112, 149, 255, 0.26);
 }
 
 .principle-item span {
@@ -602,7 +602,7 @@ button {
   justify-content: center;
   padding: 1rem;
   border-right: 1px solid rgba(255, 255, 255, 0.14);
-  color: rgba(244, 242, 237, 0.84);
+  color: rgba(236, 242, 255, 0.84);
   font-size: clamp(0.72rem, 1vw, 0.92rem);
   font-weight: 470;
   letter-spacing: 0.13em;
@@ -856,7 +856,7 @@ section[id], [id$="-title"], #main-content { scroll-margin-top: 108px; }
 .footer-links a:focus-visible, .text-link:focus-visible, .selected-row a:focus-visible { background-size: 100% 1px; }
 .button-primary:focus-visible { background: #dec189; border-color: #dec189; }
 .button-secondary:focus-visible, .nav-cta:focus-visible { color: var(--gold-light); border-color: var(--gold); }
-.venture-row-linked:focus-visible, .venture-rail > a:focus-visible { background-color: rgba(203, 168, 107, 0.035); }
+.venture-row-linked:focus-visible, .venture-rail > a:focus-visible { background-color: rgba(112, 149, 255, 0.035); }
 .venture-row-linked:focus-visible::before { transform: scaleX(2.4); }
 .venture-row-linked:focus-visible .venture-mark { opacity: 1; color: var(--gold-light); border-color: var(--gold); }
 .menu-button:focus-visible { border-color: var(--gold); }
@@ -871,17 +871,17 @@ section[id], [id$="-title"], #main-content { scroll-margin-top: 108px; }
   .nav-link:hover::after, .email-link:hover::after { transform: scaleX(1); }
   .footer-links a:hover, .text-link:hover, .selected-row a:hover { background-size: 100% 1px; }
   .button-primary:hover { background: #dec189; border-color: #dec189; color: #08090a; }
-  .button-secondary:hover, .nav-cta:hover { color: var(--gold-light); border-color: var(--gold); background-color: rgba(203, 168, 107, 0.07); }
+  .button-secondary:hover, .nav-cta:hover { color: var(--gold-light); border-color: var(--gold); background-color: rgba(112, 149, 255, 0.07); }
   .button:hover span { transform: translateY(2px); }
   .nav-cta:hover span, .text-link:hover span, .email-link:hover span,
   .selected-row a:hover span, .venture-row-linked:hover .venture-link span,
   .venture-rail > a:hover > span, .concept-card:hover .concept-view span { transform: translate(3px, -3px); }
-  .venture-row-linked:hover, .venture-rail > a:hover { background-color: rgba(203, 168, 107, 0.035); }
+  .venture-row-linked:hover, .venture-rail > a:hover { background-color: rgba(112, 149, 255, 0.035); }
   .venture-row-linked:hover::before { transform: scaleX(2.4); }
   .venture-row-linked:hover .venture-main h3, .venture-row-linked:hover .venture-link { color: var(--gold-light); }
   .venture-row-linked:hover .venture-description { color: #d1cdc4; }
   .venture-row-linked:hover .venture-mark { opacity: 1; color: var(--gold-light); border-color: var(--gold); }
-  .service-item:hover, .principle-item:hover { background-color: rgba(203, 168, 107, 0.025); border-color: var(--line-strong); }
+  .service-item:hover, .principle-item:hover { background-color: rgba(112, 149, 255, 0.025); border-color: var(--line-strong); }
   .service-item:hover h3, .principle-item:hover p { color: var(--gold-light); }
   .service-item:hover > p { transform: translateX(3px); color: var(--gold-light); }
   .service-item:hover span, .principle-item:hover span { color: var(--muted-2); }
@@ -891,7 +891,7 @@ section[id], [id$="-title"], #main-content { scroll-margin-top: 108px; }
   .concept-card:hover .concept-view { border-color: var(--gold); }
   .concept-card:hover .concept-summary { color: #d1cdc4; }
   .concept-card:hover .concept-arrow { color: var(--background); background: var(--gold); border-color: var(--gold); }
-  .menu-button:hover { border-color: var(--gold); background-color: rgba(203, 168, 107, 0.05); }
+  .menu-button:hover { border-color: var(--gold); background-color: rgba(112, 149, 255, 0.05); }
   .menu-button:hover span { background-color: var(--gold-light); }
 }
 
@@ -1169,7 +1169,7 @@ section[id], [id$="-title"], #main-content { scroll-margin-top: 108px; }
 .pricing-heading .section-title { margin: 0; font-size: clamp(2.35rem, 4.2vw, 4.2rem); }
 .pricing-heading .section-title span { color: var(--muted-2); }
 .pricing-intro { max-width: 350px; margin: 0 0 0.3rem; color: var(--muted-2); font-size: 1rem; line-height: 1.8; }
-.pricing-panel { border: 1px solid var(--line-strong); background: radial-gradient(ellipse at 0% 0%, rgba(203, 168, 107, 0.065), transparent 65%), #101113; }
+.pricing-panel { border: 1px solid var(--line-strong); background: radial-gradient(ellipse at 0% 0%, rgba(112, 149, 255, 0.065), transparent 65%), #101113; }
 .pricing-offers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .pricing-offer { min-width: 0; padding: clamp(1.5rem, 2.6vw, 2.5rem); }
 .pricing-offer + .pricing-offer { border-left: 1px solid var(--line-strong); }
@@ -1183,7 +1183,7 @@ section[id], [id$="-title"], #main-content { scroll-margin-top: 108px; }
 .pricing-inclusions { display: grid; gap: 0.9rem; list-style: none; padding: 1.7rem 0 0; margin: 1.7rem 0 0; border-top: 1px solid var(--line); }
 .pricing-inclusions li { display: flex; align-items: baseline; gap: 0.8rem; color: var(--muted-2); font-size: 0.87rem; line-height: 1.65; }
 .pricing-inclusions li::before { content: ""; flex: 0 0 7px; height: 1px; background: var(--gold); transform: translateY(-0.25em); }
-.pricing-footer { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding: 1.8rem clamp(1.5rem, 4vw, 3.5rem); border-top: 1px solid var(--line-strong); background: rgba(203, 168, 107, 0.03); }
+.pricing-footer { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding: 1.8rem clamp(1.5rem, 4vw, 3.5rem); border-top: 1px solid var(--line-strong); background: rgba(112, 149, 255, 0.03); }
 .pricing-footer p { margin: 0 0 0.4rem; font-size: 1rem; letter-spacing: -0.01em; }
 .pricing-footer > div > span { display: block; color: var(--muted-2); font-size: 0.8rem; line-height: 1.6; }
 .pricing-footer .button { flex-shrink: 0; }

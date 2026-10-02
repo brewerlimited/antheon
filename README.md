@@ -1,87 +1,51 @@
-# Anthēon Group Website
+# Anthēon Motion
 
-Production website for Anthēon Group, with a six-design interactive portfolio.
+The Antheon Group website, redesigned with a cinematic, scroll-led experience inspired by Dotech's motion and presentation.
 
-Built with:
+The redesign was developed in an independent copy, preserving the original local project. Production is published through the `main` branch of `brewerlimited/antheon` and its existing Vercel integration at https://antheon.co.uk.
 
-- Next.js App Router
-- TypeScript
-- Tailwind CSS
-- next/image
+## Run locally
 
-## Development
+Requires Node.js 20.9 or newer.
 
 ```bash
-npm install
-npm run dev
+npm ci
+npm run dev -- --port 4317
 ```
 
-## Production Build
+Open http://localhost:4317. The installed copy in this workspace already has dependencies available.
+
+For production:
 
 ```bash
 npm run build
+npm start -- --port 4317
 ```
 
-This is a standard Next.js app and is ready to import into Vercel from GitHub.
+## What's included
 
-## Vercel
+- Original generated architectural artwork, locally stored and optimised as WebP.
+- Pinned hero with scroll-driven image zoom and typography transition.
+- Scroll-revealed group statement.
+- Three horizontally moving desktop service scenes and a touch-friendly mobile carousel.
+- Stacking selected-work cards that open the existing detailed concepts.
+- Five-venture image gallery with original AI-generated scenes, pointer-following cursor, image parallax and venture detail dialogs; keyboard-accessible navigation and working email links.
+- All six original design concepts, interactive embedded website previews, pricing and privacy page.
+- Responsive layouts, reduced-motion alternatives and shared cool-blue styling.
 
-The repository includes `vercel.json` to force the Next.js framework preset and clear any stale Output Directory override left from earlier non-Next builds. In Vercel Project Settings, the Output Directory should be blank/default for this app.
+The main website permits search-engine indexing. Portfolio concept pages and embedded previews retain their noindex settings. Contact links open the visitor's email app; there is no new form backend.
 
-## Website concepts
+## Main files
 
-`data/concepts.ts` defines six concepts. The first three appear on the homepage;
-`/web-design` contains all six. Every `/concepts/[slug]` page embeds the original
-interactive homepage with its scroll effects, hover states and local controls.
-The preview toolbar supports full width, mobile width, restart and browser full
-screen where available. The homepage and gallery load only small thumbnails;
-only the selected detail page loads its interactive preview.
+- `components/MotionHome.tsx` — home content, scroll updates and interactions.
+- `components/motion-home.css` — layout, motion and responsive styling.
+- `app/globals.css` — existing inner-page styles with a coordinated blue palette.
+- `data/site.ts` and `data/concepts.ts` — preserved venture and portfolio content.
+- `public/images/motion/hero.webp` — original generated hero artwork.
+- `components/VentureGallery.tsx` and `components/venture-gallery.css` — venture gallery and cursor interactions.
+- `public/images/motion/ventures/` — five generated venture scenes, optimised as WebP.
+- `docs/venture-image-prompts.json` — exact prompts used with the built-in image generator.
 
-The designs are explicitly labelled independent concepts, not commissioned
-client work. Detail pages and preview resources use `noindex`. No private Sites
-URLs, credentials, original servers or third-party iframe hosts are required.
+The service scenes feature Pride Flooring, Surefix Interiors and Anchor Flooring. Selected work features Intimate Detail, Eventco and Hamilton Flooring; these sections do not repeat a website.
 
-### Preview architecture
-
-Each `public/previews/<slug>/index.html` has its own CSS, JavaScript and local
-assets. The iframe uses `sandbox="allow-scripts"` without same-origin, forms,
-popups or top navigation permissions. `preview-guard.js` keeps local section
-links and harmless interactions, blocks outbound links and fetches outside
-that preview's assets, and provides in-memory storage where sandboxed browser
-storage is unavailable. `next.config.ts` supplies the CORS and CSP headers
-needed for fonts, local gallery JSON and isolated scripts. Google Fonts are
-permitted for the static concepts that originally use them. Enquiries do not
-submit.
-
-These are the original six homepages adapted for viewing inside the portfolio:
-Intimate Detail, Eventco Marquees, Pride Flooring (red version), Surefix Interiors,
-Hamilton Commercial Flooring and Anchor Flooring. Surefix replaces HS Flooring;
-the former HS concept URL redirects to the Surefix page. Original
-project folders and their hosting have not been changed.
-
-### Maintaining previews
-
-- Static Pride and Anchor previews are editable HTML/CSS/JS snapshots under
-  `public/previews/`; only homepage assets and interactions are included.
-- React preview source and per-preview build instructions are in `preview-src/`
-  for Intimate Detail, Eventco and Hamilton. These isolated sources are excluded
-  from the main Next.js type/lint checks; the shipped bundles are already built.
-  Normal `npm run build` does not require their separate build dependencies.
-- Surefix preserves the original React/Vite homepage bundle and its motion code.
-  `scripts/import-surefix-preview.mjs` imports a built Surefix project into the
-  isolated preview, rebasing assets and retaining the images used by every
-  homepage service tab. The original project remains separate.
-- To add a design, add its packaged homepage, one 1440×1000 WebP thumbnail under
-  `public/images/concepts/` and a record in `data/concepts.ts`. Keep the shared
-  guard script before its application scripts and verify the sandboxed version.
-- The old full-page WebP captures remain for compatibility with saved links,
-  but the current portfolio renders real interactive pages instead.
-
-The main site uses a self-hosted Geist variable font with its licence in
-`public/fonts/LICENSE.txt`, so its typography needs no external font request.
-Motion is subtle and respects reduced-motion preferences. Warm colour changes
-highlight headings and panels; links also use fine rules and small arrow movements.
-
-Venture URLs live in `data/site.ts` and appear in both the venture list and brand
-rail. Empty URLs leave the venture visible without a link. Commercial Co-Pilot,
-ClearQuote and Anthēon Outdoor are linked; GetYourPrint and Dualis remain unlinked.
+The six portfolio examples are independent design explorations, not claims of commissioned client work. Venture links, pricing and business details were preserved from the original project.

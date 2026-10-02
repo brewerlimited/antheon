@@ -1,29 +1,10 @@
-import { Contact } from "@/components/Contact";
-import { DigitalServices } from "@/components/DigitalServices";
-import { Footer } from "@/components/Footer";
-import { GroupBrandStrip } from "@/components/GroupBrandStrip";
-import { GroupIntro } from "@/components/GroupIntro";
-import { Header } from "@/components/Header";
-import { Hero } from "@/components/Hero";
-import { Principles } from "@/components/Principles";
-import { SelectedWork } from "@/components/SelectedWork";
-import { Ventures } from "@/components/Ventures";
+import type { Metadata } from "next";
+import { MotionHome } from "@/components/MotionHome";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
-  return (
-    <>
-      <Header />
-      <main id="main-content" tabIndex={-1}>
-        <Hero />
-        <GroupIntro />
-        <Ventures />
-        <DigitalServices />
-        <SelectedWork />
-        <Principles />
-        <GroupBrandStrip />
-        <Contact />
-      </main>
-      <Footer />
-    </>
-  );
+  return <MotionHome />;
 }
