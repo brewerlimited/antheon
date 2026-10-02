@@ -70,7 +70,7 @@ export function MotionHome() {
       });
       dimensions = { heroTop: hero.offsetTop, heroHeight: hero.offsetHeight, introTop: intro.offsetTop, introHeight: intro.offsetHeight, servicesTop: service.offsetTop, serviceHeight: service.offsetHeight, viewport: window.innerHeight, heroViewport: heroStage.clientHeight, trackWidth: track.clientWidth, scrollRange: Math.max(1, document.documentElement.scrollHeight - window.innerHeight), cardTops };
       serviceIndex = Math.round(track.scrollLeft / Math.max(1, dimensions.trackWidth));
-      // Pixel ranges retain the original zoom timing, including the stable mobile viewport.
+      // The camera glide retains the original transition's scroll range.
       setStyle(hero, "--hero-scroll-start", `${dimensions.heroTop}px`);
       setStyle(hero, "--hero-scroll-end", `${dimensions.heroTop + Math.max(1, dimensions.heroHeight - dimensions.heroViewport)}px`);
     };
@@ -84,7 +84,7 @@ export function MotionHome() {
       // Modern browsers drive these three layers on the scroll timeline. Older
       // browsers update only the affected layers, never an inherited hero variable.
       if (!nativeScroll || reduced.matches) {
-        setStyle(heroArt, "transform", `scale(${(1 + heroProgress * .38).toFixed(5)})`);
+        setStyle(heroArt, "transform", reduced.matches ? "none" : `translate3d(0,${(40 - heroProgress * 80).toFixed(3)}px,0)`);
         setStyle(heroCopy, "transform", `translate3d(0,${(-140 * heroProgress).toFixed(3)}px,0)`);
         setMotion(heroCopy, "opacity", clamp(1 - heroProgress * 1.65));
         setStyle(heroNext, "transform", `translate3d(0,${((1 - heroProgress) * 80).toFixed(3)}px,0)`);

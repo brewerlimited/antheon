@@ -26,7 +26,7 @@ html[data-antheon-intro]{overflow:hidden;scrollbar-gutter:stable;background:#060
 .intro-skip:focus-visible{outline:1px solid #b9cbff;outline-offset:8px;opacity:1}
 .intro-scan{position:absolute;left:12%;right:12%;height:1px;top:calc(34% + var(--intro-scan)*28%);opacity:calc(var(--intro-scan-opacity)*.6);background:linear-gradient(90deg,transparent,#b9cbff40 24%,#dce5ff 50%,#b9cbff40 76%,transparent);box-shadow:0 0 8px #91acff24;pointer-events:none;z-index:2}
 .intro-content[data-entering]{--entry-progress:0;--entry-ui:0}
-.intro-content[data-entering] .hero-art{scale:calc(1.08 - var(--entry-progress)*.08);filter:brightness(calc(.42 + var(--entry-progress)*.58))}
+.intro-content[data-entering] .hero-art{filter:brightness(calc(.42 + var(--entry-progress)*.58))}
 .intro-content[data-entering] .motion-hero-copy{translate:0 calc((1 - var(--entry-ui))*16px);opacity:var(--entry-ui)}
 .intro-content[data-entering] .motion-header,.intro-content[data-entering] .hero-bottom,.intro-content[data-entering] .motion-rail,.intro-content[data-entering] .hero-edge-label{opacity:var(--entry-ui)}
 .intro-content[data-entering] .motion-header .motion-brand{visibility:hidden}
