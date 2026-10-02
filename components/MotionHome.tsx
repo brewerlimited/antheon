@@ -33,16 +33,25 @@ export function MotionHome() {
     const intro = page.querySelector<HTMLElement>(".motion-intro")!;
     const heroStage = page.querySelector<HTMLElement>(".hero-stage")!;
     const progressBar = page.querySelector<HTMLElement>(".motion-progress")!;
+    const heroArt = page.querySelector<HTMLElement>(".hero-art")!;
+    const heroCopy = page.querySelector<HTMLElement>(".motion-hero-copy")!;
+    const heroNext = page.querySelector<HTMLElement>(".hero-next")!;
+    const nativeScroll = CSS.supports("animation-timeline", "scroll(root block)")
+      && CSS.supports("animation-range", "0px 1px")
+      && !(process.env.NODE_ENV === "development" && new URLSearchParams(location.search).get("scroll-engine") === "fallback");
     const lastStyles = new WeakMap<HTMLElement, Map<string, string>>();
-    const setMotion = (element: HTMLElement, property: string, value: number) => {
-      const rounded = value.toFixed(4);
+    const setStyle = (element: HTMLElement, property: string, value: string) => {
       let values = lastStyles.get(element);
       if (!values) { values = new Map(); lastStyles.set(element, values); }
-      if (values.get(property) === rounded) return;
-      values.set(property, rounded);
-      element.style.setProperty(property, rounded);
+      if (values.get(property) === value) return;
+      values.set(property, value);
+      element.style.setProperty(property, value);
     };
+    const setMotion = (element: HTMLElement, property: string, value: number) => setStyle(element, property, value.toFixed(4));
     let lastService = -1;
+    let serviceIndex = 0;
+    let needsMeasure = true;
+    let disposed = false;
     const service = page.querySelector<HTMLElement>(".motion-services")!;
     const track = page.querySelector<HTMLElement>(".service-track")!;
     const words = Array.from(page.querySelectorAll<HTMLElement>(".intro-word"));
@@ -60,27 +69,45 @@ export function MotionHome() {
         return top;
       });
       dimensions = { heroTop: hero.offsetTop, heroHeight: hero.offsetHeight, introTop: intro.offsetTop, introHeight: intro.offsetHeight, servicesTop: service.offsetTop, serviceHeight: service.offsetHeight, viewport: window.innerHeight, heroViewport: heroStage.clientHeight, trackWidth: track.clientWidth, scrollRange: Math.max(1, document.documentElement.scrollHeight - window.innerHeight), cardTops };
+      serviceIndex = Math.round(track.scrollLeft / Math.max(1, dimensions.trackWidth));
+      // Pixel ranges retain the original zoom timing, including the stable mobile viewport.
+      setStyle(hero, "--hero-scroll-start", `${dimensions.heroTop}px`);
+      setStyle(hero, "--hero-scroll-end", `${dimensions.heroTop + Math.max(1, dimensions.heroHeight - dimensions.heroViewport)}px`);
     };
     const update = () => {
       frame = 0;
+      if (disposed) return;
       const y = window.scrollY;
+      if (needsMeasure) { needsMeasure = false; measure(); }
       const d = dimensions;
       const heroProgress = reduced.matches ? 0 : clamp((y - d.heroTop) / Math.max(1, d.heroHeight - d.heroViewport));
-      setMotion(hero, "--hero-progress", heroProgress);
+      // Modern browsers drive these three layers on the scroll timeline. Older
+      // browsers update only the affected layers, never an inherited hero variable.
+      if (!nativeScroll || reduced.matches) {
+        setStyle(heroArt, "transform", `scale(${(1 + heroProgress * .38).toFixed(5)})`);
+        setStyle(heroCopy, "transform", `translate3d(0,${(-140 * heroProgress).toFixed(3)}px,0)`);
+        setMotion(heroCopy, "opacity", clamp(1 - heroProgress * 1.65));
+        setStyle(heroNext, "transform", `translate3d(0,${((1 - heroProgress) * 80).toFixed(3)}px,0)`);
+        setMotion(heroNext, "opacity", clamp((heroProgress - .48) * 3));
+      }
       const introProgress = clamp((y - d.introTop + d.viewport * .66) / (d.introHeight * .8));
-      words.forEach((word, index) => setMotion(word, "--word-opacity", reduced.matches ? 1 : .18 + .82 * clamp(introProgress * (words.length + 4) - index)));
+      words.forEach((word, index) => setMotion(word, "opacity", reduced.matches ? 1 : .18 + .82 * clamp(introProgress * (words.length + 4) - index)));
       const serviceProgress = clamp((y - d.servicesTop) / Math.max(1, d.serviceHeight - d.viewport));
-      const index = mobile.matches || reduced.matches ? Math.round(track.scrollLeft / Math.max(1, d.trackWidth)) : Math.round(serviceProgress * 2);
+      const index = mobile.matches || reduced.matches ? serviceIndex : Math.round(serviceProgress * 2);
       if (index !== lastService) { lastService = index; setActiveService(index); }
       if (!mobile.matches && !reduced.matches) setMotion(service, "--service-progress", serviceProgress);
-      setMotion(progressBar, "--page-progress", y / d.scrollRange);
+      if (!nativeScroll || reduced.matches) setStyle(progressBar, "transform", `scaleX(${(y / d.scrollRange).toFixed(5)})`);
       cards.forEach((card, i) => {
         const p = reduced.matches || mobile.matches ? 0 : clamp((y - d.cardTops[i] + 110) / (d.viewport * .9));
         setMotion(card, "--card-progress", p);
       });
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
-    const resize = () => { measure(); schedule(); };
+    const resize = () => { if (!disposed) { needsMeasure = true; schedule(); } };
+    const onTrackScroll = () => {
+      serviceIndex = Math.round(track.scrollLeft / Math.max(1, dimensions.trackWidth));
+      schedule();
+    };
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("is-visible"); observer.unobserve(entry.target); } });
     }, { threshold: .12 });
@@ -89,17 +116,20 @@ export function MotionHome() {
       entries.forEach(entry => { if (entry.isIntersecting) setSectionName((entry.target as HTMLElement).dataset.chapter || "01 — INTRO"); });
     }, { rootMargin: "-15% 0px -70% 0px", threshold: 0 });
     page.querySelectorAll("[data-chapter]").forEach(el => sectionObserver.observe(el));
-    measure(); update();
+    if (nativeScroll) page.dataset.nativeScroll = "true";
+    update();
     document.fonts.ready.then(resize);
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", resize);
-    track.addEventListener("scroll", schedule, { passive: true });
+    track.addEventListener("scroll", onTrackScroll, { passive: true });
     reduced.addEventListener("change", resize);
     mobile.addEventListener("change", resize);
     return () => {
+      disposed = true;
       cancelAnimationFrame(frame); observer.disconnect(); sectionObserver.disconnect();
+      delete page.dataset.nativeScroll;
       window.removeEventListener("scroll", schedule); window.removeEventListener("resize", resize);
-      track.removeEventListener("scroll", schedule); reduced.removeEventListener("change", resize); mobile.removeEventListener("change", resize);
+      track.removeEventListener("scroll", onTrackScroll); reduced.removeEventListener("change", resize); mobile.removeEventListener("change", resize);
     };
   }, []);
 

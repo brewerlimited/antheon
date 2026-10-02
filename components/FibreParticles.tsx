@@ -9,30 +9,89 @@ const lanes = [
   "M1410 970 C1310 809 1100 650 987 543 C889 457 859 418 955 425 C1130 460 1450 410 1570 320 C1680 220 1550 135 1390 120 C1190 89 1070 60 985 -40",
 ];
 
+const sourceWidth = 1672;
+const sourceHeight = 941;
+
+// Sample once, at equal distances, to retain animateMotion's paced movement.
+// Only transform and opacity animate; each small sprite can stay on its own
+// compositor layer instead of invalidating a full-screen SVG every frame.
+function sampleLane(pathData: string): Keyframe[] {
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute("d", pathData);
+  const length = path.getTotalLength();
+  let previousAngle = 0;
+
+  return Array.from({ length: 601 }, (_, index) => {
+    const progress = index / 600;
+    const distance = progress * length;
+    const point = path.getPointAtLength(distance);
+    const before = path.getPointAtLength(Math.max(0, distance - .5));
+    const after = path.getPointAtLength(Math.min(length, distance + .5));
+    let angle = Math.atan2(after.y - before.y, after.x - before.x) * 180 / Math.PI;
+    if (index) {
+      while (angle - previousAngle > 180) angle -= 360;
+      while (angle - previousAngle < -180) angle += 360;
+    }
+    previousAngle = angle;
+    const opacity = progress < .12 ? progress / .12 * .6
+      : progress > .86 ? (1 - progress) / .14 * .6 : .6;
+
+    return {
+      offset: progress,
+      transform: `translate3d(${(point.x - 8).toFixed(4)}px, ${(point.y - 8).toFixed(4)}px, 0) rotate(${angle.toFixed(4)}deg)`,
+      opacity,
+    };
+  });
+}
+
 export function FibreParticles() {
-  const ref = useRef<SVGSVGElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const planeRef = useRef<HTMLDivElement>(null);
   const glowId = `fibre-glow-${useId().replaceAll(":", "")}`;
 
   useEffect(() => {
-    const svg = ref.current;
-    const art = svg?.parentElement;
+    const overlay = ref.current;
+    const plane = planeRef.current;
+    const art = overlay?.parentElement;
     const image = art?.querySelector("img");
-    if (!svg || !art || !image) return;
+    if (!overlay || !plane || !art || !image) return;
+
+    const frames = lanes.map(sampleLane);
+    const animations = Array.from(plane.children, (element, particle) => {
+      const lane = Math.floor(particle / 3);
+      const index = particle % 3;
+      const duration = (18 + lane * 3) * 1000;
+      const animation = element.animate(frames[lane], {
+        duration,
+        iterations: Infinity,
+        easing: "linear",
+        fill: "both",
+      });
+      animation.pause();
+      animation.currentTime = duration * index / 3 + lane * 2000;
+      return animation;
+    });
+
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
     let visible = false;
+    let wasRunning = false;
     const sync = () => {
       const running = visible && !document.hidden && !reduced.matches && !document.documentElement.dataset.antheonIntro;
-      if (running) svg.unpauseAnimations(); else svg.pauseAnimations();
-      svg.dataset.running = String(running);
+      if (running !== wasRunning) {
+        animations.forEach(animation => { if (running) animation.play(); else animation.pause(); });
+        wasRunning = running;
+      }
+      overlay.dataset.running = String(running);
     };
     const measure = () => {
       const width = art.clientWidth, height = art.clientHeight;
       if (!width || !height) return;
-      const scale = Math.max(width / 1672, height / 941);
+      const scale = Math.max(width / sourceWidth, height / sourceHeight);
       const [x, y] = getComputedStyle(image).objectPosition.split(" ").map(value => parseFloat(value) / 100);
-      const viewWidth = width / scale, viewHeight = height / scale;
-      svg.setAttribute("viewBox", `${(1672 - viewWidth) * (Number.isFinite(x) ? x : .5)} ${(941 - viewHeight) * (Number.isFinite(y) ? y : .5)} ${viewWidth} ${viewHeight}`);
-      svg.dataset.ready = "true";
+      const left = (width - sourceWidth * scale) * (Number.isFinite(x) ? x : .5);
+      const top = (height - sourceHeight * scale) * (Number.isFinite(y) ? y : .5);
+      plane.style.transform = `translate(${left}px, ${top}px) scale(${scale})`;
+      overlay.dataset.ready = "true";
     };
     const resize = new ResizeObserver(measure);
     const visibility = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); });
@@ -44,25 +103,26 @@ export function FibreParticles() {
     reduced.addEventListener("change", sync);
     measure(); sync();
     return () => {
-      svg.pauseAnimations();
+      animations.forEach(animation => animation.cancel());
       resize.disconnect(); visibility.disconnect(); intro.disconnect();
       document.removeEventListener("visibilitychange", sync);
       reduced.removeEventListener("change", sync);
     };
   }, []);
 
-  return <svg ref={ref} className="fibre-particles" viewBox="0 0 1672 941" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-    <defs><radialGradient id={glowId}><stop stopColor="#c8e7ff" stopOpacity=".55" /><stop offset="1" stopColor="#819dff" stopOpacity="0" /></radialGradient></defs>
-    {lanes.flatMap((path, lane) => Array.from({ length: 3 }, (_, index) => {
-      const duration = 18 + lane * 3;
-      const begin = -(duration * index / 3 + lane * 2);
-      return <g key={`${lane}-${index}`} className={index === 2 ? "fibre-particle-extra" : undefined} opacity="0">
-        <circle r="8" fill={`url(#${glowId})`} />
-        <ellipse rx="5" ry=".7" fill="#b9dcff" opacity=".4" />
-        <circle r="1.3" fill="#e2f1ff" />
-        <animateMotion path={path} dur={`${duration}s`} begin={`${begin}s`} rotate="auto" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0;.6;.6;0" keyTimes="0;.12;.86;1" dur={`${duration}s`} begin={`${begin}s`} repeatCount="indefinite" />
-      </g>;
-    }))}
-  </svg>;
+  return <div ref={ref} className="fibre-particles" aria-hidden="true">
+    <div ref={planeRef} style={{ position: "absolute", left: 0, top: 0, width: sourceWidth, height: sourceHeight, transformOrigin: "0 0" }}>
+      {lanes.flatMap((_, lane) => Array.from({ length: 3 }, (_, index) => {
+        const particleGlowId = `${glowId}-${lane}-${index}`;
+        return <span key={`${lane}-${index}`} className={`fibre-particle${index === 2 ? " fibre-particle-extra" : ""}`} style={{ position: "absolute", left: 0, top: 0, width: 16, height: 16, opacity: 0, willChange: "transform, opacity" }}>
+          <svg width="16" height="16" viewBox="-8 -8 16 16" focusable="false" style={{ display: "block" }}>
+            <defs><radialGradient id={particleGlowId}><stop stopColor="#c8e7ff" stopOpacity=".55" /><stop offset="1" stopColor="#819dff" stopOpacity="0" /></radialGradient></defs>
+            <circle r="8" fill={`url(#${particleGlowId})`} />
+            <ellipse rx="5" ry=".7" fill="#b9dcff" opacity=".4" />
+            <circle r="1.3" fill="#e2f1ff" />
+          </svg>
+        </span>;
+      }))}
+    </div>
+  </div>;
 }
