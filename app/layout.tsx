@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { Viewport } from "next";
 import localFont from "next/font/local";
+import { IntroBootstrap } from "@/components/intro/IntroBootstrap";
 import "./globals.css";
 
 const geist = localFont({
@@ -56,7 +57,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
+      <head><IntroBootstrap /></head>
       <body className={geist.variable}>
         {children}
       </body>
