@@ -1,6 +1,6 @@
 # Anthēon Motion
 
-The Antheon Group website, redesigned with a cinematic, scroll-led experience inspired by Dotech's motion and presentation.
+The Anthēon Group website, with a cinematic opening and an interactive architectural city representing its ventures, software and digital work.
 
 The redesign was developed in an independent copy, preserving the original local project. The base redesign is published through the `main` branch of `brewerlimited/antheon` and its existing Vercel integration at https://antheon.co.uk. The fullscreen intro is included in the approved production release.
 
@@ -17,7 +17,7 @@ Open http://localhost:4317. The installed copy in this workspace already has dep
 
 To replay the intro during development, open http://localhost:4317/?intro=1 and refresh to play again. This override is disabled in production. For a frozen motion-review frame, add `&at=2.2` (architectural surge), `&at=3.23` (near formation), `&at=3.6` (lock), or `&at=4.94` (navigation handoff).
 
-The 4.95-second intro runs once per browser session. Direct section links and restored scrolled positions go straight to their destination. Reduced-motion visitors go straight to the website. Skip appears after 800ms, Escape exits immediately, and failed WebGL or essential assets release the page. The existing hero starts loading underneath from the initial document. No-JavaScript visits remain usable; failed hydration has a bounded timeout.
+The 4.95-second intro runs once per browser session. Direct section links and restored scrolled positions go straight to their destination. Reduced-motion visitors go straight to the website. Skip appears after 800ms, Escape exits immediately, and failed WebGL or essential assets release the page. A lightweight aerial render of the city loads underneath from the initial document. The live city renderer starts after the intro releases the page, avoiding two simultaneous animated WebGL scenes. No-JavaScript visits remain usable; failed hydration has a bounded timeout.
 
 For production:
 
@@ -30,8 +30,9 @@ npm start -- --port 4317
 
 - Architectural WebGL opening with 13,800 desktop / 6,200 mobile identity particles, deep perspective grids, electric-blue and violet reflections, node constellations, topographic ribbons, foreground fragments and camera travel. Coloured particles resolve into the white navigation logo, with a 0.25-second longer full-logo hold before a precisely styled copy moves into the real header position while the hero resolves through the environment.
 - Original generated architectural artwork, locally stored and optimised as WebP.
-- Pinned hero with scroll-driven image zoom and typography transition.
-- Scroll-revealed group statement.
+- A pinned Three.js city: dark aerial arrival, scroll-driven camera descent, staged lights/routes/windows, subtle traffic, and four discoverable districts.
+- Hover-driven district stories with subtle crossfades, compact keyboard/touch navigation, pause/resume and a direct link past the experience.
+- The original full group introduction and its scroll-revealed statement follow the city, ahead of the existing services, selected work and ventures.
 - Three horizontally moving desktop service scenes and a touch-friendly mobile carousel.
 - Stacking selected-work cards that open the existing detailed concepts.
 - Five-venture image gallery with original AI-generated scenes, pointer-following cursor, image parallax and venture detail dialogs; keyboard-accessible navigation and working email links.
@@ -51,7 +52,11 @@ The main website permits search-engine indexing. Portfolio concept pages and emb
 - `components/motion-home.css` — layout, motion and responsive styling.
 - `app/globals.css` — existing inner-page styles with a coordinated blue palette.
 - `data/site.ts` and `data/concepts.ts` — preserved venture and portfolio content.
-- `public/images/motion/hero-fibres.webp` — selected optical-fibre hero artwork, with the earlier arch preserved as `hero.webp`.
+- `components/city/CityHero.tsx` — intro-aware loading, native scroll progress, accessible district discovery, responsive fallbacks and lifecycle management.
+- `components/city/city-scene.ts` — deterministic procedural architecture, instanced geometry, façade lighting, camera choreography, raycasting and traffic.
+- `components/city/districts.ts` — the four district descriptions and destinations.
+- `components/city/city.css` — hero composition, scroll handoff and mobile presentation.
+- `public/images/city/` — aerial, isometric and mobile stills rendered from the actual Three.js city. Earlier motion artwork remains available but is not loaded by the homepage hero.
 - `components/VentureGallery.tsx` and `components/venture-gallery.css` — venture gallery and cursor interactions.
 - `public/images/motion/ventures/` — five generated venture scenes, optimised as WebP.
 - `docs/venture-image-prompts.json` — exact prompts used with the built-in image generator.
@@ -68,8 +73,14 @@ After the colour and logo-hold refinement, normal-speed desktop (1280 × 720) an
 
 Vercel Web Analytics is installed through `@vercel/analytics/next` in the root layout, covering page views and navigation across the Next.js pages. The privacy notice includes the analytics disclosure. This release includes the approved analytics integration, SVG icon fix and three-line scroll headline. After deployment, verify that Web Analytics is enabled for the Anthēon project and confirm page views arrive in its Analytics dashboard.
 
-## Fibre hero refinement
+## City hero
 
-The selected Connected Flow image uses nine small SVG light sprites (six visible on mobile) in `components/FibreParticles.tsx`. The traced paths are sampled once, then native Web Animations move individual sprite layers using only transforms and opacity. Crop coordinates, glow, timing and path direction match the original effect. Motion pauses offscreen, in hidden tabs, during the intro and for reduced-motion preferences. No JavaScript animation loop or WebGL context is added.
+The opening animation is preserved. Its final brand handoff reveals a dark aerial city. Native document scrolling then activates windows, embedded routes and traffic while moving the orthographic camera into a settled isometric composition. There is no scroll interception. Further scrolling fades the scene into the group introduction and existing website.
 
-The hero uses a camera glide instead of continuously enlarging the image: a fixed-size image layer extends 40px above and below the viewport and travels vertically by 80px. The image and particles share that movement, with no exposed edges or changing image scale. Native CSS scroll timelines drive the movement where supported; older browsers update the affected layers directly. The text retains its original fade and movement timing. The intro keeps its brightness reveal without image scaling, and reduced-motion visitors receive a static image. Resize measurements are batched into a frame, horizontal service scrolling is read separately, and unchanged styles are skipped.
+The city uses instanced geometry, shared materials, procedural façade shaders, a single cached shadow map and limited raycasting. It needs no external models or texture requests. Rendering stops when offscreen, in a hidden tab, during the intro, or when paused. Low sustained frame rates reduce resolution. Resize, breakpoint changes and unmount release scene resources. Context loss or import failure falls back to the rendered stills and working district controls.
+
+Widths up to 800px, viewports up to 560px high, reduced-motion preferences, data-saving connections and devices reporting at most 2GB of memory receive the lighter still-image experience. It contains the same district information and destinations without a long pinned scroll area. With JavaScript disabled, the district links and existing services remain available.
+
+District selection persists when the pointer moves from a building to its information link. The information panel crossfades between districts without shifting its layout. Discreet previous/next arrows provide the same interaction with keyboard or touch. Contact, portfolio, venture and pricing routes are unchanged.
+
+For local visual maintenance only, the development canvas exposes `document.querySelector('.city-canvas').cityScene`, with `capture()` and `getStats()`. This is absent from production. Render the scene at progress 0 and 0.67 to refresh the aerial/isometric posters after geometry changes; the mobile still crops the actual activated render to the entire city. The production experience does not rely on this diagnostic handle.

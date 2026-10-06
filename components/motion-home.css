@@ -9,18 +9,8 @@
 @media(max-width:800px){.work-heading-new h2{font-size:15.5vw;max-width:100%}.work-asterisk{top:70%;right:5px;font-size:40px}}
 .fibre-particles{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;overflow:hidden}.fibre-particles[data-ready=true]{opacity:.75}@media(max-width:800px){.fibre-particle-extra{display:none}.fibre-particles[data-ready=true]{opacity:.6}}@media(prefers-reduced-motion:reduce){.fibre-particles{display:none}}
 
-/* A fixed-size image layer glides behind the text; no image rescaling during scroll. */
-@keyframes hero-scroll-camera{from{transform:translate3d(0,40px,0)}to{transform:translate3d(0,-40px,0)}}
-@keyframes hero-scroll-copy{from{transform:translate3d(0,0,0);opacity:1}60.6060606%{opacity:0}to{transform:translate3d(0,-140px,0);opacity:0}}
-@keyframes hero-scroll-next{from{transform:translate3d(0,80px,0);opacity:0}48%{opacity:0}81.3333333%{opacity:1}to{transform:translate3d(0,0,0);opacity:1}}
+/* The page progress remains independent of the city renderer. */
 @keyframes page-scroll-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@media(prefers-reduced-motion:no-preference){
-  .motion-home[data-native-scroll] .hero-art{animation:hero-scroll-camera auto linear both;animation-timeline:scroll(root block);animation-range:var(--hero-scroll-start) var(--hero-scroll-end)}
-  .motion-home[data-native-scroll] .motion-hero-copy{animation:hero-scroll-copy auto linear both;animation-timeline:scroll(root block);animation-range:var(--hero-scroll-start) var(--hero-scroll-end)}
-  .motion-home[data-native-scroll] .hero-next{animation:hero-scroll-next auto linear both;animation-timeline:scroll(root block);animation-range:var(--hero-scroll-start) var(--hero-scroll-end)}
-  .motion-home[data-native-scroll] .motion-progress{animation:page-scroll-progress auto linear both;animation-timeline:scroll(root block)}
-}
-.intro-content[data-entering] .motion-home .motion-hero-copy{animation:none;opacity:var(--entry-ui)!important}
+@media(prefers-reduced-motion:no-preference){.motion-home[data-native-scroll] .motion-progress{animation:page-scroll-progress auto linear both;animation-timeline:scroll(root block)}}
 @media(max-width:800px){.service-track,.motion-work-card{will-change:auto}}
-
-@media(prefers-reduced-motion:reduce){.hero-art{inset:0;transform:none;will-change:auto}}
+@media(scripting:none){.intro-word{opacity:1}.motion-reveal{opacity:1;transform:none}.motion-services{height:auto}.services-stage{position:relative;height:auto;min-height:0;padding:60px 0}.services-top{position:relative;inset:auto;padding:0 8.5%;margin-bottom:25px}.service-track{display:block;width:100%;height:auto;transform:none}.service-panel{width:100%;padding:50px 8.5%;gap:6%;pointer-events:auto}.service-panel[inert]{interactivity:auto}.services-bottom{display:none}.motion-work-card{position:relative;top:auto;transform:none}}

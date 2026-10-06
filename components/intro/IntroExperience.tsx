@@ -65,7 +65,7 @@ export function IntroExperience({ children }: { children: ReactNode }) {
     let brandTarget = navBrand.getBoundingClientRect();
     const finePointer = matchMedia("(hover: hover) and (pointer: fine)");
     const previousFocus = document.activeElement as HTMLElement | null;
-    const hero = content.querySelector<HTMLImageElement>(".hero-art img");
+    const hero = content.querySelector<HTMLImageElement>(".city-poster-aerial img");
     const start = performance.now();
     const preview = process.env.NODE_ENV === "development" && ["1", "replay"].includes(new URLSearchParams(location.search).get("intro") || "");
     const stillValue = preview ? Number(new URLSearchParams(location.search).get("at")) : NaN;

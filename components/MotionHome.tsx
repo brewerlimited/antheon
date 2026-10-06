@@ -7,7 +7,7 @@ import Image from "next/image";
 import { concepts } from "@/data/concepts";
 import { siteLinks } from "@/data/site";
 import { VentureGallery } from "./VentureGallery";
-import { FibreParticles } from "./FibreParticles";
+import { CityHero } from "./city/CityHero";
 import "./motion-home.css";
 
 const services = [
@@ -21,21 +21,18 @@ export function MotionHome() {
   const menuRef = useRef<HTMLDialogElement>(null);
   const menuButton = useRef<HTMLButtonElement>(null);
   const [activeService, setActiveService] = useState(0);
+  const [enhanced, setEnhanced] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [sectionName, setSectionName] = useState("01 — INTRO");
 
   useEffect(() => {
     const page = root.current;
     if (!page) return;
+    const enhancement = requestAnimationFrame(() => setEnhanced(true));
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     const mobile = window.matchMedia("(max-width: 800px)");
-    const hero = page.querySelector<HTMLElement>(".motion-hero")!;
     const intro = page.querySelector<HTMLElement>(".motion-intro")!;
-    const heroStage = page.querySelector<HTMLElement>(".hero-stage")!;
     const progressBar = page.querySelector<HTMLElement>(".motion-progress")!;
-    const heroArt = page.querySelector<HTMLElement>(".hero-art")!;
-    const heroCopy = page.querySelector<HTMLElement>(".motion-hero-copy")!;
-    const heroNext = page.querySelector<HTMLElement>(".hero-next")!;
     const nativeScroll = CSS.supports("animation-timeline", "scroll(root block)")
       && CSS.supports("animation-range", "0px 1px")
       && !(process.env.NODE_ENV === "development" && new URLSearchParams(location.search).get("scroll-engine") === "fallback");
@@ -57,7 +54,7 @@ export function MotionHome() {
     const words = Array.from(page.querySelectorAll<HTMLElement>(".intro-word"));
     const cards = Array.from(page.querySelectorAll<HTMLElement>(".motion-work-card"));
     let frame = 0;
-    let dimensions = { heroTop: 0, heroHeight: 0, introTop: 0, introHeight: 0, servicesTop: 0, serviceHeight: 0, viewport: 0, heroViewport: 0, trackWidth: 1, scrollRange: 1, cardTops: [] as number[] };
+    let dimensions = { introTop: 0, introHeight: 0, servicesTop: 0, serviceHeight: 0, viewport: 0, trackWidth: 1, scrollRange: 1, cardTops: [] as number[] };
     const clamp = (n: number) => Math.max(0, Math.min(1, n));
     const measure = () => {
       const stack = page.querySelector<HTMLElement>(".motion-work-stack")!;
@@ -68,11 +65,8 @@ export function MotionHome() {
         naturalTop += card.offsetHeight + gap;
         return top;
       });
-      dimensions = { heroTop: hero.offsetTop, heroHeight: hero.offsetHeight, introTop: intro.offsetTop, introHeight: intro.offsetHeight, servicesTop: service.offsetTop, serviceHeight: service.offsetHeight, viewport: window.innerHeight, heroViewport: heroStage.clientHeight, trackWidth: track.clientWidth, scrollRange: Math.max(1, document.documentElement.scrollHeight - window.innerHeight), cardTops };
+      dimensions = { introTop: intro.offsetTop, introHeight: intro.offsetHeight, servicesTop: service.offsetTop, serviceHeight: service.offsetHeight, viewport: window.innerHeight, trackWidth: track.clientWidth, scrollRange: Math.max(1, document.documentElement.scrollHeight - window.innerHeight), cardTops };
       serviceIndex = Math.round(track.scrollLeft / Math.max(1, dimensions.trackWidth));
-      // The camera glide retains the original transition's scroll range.
-      setStyle(hero, "--hero-scroll-start", `${dimensions.heroTop}px`);
-      setStyle(hero, "--hero-scroll-end", `${dimensions.heroTop + Math.max(1, dimensions.heroHeight - dimensions.heroViewport)}px`);
     };
     const update = () => {
       frame = 0;
@@ -80,16 +74,6 @@ export function MotionHome() {
       const y = window.scrollY;
       if (needsMeasure) { needsMeasure = false; measure(); }
       const d = dimensions;
-      const heroProgress = reduced.matches ? 0 : clamp((y - d.heroTop) / Math.max(1, d.heroHeight - d.heroViewport));
-      // Modern browsers drive these three layers on the scroll timeline. Older
-      // browsers update only the affected layers, never an inherited hero variable.
-      if (!nativeScroll || reduced.matches) {
-        setStyle(heroArt, "transform", reduced.matches ? "none" : `translate3d(0,${(40 - heroProgress * 80).toFixed(3)}px,0)`);
-        setStyle(heroCopy, "transform", `translate3d(0,${(-140 * heroProgress).toFixed(3)}px,0)`);
-        setMotion(heroCopy, "opacity", clamp(1 - heroProgress * 1.65));
-        setStyle(heroNext, "transform", `translate3d(0,${((1 - heroProgress) * 80).toFixed(3)}px,0)`);
-        setMotion(heroNext, "opacity", clamp((heroProgress - .48) * 3));
-      }
       const introProgress = clamp((y - d.introTop + d.viewport * .66) / (d.introHeight * .8));
       words.forEach((word, index) => setMotion(word, "opacity", reduced.matches ? 1 : .18 + .82 * clamp(introProgress * (words.length + 4) - index)));
       const serviceProgress = clamp((y - d.servicesTop) / Math.max(1, d.serviceHeight - d.viewport));
@@ -104,6 +88,8 @@ export function MotionHome() {
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
     const resize = () => { if (!disposed) { needsMeasure = true; schedule(); } };
+    const pageSize = new ResizeObserver(resize);
+    pageSize.observe(page);
     const onTrackScroll = () => {
       serviceIndex = Math.round(track.scrollLeft / Math.max(1, dimensions.trackWidth));
       schedule();
@@ -126,7 +112,7 @@ export function MotionHome() {
     mobile.addEventListener("change", resize);
     return () => {
       disposed = true;
-      cancelAnimationFrame(frame); observer.disconnect(); sectionObserver.disconnect();
+      cancelAnimationFrame(frame); cancelAnimationFrame(enhancement); observer.disconnect(); sectionObserver.disconnect(); pageSize.disconnect();
       delete page.dataset.nativeScroll;
       window.removeEventListener("scroll", schedule); window.removeEventListener("resize", resize);
       track.removeEventListener("scroll", onTrackScroll); reduced.removeEventListener("change", resize); mobile.removeEventListener("change", resize);
@@ -166,16 +152,7 @@ export function MotionHome() {
     </dialog>
     <aside className="motion-rail" aria-hidden="true"><span>{sectionName}</span><div /><span>SCROLL TO EXPLORE</span></aside>
     <main id="main-content" tabIndex={-1}>
-      <section className="motion-hero" id="top" data-chapter="01 — INTRO" aria-labelledby="motion-hero-title">
-        <div className="hero-stage">
-          <div className="hero-art"><Image src="/images/motion/hero-fibres.webp" alt="Flowing optical fibres illuminated in electric blue and violet" fill priority sizes="(max-width: 800px) 178vh, 100vw" /><FibreParticles /></div>
-          <div className="hero-shade" />
-          <div className="motion-hero-copy"><p className="motion-eyebrow"><span className="tiny-cross" aria-hidden="true"><VectorIcon name="star" /></span> A VENTURE & DIGITAL DEVELOPMENT GROUP</p><h1 id="motion-hero-title">Ideas into<br /><em>what’s next.</em></h1><div className="hero-description"><span className="short-line" /><p>We build businesses, digital products<br />and experiences that move things forward.</p></div></div>
-          <div className="hero-next" aria-hidden="true"><span>BEYOND</span><span>WHAT’S</span><span>EXPECTED.</span></div>
-          <div className="hero-bottom"><span>BUCKINGHAMSHIRE, UK<br /><b>INDEPENDENT. BY DESIGN.</b></span><a href="#about" className="scroll-orbit" aria-label="Scroll to discover Anthēon"><span>SCROLL<br />TO DISCOVER</span><i aria-hidden="true"><VectorIcon name="arrow-down" /></i></a><span className="hero-coordinate">VENTURES / DIGITAL / DESIGN<br /><b>EST. WITH INTENT.</b></span></div>
-          <span className="hero-edge-label" aria-hidden="true">ANTHĒON / EXPLORING POSSIBILITY</span>
-        </div>
-      </section>
+      <CityHero />
       <section className="motion-intro" id="about" data-chapter="02 — THE GROUP" aria-labelledby="intro-title">
         <div className="intro-top"><p className="motion-eyebrow">01 / THE GROUP</p><span className="intro-star" aria-hidden="true"><VectorIcon name="star" /></span></div>
         <h2 id="intro-title" aria-label="Different ideas. Shared ambition. We turn possibility into something real.">{"Different ideas. Shared ambition. We turn possibility into something real.".split(" ").map((word, i) => <span className="intro-word" key={i}>{word} </span>)}</h2>
@@ -184,7 +161,7 @@ export function MotionHome() {
       <section className="motion-services" id="digital" data-chapter="03 — WHAT WE DO" aria-labelledby="services-title">
         <div className="services-stage">
           <div className="services-top"><p className="motion-eyebrow" id="services-title">02 / WHAT WE DO</p><span>THOUGHTFULLY CONCEIVED. METICULOUSLY BUILT.</span></div>
-          <div className="service-track">{services.map((service, index) => <article className="service-panel" key={service.number} inert={activeService !== index}>
+          <div className="service-track">{services.map((service, index) => <article className="service-panel" key={service.number} inert={enhanced && activeService !== index}>
             <div className="service-visual"><div className="service-orbit" aria-hidden="true" /><span className="service-watermark" aria-hidden="true">{service.number}</span><a href={service.href} className="service-screen" aria-label={service.link}><div className="screen-chrome"><i /><i /><i /><span>ANTHĒON / SELECTED EXPLORATIONS</span></div><Image src={service.image} alt={service.name} width={1440} height={900} sizes="(max-width: 800px) 90vw, 50vw" /></a><span className="service-caption">{service.name}</span></div>
             <div className="service-copy"><p className="motion-eyebrow">{service.tag}</p><h2>{service.title[0]}<br /><em>{service.title[1]}</em></h2><p className="service-description">{service.description}</p><ul>{service.items.map(item => <li key={item}>{item}</li>)}</ul><a href={service.href} className="motion-pill">{service.link}<i aria-hidden="true" /></a></div>
           </article>)}</div>
