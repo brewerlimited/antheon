@@ -38,3 +38,6 @@ yarn-error.log*
 /.wrangler/
 /outputs/
 /work/
+
+/private-previews/gjl/
+/private-previews/gjl.bundle.enc

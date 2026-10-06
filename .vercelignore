@@ -1,0 +1,7 @@
+
+.git
+.next
+node_modules
+.env*
+private-previews/gjl/
+private-previews/gjl.bundle.enc

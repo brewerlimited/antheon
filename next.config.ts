@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   devIndicators: false,
+  outputFileTracingIncludes: {
+    '/client-preview/gjl/[[...path]]': ['./private-previews/gjl.bundle.enc'],
+  },
   async redirects() {
     return [
       { source: "/concepts/hs-flooring", destination: "/concepts/surefix-interiors", permanent: true },
