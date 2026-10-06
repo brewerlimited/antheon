@@ -7,6 +7,7 @@ import {
   Scene, SRGBColorSpace, Vector2, Vector3, WebGLRenderer,
 } from "three";
 import type { Material, Texture } from "three";
+import { createCitySurroundings } from "./city-surroundings";
 
 export type DistrictId = "core" | "digital" | "software" | "ventures";
 type Options = {
@@ -39,10 +40,10 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
   renderer.shadowMap.type = PCFSoftShadowMap;
   renderer.shadowMap.autoUpdate = false;
   renderer.shadowMap.needsUpdate = true;
-  renderer.setClearColor(0x080d14, 1);
+  renderer.setClearColor(0x06070b, 1);
   const scene = new Scene();
-  scene.background = new Color(0x080d14);
-  scene.fog = new FogExp2(0x080d14, 0.0034);
+  scene.background = new Color(0x06070b);
+  scene.fog = new FogExp2(0x06070b, 0.0034);
   const camera = new OrthographicCamera(-60, 60, 40, -40, 0.1, 420);
   const geometries = new Set<BufferGeometry>();
   const materials = new Set<Material>();
@@ -64,14 +65,19 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
 
   // Broad matte ground. The different precincts grow from real pedestrian
   // podiums, with ordinary streets between them, rather than a floating board.
-  const groundMaterial = new MeshStandardMaterial({ color: 0x080e16, roughness: 0.96, metalness: 0.04 });
+  const groundMaterial = new MeshStandardMaterial({ color: 0x09090d, roughness: 0.96, metalness: 0.04 });
   materials.add(groundMaterial);
   const groundGeometry = new PlaneGeometry(600, 600); geometries.add(groundGeometry);
   const ground = new Mesh(groundGeometry, groundMaterial);
   ground.rotation.x = -Math.PI / 2; ground.position.y = -0.06; ground.receiveShadow = true; scene.add(ground);
 
-  const sky = new HemisphereLight(0xb4c6df, 0x20232c, 1.1); scene.add(sky);
-  const sun = new DirectionalLight(0xe5efff, 3.2);
+  // Existing Anthēon sources: intro-scene.ts uViolet and globals.css warm white.
+  // Neutral albedo/key light keep the architecture charcoal; violet lives in illumination.
+  const brandViolet = new Color("#b184ff");
+  const warmWhite = new Color("#f4f2ed");
+  const lavender = warmWhite.clone().lerp(brandViolet, 0.68);
+  const sky = new HemisphereLight(warmWhite.clone().lerp(brandViolet, 0.18), 0x17161a, 1.1); scene.add(sky);
+  const sun = new DirectionalLight(warmWhite, 3.2);
   sun.position.set(-34, 74, 22); sun.castShadow = true;
   sun.shadow.mapSize.set(2048, 2048);
   sun.shadow.camera.left = -63; sun.shadow.camera.right = 63;
@@ -79,8 +85,8 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
   sun.shadow.camera.near = 5; sun.shadow.camera.far = 170;
   sun.shadow.normalBias = 0.045; sun.shadow.bias = -0.00012;
   sun.shadow.radius = 3; scene.add(sun);
-  const rim = new DirectionalLight(0x90a9d6, 2.1); rim.position.set(32, 38, -45); scene.add(rim);
-  const fill = new DirectionalLight(0xf5d9b6, 0.45); fill.position.set(18, 14, 36); scene.add(fill);
+  const rim = new DirectionalLight(brandViolet, 2.1); rim.position.set(32, 38, -45); scene.add(rim);
+  const fill = new DirectionalLight(warmWhite, 0.25); fill.position.set(18, 14, 36); scene.add(fill);
 
   // A tiny locally drawn studio environment gives glazing reflected sky and
   // elongated highlights, without a remote HDRI or a large environment asset.
@@ -90,16 +96,16 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
   let environmentTarget: ReturnType<PMREMGenerator["fromEquirectangular"]> | null = null;
   if (ctx) {
     const gradient = ctx.createLinearGradient(0, 0, 0, 256);
-    gradient.addColorStop(0, "#8194ac"); gradient.addColorStop(0.42, "#46596c");
-    gradient.addColorStop(0.55, "#202c3b"); gradient.addColorStop(1, "#10171e");
+    gradient.addColorStop(0, "#59585b"); gradient.addColorStop(0.42, "#353437");
+    gradient.addColorStop(0.55, "#1c1b1e"); gradient.addColorStop(1, "#0d0c0f");
     ctx.fillStyle = gradient; ctx.fillRect(0, 0, 512, 256);
-    ctx.fillStyle = "#b3bfc9"; ctx.fillRect(58, 40, 31, 110);
-    ctx.fillStyle = "#788d9d"; ctx.fillRect(322, 24, 62, 116);
+    ctx.fillStyle = "#c4becb"; ctx.fillRect(58, 40, 31, 110);
+    ctx.fillStyle = "#8b858f"; ctx.fillRect(322, 24, 62, 116);
     const sourceTexture = new CanvasTexture(environmentCanvas);
     sourceTexture.mapping = EquirectangularReflectionMapping; sourceTexture.colorSpace = SRGBColorSpace;
     const pmrem = new PMREMGenerator(renderer);
     environmentTarget = pmrem.fromEquirectangular(sourceTexture);
-    scene.environment = environmentTarget.texture; scene.environmentIntensity = 0.8;
+    scene.environment = environmentTarget.texture; scene.environmentIntensity = 0.65;
     sourceTexture.dispose(); pmrem.dispose();
   }
 
@@ -107,14 +113,14 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
   const highlights = Object.fromEntries(districtIds.map(id => [id, { value: 0 }])) as Record<DistrictId, Uniform>;
   const tintedMaterials: { material: MeshStandardMaterial; base: Color; id: DistrictId }[] = [];
   const palette: Record<Style, number> = {
-    stone: 0x78858d, metal: 0x9eacb5, glass: 0x4a6579,
-    dark: 0x35414d, paving: 0x28333c, roof: 0x4c5964,
+    stone: 0x454447, metal: 0x656368, glass: 0x29282d,
+    dark: 0x222125, paving: 0x222125, roof: 0x37353b,
   };
   function buildingMaterial(style: Style, district: DistrictId | null) {
     const mat = new MeshStandardMaterial({
       color: palette[style], roughness: style === "glass" ? 0.27 : style === "metal" ? 0.38 : 0.79,
       metalness: style === "glass" ? 0.61 : style === "metal" ? 0.64 : 0.12,
-      envMapIntensity: style === "glass" ? 1.05 : 0.32,
+      envMapIntensity: style === "glass" ? 0.8 : 0.24,
     });
     materials.add(mat);
     if (district) tintedMaterials.push({ material: mat, base: mat.color.clone(), id: district });
@@ -123,6 +129,8 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
       mat.onBeforeCompile = shader => {
         shader.uniforms.cityActivation = activation;
         shader.uniforms.cityHighlight = highlight;
+        shader.uniforms.cityWindowLavender = { value: lavender };
+        shader.uniforms.cityWarmWhite = { value: warmWhite };
         shader.vertexShader = shader.vertexShader.replace("#include <common>", `#include <common>
           attribute vec3 citySize; attribute float citySeed;
           varying vec2 vCityUv; varying vec2 vCitySize;
@@ -132,6 +140,7 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
           vCitySide = 1.0 - abs(normal.y); vCitySeed = citySeed;`);
         shader.fragmentShader = shader.fragmentShader.replace("#include <common>", `#include <common>
           uniform float cityActivation; uniform float cityHighlight;
+          uniform vec3 cityWindowLavender; uniform vec3 cityWarmWhite;
           varying vec2 vCityUv; varying vec2 vCitySize;
           varying float vCitySide; varying float vCitySeed;
           float cityHash(vec2 p) { return fract(sin(dot(p,vec2(127.1,311.7)) + vCitySeed) * 43758.5453); }`)
@@ -145,11 +154,12 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
           diffuseColor.rgb *= mix(0.45,1.0,pane);
           float occupancy = cityHash(cityId);
           float lit = smoothstep(occupancy * 1.25, occupancy * 1.25 + 0.11, cityActivation) * step(0.51,occupancy);
-          vec3 officeLight = mix(vec3(0.32,0.52,0.76),vec3(1.0,0.64,0.31),step(0.74,cityHash(cityId+31.0)));
-          totalEmissiveRadiance += pane * officeLight * (lit * (0.3 + cityHash(cityId+7.0)*0.6) + cityHighlight*0.1*cityActivation);
+          vec3 officeLight = mix(cityWindowLavender,cityWarmWhite,step(0.8,cityHash(cityId+31.0)));
+          officeLight *= mix(0.78,1.35,cityHash(cityId+19.0));
+          totalEmissiveRadiance += pane * officeLight * (lit * (0.18 + cityHash(cityId+7.0)*0.48) + cityHighlight*0.035*cityActivation);
           `);
       };
-      mat.customProgramCacheKey = () => "antheon-city-facades-v1";
+      mat.customProgramCacheKey = () => "antheon-city-facades-v2-lavender";
     }
     return mat;
   }
@@ -206,7 +216,7 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
   for (let x = -5; x <= 5; x += 2.5) add("core", "stone", x, 1.48, 1.35, 0.2, 2.8, 0.2);
   for (const x of [-5.8, 5.8]) for (const z of [-11, -6, -1, 3]) tree(x, z, 0.2, 0.78);
   // Reflecting water is a dark horizontal surface, not a luminous sci-fi ring.
-  const waterMaterial = new MeshStandardMaterial({ color: 0x243c4c, metalness: 0.8, roughness: 0.2 }); materials.add(waterMaterial);
+  const waterMaterial = new MeshStandardMaterial({ color: 0x24212e, metalness: 0.8, roughness: 0.2 }); materials.add(waterMaterial);
   const water = new Mesh(box, waterMaterial); water.scale.set(7, 0.07, 2.4); water.position.set(0, 0.23, 3); scene.add(water);
   for (const x of [-5.2, 5.2]) { add("core", "stone", x, 0.42, 3, 1.6, 0.4, 0.45); }
 
@@ -225,9 +235,9 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
   const mediaContext=mediaCanvas.getContext("2d");
   let mediaMaterial:MeshBasicMaterial|null=null;
   if(mediaContext){
-    mediaContext.fillStyle="#172430";mediaContext.fillRect(0,0,256,96);
+    mediaContext.fillStyle="#1b1724";mediaContext.fillRect(0,0,256,96);
     for(let i=0;i<8;i++){
-      mediaContext.fillStyle=["#5e7b8d","#8ea1ac","#354c60","#81979d"][i%4];
+      mediaContext.fillStyle=["#77658e","#b184ff","#3c344b","#b4a7c4"][i%4];
       mediaContext.fillRect(12+i*30,12+(i%3)*13,19,65-(i%3)*13);
     }
     const texture=new CanvasTexture(mediaCanvas);texture.colorSpace=SRGBColorSpace;textures.add(texture);
@@ -299,7 +309,7 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
     {x:31.5,z:0,w:2.5,d:55,alongX:false},
     {x:-32.1,z:9,w:2.5,d:36,alongX:false},
   ];
-  const roadMaterial = new MeshStandardMaterial({ color: 0x101821, roughness: 0.91 }); materials.add(roadMaterial);
+  const roadMaterial = new MeshStandardMaterial({ color: 0x111015, roughness: 0.91 }); materials.add(roadMaterial);
   const roadMesh = new InstancedMesh(box, roadMaterial, roads.length); scene.add(roadMesh);
   roads.forEach((r,i) => { temp.position.set(r.x,0.01,r.z); temp.scale.set(r.w,0.08,r.d); temp.updateMatrix(); roadMesh.setMatrixAt(i,temp.matrix); });
   const routePieces: Piece[] = [];
@@ -315,7 +325,7 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
       }
     }
   });
-  const routeMaterial = new MeshBasicMaterial({color:0x7fa8c8,transparent:true,opacity:0.06,toneMapped:false}); materials.add(routeMaterial);
+  const routeMaterial = new MeshBasicMaterial({color:brandViolet,transparent:true,opacity:0.06,toneMapped:false}); materials.add(routeMaterial);
   const routes = new InstancedMesh(box,routeMaterial,routePieces.length); scene.add(routes);
   routePieces.forEach((p,i)=>{temp.position.set(p.x,p.y,p.z);temp.scale.set(p.w,p.h,p.d);temp.rotation.set(0,0,0);temp.updateMatrix();routes.setMatrixAt(i,temp.matrix);});
 
@@ -353,7 +363,7 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
   // Traffic is a handful of real small cars. Their roof light is quiet; motion
   // follows the street axes and only begins as the city becomes inhabited.
   const cars = Array.from({length:24},(_,i)=>({road:roads[i%roads.length],phase:random(),speed:0.018+random()*0.012,direction:i%2?1:-1}));
-  const carMaterial = new MeshStandardMaterial({color:0x8494a1,roughness:0.4,metalness:0.55});materials.add(carMaterial);
+  const carMaterial = new MeshStandardMaterial({color:0x77717f,roughness:0.4,metalness:0.55});materials.add(carMaterial);
   const carMesh = new InstancedMesh(box,carMaterial,cars.length);scene.add(carMesh);
   const headMaterial = new MeshBasicMaterial({color:0xf5e5ca,transparent:true,opacity:0,toneMapped:false});materials.add(headMaterial);
   const headMesh = new InstancedMesh(box,headMaterial,cars.length);scene.add(headMesh);
@@ -371,6 +381,9 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
     carMesh.visible=active>0.12;headMesh.visible=active>0.12;headMaterial.opacity=active*0.85;
   }
   updateCars(0,0);
+
+  // Added after the original seeded scene: no change to buildings, windows or traffic.
+  const surroundings = createCitySurroundings(scene, brandViolet);
 
   const raycaster = new Raycaster();
   const pointer = new Vector2(10,10);
@@ -416,14 +429,15 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
     camera.lookAt(cameraTarget);camera.updateProjectionMatrix();
     const light=ease(0.025,0.58,progress);
     activation.value=light;
-    sun.intensity=0.7+light*1.4;sky.intensity=0.27+light*0.45;rim.intensity=1.0+light*1.45;
+    sun.intensity=0.65+light*1.3;sky.intensity=0.24+light*0.4;rim.intensity=0.32+light*0.85;
+    surroundings.setActivation(light);
     renderer.toneMappingExposure=0.77+light*0.27;
     routeMaterial.opacity=0.04+light*0.64;
     if(mediaMaterial)mediaMaterial.opacity=0.08+light*0.8;
     for(const id of districtIds){const target=id===(selected??hovered)?1:0;highlights[id].value+= (target-highlights[id].value)*0.1;}
-    for(const {material,base,id} of tintedMaterials)material.color.copy(base).lerp(highlightColor,highlights[id].value*0.18);
+    for(const {material,base,id} of tintedMaterials)material.color.copy(base).lerp(highlightColor,highlights[id].value*0.08);
   }
-  const highlightColor=new Color(0xb9d8ee);
+  const highlightColor=lavender.clone();
   function render(timestamp:number){
     raf=0;if(disposed||!running)return;
     const rawDelta=lastTime?(timestamp-lastTime)/1000:1/60;
@@ -470,7 +484,7 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
       canvas.removeEventListener("pointermove",move);canvas.removeEventListener("pointerleave",leave);
       canvas.removeEventListener("click",click);canvas.removeEventListener("webglcontextlost",contextLost);
       onHover(null);scene.traverse(object=>{if(object instanceof InstancedMesh)object.dispose();});scene.clear();geometries.forEach(geometry=>geometry.dispose());materials.forEach(material=>material.dispose());textures.forEach(texture=>texture.dispose());
-      environmentTarget?.dispose();sun.shadow.dispose();renderer.dispose();
+      surroundings.dispose();environmentTarget?.dispose();sun.shadow.dispose();renderer.dispose();
     },
   };
 }
