@@ -1,0 +1,164 @@
+[
+  {
+    "device": "desktop",
+    "slug": "website-redesign",
+    "title": "Website Redesign for Growing Businesses | Anthēon",
+    "heading": "Keep what works. Make the rest feel like you.",
+    "h1": 1,
+    "width": 1440,
+    "viewport": 1440,
+    "footer": true,
+    "ok": true
+  },
+  {
+    "device": "desktop",
+    "slug": "website-redesign",
+    "faqKeyboard": true
+  },
+  {
+    "device": "desktop",
+    "slug": "seo-services",
+    "title": "SEO Monitoring & Optimisation | Anthēon",
+    "heading": "Understand what gets found. Improve what matters.",
+    "h1": 1,
+    "width": 1440,
+    "viewport": 1440,
+    "footer": true,
+    "ok": true
+  },
+  {
+    "device": "desktop",
+    "slug": "seo-services",
+    "faqKeyboard": true
+  },
+  {
+    "device": "desktop",
+    "slug": "website-care",
+    "title": "Website Management, Hosting & Care | Anthēon",
+    "heading": "A website is never quite finished. We keep it looked after.",
+    "h1": 1,
+    "width": 1440,
+    "viewport": 1440,
+    "footer": true,
+    "ok": true
+  },
+  {
+    "device": "desktop",
+    "slug": "website-care",
+    "faqKeyboard": true
+  },
+  {
+    "device": "desktop",
+    "slug": "contact",
+    "title": "Contact Anthēon | Websites, SEO & Digital Projects",
+    "heading": "A good conversation.A clear next step.",
+    "h1": 1,
+    "width": 1440,
+    "viewport": 1440,
+    "footer": true,
+    "ok": true
+  },
+  {
+    "device": "desktop",
+    "slug": "web-design",
+    "title": "Website Design & Development | Anthēon",
+    "heading": "Designed to beexperienced.",
+    "h1": 1,
+    "width": 1440,
+    "viewport": 1440,
+    "footer": true,
+    "ok": true
+  },
+  {
+    "device": "desktop",
+    "slug": "web-design",
+    "faqKeyboard": true
+  },
+  {
+    "device": "desktop",
+    "errors": []
+  },
+  {
+    "device": "mobile",
+    "slug": "website-redesign",
+    "title": "Website Redesign for Growing Businesses | Anthēon",
+    "heading": "Keep what works. Make the rest feel like you.",
+    "h1": 1,
+    "width": 390,
+    "viewport": 390,
+    "footer": true,
+    "ok": true
+  },
+  {
+    "device": "mobile",
+    "slug": "website-redesign",
+    "faqKeyboard": true
+  },
+  {
+    "device": "mobile",
+    "slug": "seo-services",
+    "title": "SEO Monitoring & Optimisation | Anthēon",
+    "heading": "Understand what gets found. Improve what matters.",
+    "h1": 1,
+    "width": 390,
+    "viewport": 390,
+    "footer": true,
+    "ok": true
+  },
+  {
+    "device": "mobile",
+    "slug": "seo-services",
+    "faqKeyboard": true
+  },
+  {
+    "device": "mobile",
+    "slug": "website-care",
+    "title": "Website Management, Hosting & Care | Anthēon",
+    "heading": "A website is never quite finished. We keep it looked after.",
+    "h1": 1,
+    "width": 390,
+    "viewport": 390,
+    "footer": true,
+    "ok": true
+  },
+  {
+    "device": "mobile",
+    "slug": "website-care",
+    "faqKeyboard": true
+  },
+  {
+    "device": "mobile",
+    "slug": "contact",
+    "title": "Contact Anthēon | Websites, SEO & Digital Projects",
+    "heading": "A good conversation.A clear next step.",
+    "h1": 1,
+    "width": 390,
+    "viewport": 390,
+    "footer": true,
+    "ok": true
+  },
+  {
+    "device": "mobile",
+    "slug": "web-design",
+    "title": "Website Design & Development | Anthēon",
+    "heading": "Designed to beexperienced.",
+    "h1": 1,
+    "width": 390,
+    "viewport": 390,
+    "footer": true,
+    "ok": true
+  },
+  {
+    "device": "mobile",
+    "slug": "web-design",
+    "faqKeyboard": true
+  },
+  {
+    "device": "mobile",
+    "errors": []
+  },
+  {
+    "noJavaScriptServiceCopy": true,
+    "noJavaScriptCTA": true
+  }
+]

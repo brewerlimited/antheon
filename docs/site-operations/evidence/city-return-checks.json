@@ -1,0 +1,33 @@
+{
+  "base": "http://localhost:3096",
+  "checks": [
+    {
+      "name": "forward scroll reaches isometric view",
+      "ok": true
+    },
+    {
+      "name": "reverse scroll restores transitional view",
+      "ok": true
+    },
+    {
+      "name": "reverse scroll restores top-down arrival",
+      "ok": true
+    },
+    {
+      "name": "return navigation recreates live city",
+      "ok": true
+    },
+    {
+      "name": "return navigation does not replay intro",
+      "ok": true
+    },
+    {
+      "name": "district interaction works after return",
+      "ok": true
+    },
+    {
+      "name": "tablet remains free of horizontal overflow",
+      "ok": true
+    }
+  ]
+}

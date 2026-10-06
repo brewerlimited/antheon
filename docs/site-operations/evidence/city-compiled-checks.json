@@ -1,0 +1,178 @@
+{
+  "base": "http://localhost:3096",
+  "checks": [
+    {
+      "name": "Compiled intro preserved",
+      "ok": true
+    },
+    {
+      "name": "Intro hands off to actual WebGL city",
+      "ok": true,
+      "details": {
+        "draws": 3367,
+        "deletes": 32
+      }
+    },
+    {
+      "name": "Production has no dev scene handle",
+      "ok": true
+    },
+    {
+      "name": "Compiled city visually changes with scroll",
+      "ok": true
+    },
+    {
+      "name": "Bottom district tabs removed",
+      "ok": true
+    },
+    {
+      "name": "Keyboard arrow step 1 retains focus",
+      "ok": true
+    },
+    {
+      "name": "Keyboard arrow step 2 retains focus",
+      "ok": true
+    },
+    {
+      "name": "Keyboard arrow step 3 retains focus",
+      "ok": true
+    },
+    {
+      "name": "Keyboard arrow step 4 retains focus",
+      "ok": true
+    },
+    {
+      "name": "Keyboard arrows reach all four districts",
+      "ok": true
+    },
+    {
+      "name": "Only current story and CTA are interactive",
+      "ok": true
+    },
+    {
+      "name": "Compiled building hover hits all districts",
+      "ok": true,
+      "details": [
+        "Complexity,\nmade useful.",
+        "Distinct by design.",
+        "Independent thinking.\nShared ambition.",
+        "What comes next\nstarts here."
+      ]
+    },
+    {
+      "name": "Leaving city retains CTA",
+      "ok": true
+    },
+    {
+      "name": "Pause stops actual WebGL draws",
+      "ok": true
+    },
+    {
+      "name": "Compact mode disposes WebGL resources",
+      "ok": true
+    },
+    {
+      "name": "Mobile arrow selection works",
+      "ok": true
+    },
+    {
+      "name": "Narrow mobile has no overflow",
+      "ok": true
+    },
+    {
+      "name": "Paused scene recreates without loading trap",
+      "ok": true
+    },
+    {
+      "name": "Recreated scene resumes drawing",
+      "ok": true
+    },
+    {
+      "name": "Offscreen city stops WebGL draws",
+      "ok": true
+    },
+    {
+      "name": "Original group headline restored",
+      "ok": true
+    },
+    {
+      "name": "Restored headline brightens on scroll",
+      "ok": true
+    },
+    {
+      "name": "Service 1 preserved",
+      "ok": true
+    },
+    {
+      "name": "Service 2 preserved",
+      "ok": true
+    },
+    {
+      "name": "Service 3 preserved",
+      "ok": true
+    },
+    {
+      "name": "Homepage concept selection preserved",
+      "ok": true
+    },
+    {
+      "name": "Venture destinations preserved",
+      "ok": true
+    },
+    {
+      "name": "Venture detail dialog preserved",
+      "ok": true
+    },
+    {
+      "name": "Gallery and pricing preserved",
+      "ok": true
+    },
+    {
+      "name": "City removed on route navigation",
+      "ok": true
+    },
+    {
+      "name": "Reduced-motion page bypasses intro and continuous rendering",
+      "ok": true
+    },
+    {
+      "name": "Reduced motion swaps story without transition",
+      "ok": true
+    },
+    {
+      "name": "Reduced-motion original headline readable",
+      "ok": true
+    },
+    {
+      "name": "No-WebGL compiled fallback renders poster",
+      "ok": true
+    },
+    {
+      "name": "No-JS fallback has direct links and readable preserved sections",
+      "ok": true
+    },
+    {
+      "name": "No-JS original headline readable",
+      "ok": true
+    },
+    {
+      "name": "No-JS shows one city image",
+      "ok": true
+    },
+    {
+      "name": "No compiled runtime exceptions",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "No failed application resources",
+      "ok": true,
+      "details": {
+        "failures": [],
+        "expectedLocalAnalytics404": 0
+      }
+    }
+  ],
+  "errors": [],
+  "resources": []
+}

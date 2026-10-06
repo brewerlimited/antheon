@@ -1,9 +1,12 @@
 import { Brand } from "./Brand";
 import { siteLinks } from "@/data/site";
+import { serviceNavigation } from "@/data/public-content";
+import styles from "@/components/public-content/footer-links.module.css";
 
 export function Footer() {
   return (
     <footer className="site-footer">
+      <nav className={`site-container ${styles.links}`} aria-label="Services and contact">{serviceNavigation.map(item => <a key={item.href} href={item.href}>{item.label}</a>)}</nav>
       <div className="site-container footer-grid">
         <div>
           <Brand compact />

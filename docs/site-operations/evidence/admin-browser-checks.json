@@ -1,0 +1,940 @@
+{
+  "base": "http://localhost:3095",
+  "credentials": "Supabase unavailable; no authenticated database persistence or real connected-service assertion was attempted.",
+  "checks": 186,
+  "passed": 186,
+  "failed": 0,
+  "failures": [],
+  "details": [
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "desktop /seo/demo/admin/site HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "desktop /seo/demo/admin/site width1440/1440"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "desktop /seo/demo/admin/site 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "desktop /seo/demo/admin/site seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "desktop /seo/demo/admin/site 0 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "desktop /seo/demo/admin/site explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "desktop /seo/demo/admin/site noindex"
+    },
+    {
+      "result": "pass",
+      "area": "analytics status",
+      "detail": "desktop no fabricated connection"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "desktop /seo/demo/admin/site/content HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "desktop /seo/demo/admin/site/content width1440/1440"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "desktop /seo/demo/admin/site/content 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "desktop /seo/demo/admin/site/content seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "desktop /seo/demo/admin/site/content 0 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "desktop /seo/demo/admin/site/content explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "desktop /seo/demo/admin/site/content noindex"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "desktop /seo/demo/admin/site/operations HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "desktop /seo/demo/admin/site/operations width1440/1440"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "desktop /seo/demo/admin/site/operations 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "desktop /seo/demo/admin/site/operations seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "desktop /seo/demo/admin/site/operations 7 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "desktop /seo/demo/admin/site/operations explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "desktop /seo/demo/admin/site/operations noindex"
+    },
+    {
+      "result": "pass",
+      "area": "operations status",
+      "detail": "desktop seven services await configuration"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "desktop /seo/demo/admin/site/projects HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "desktop /seo/demo/admin/site/projects width1440/1440"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "desktop /seo/demo/admin/site/projects 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "desktop /seo/demo/admin/site/projects seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "desktop /seo/demo/admin/site/projects 1 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "desktop /seo/demo/admin/site/projects explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "desktop /seo/demo/admin/site/projects noindex"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "desktop /seo/demo/admin/site/health HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "desktop /seo/demo/admin/site/health width1440/1440"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "desktop /seo/demo/admin/site/health 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "desktop /seo/demo/admin/site/health seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "desktop /seo/demo/admin/site/health 1 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "desktop /seo/demo/admin/site/health explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "desktop /seo/demo/admin/site/health noindex"
+    },
+    {
+      "result": "pass",
+      "area": "health status",
+      "detail": "desktop no fabricated check"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "desktop /seo/demo/admin/site/enquiries HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "desktop /seo/demo/admin/site/enquiries width1440/1440"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "desktop /seo/demo/admin/site/enquiries 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "desktop /seo/demo/admin/site/enquiries seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "desktop /seo/demo/admin/site/enquiries 0 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "desktop /seo/demo/admin/site/enquiries explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "desktop /seo/demo/admin/site/enquiries noindex"
+    },
+    {
+      "result": "pass",
+      "area": "enquiry status",
+      "detail": "desktop no fabricated enquiries"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "desktop /seo/demo/admin/site/changes HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "desktop /seo/demo/admin/site/changes width1440/1440"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "desktop /seo/demo/admin/site/changes 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "desktop /seo/demo/admin/site/changes seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "desktop /seo/demo/admin/site/changes 1 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "desktop /seo/demo/admin/site/changes explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "desktop /seo/demo/admin/site/changes noindex"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "desktop /seo/demo/admin/site/content/web-design HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "desktop /seo/demo/admin/site/content/web-design width1440/1440"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "desktop /seo/demo/admin/site/content/web-design 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "desktop /seo/demo/admin/site/content/web-design seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "desktop /seo/demo/admin/site/content/web-design 2 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "desktop /seo/demo/admin/site/content/web-design explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "desktop /seo/demo/admin/site/content/web-design noindex"
+    },
+    {
+      "result": "pass",
+      "area": "editor state",
+      "detail": "desktop content/web-design no invented saved revision"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "desktop /seo/demo/admin/site/content/website-redesign HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "desktop /seo/demo/admin/site/content/website-redesign width1440/1440"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "desktop /seo/demo/admin/site/content/website-redesign 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "desktop /seo/demo/admin/site/content/website-redesign seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "desktop /seo/demo/admin/site/content/website-redesign 2 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "desktop /seo/demo/admin/site/content/website-redesign explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "desktop /seo/demo/admin/site/content/website-redesign noindex"
+    },
+    {
+      "result": "pass",
+      "area": "editor state",
+      "detail": "desktop content/website-redesign no invented saved revision"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "desktop /seo/demo/admin/site/content/seo-services HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "desktop /seo/demo/admin/site/content/seo-services width1440/1440"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "desktop /seo/demo/admin/site/content/seo-services 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "desktop /seo/demo/admin/site/content/seo-services seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "desktop /seo/demo/admin/site/content/seo-services 2 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "desktop /seo/demo/admin/site/content/seo-services explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "desktop /seo/demo/admin/site/content/seo-services noindex"
+    },
+    {
+      "result": "pass",
+      "area": "editor state",
+      "detail": "desktop content/seo-services no invented saved revision"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "desktop /seo/demo/admin/site/content/website-care HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "desktop /seo/demo/admin/site/content/website-care width1440/1440"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "desktop /seo/demo/admin/site/content/website-care 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "desktop /seo/demo/admin/site/content/website-care seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "desktop /seo/demo/admin/site/content/website-care 2 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "desktop /seo/demo/admin/site/content/website-care explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "desktop /seo/demo/admin/site/content/website-care noindex"
+    },
+    {
+      "result": "pass",
+      "area": "editor state",
+      "detail": "desktop content/website-care no invented saved revision"
+    },
+    {
+      "result": "pass",
+      "area": "browser errors",
+      "detail": "desktop: none"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "mobile /seo/demo/admin/site HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "mobile /seo/demo/admin/site width390/390"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "mobile /seo/demo/admin/site 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "mobile /seo/demo/admin/site seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "mobile /seo/demo/admin/site 0 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "mobile /seo/demo/admin/site explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "mobile /seo/demo/admin/site noindex"
+    },
+    {
+      "result": "pass",
+      "area": "analytics status",
+      "detail": "mobile no fabricated connection"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "mobile /seo/demo/admin/site/content HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "mobile /seo/demo/admin/site/content width390/390"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "mobile /seo/demo/admin/site/content 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "mobile /seo/demo/admin/site/content seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "mobile /seo/demo/admin/site/content 0 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "mobile /seo/demo/admin/site/content explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "mobile /seo/demo/admin/site/content noindex"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "mobile /seo/demo/admin/site/operations HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "mobile /seo/demo/admin/site/operations width390/390"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "mobile /seo/demo/admin/site/operations 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "mobile /seo/demo/admin/site/operations seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "mobile /seo/demo/admin/site/operations 7 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "mobile /seo/demo/admin/site/operations explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "mobile /seo/demo/admin/site/operations noindex"
+    },
+    {
+      "result": "pass",
+      "area": "operations status",
+      "detail": "mobile seven services await configuration"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "mobile /seo/demo/admin/site/projects HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "mobile /seo/demo/admin/site/projects width390/390"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "mobile /seo/demo/admin/site/projects 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "mobile /seo/demo/admin/site/projects seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "mobile /seo/demo/admin/site/projects 1 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "mobile /seo/demo/admin/site/projects explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "mobile /seo/demo/admin/site/projects noindex"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "mobile /seo/demo/admin/site/health HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "mobile /seo/demo/admin/site/health width390/390"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "mobile /seo/demo/admin/site/health 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "mobile /seo/demo/admin/site/health seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "mobile /seo/demo/admin/site/health 1 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "mobile /seo/demo/admin/site/health explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "mobile /seo/demo/admin/site/health noindex"
+    },
+    {
+      "result": "pass",
+      "area": "health status",
+      "detail": "mobile no fabricated check"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "mobile /seo/demo/admin/site/enquiries HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "mobile /seo/demo/admin/site/enquiries width390/390"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "mobile /seo/demo/admin/site/enquiries 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "mobile /seo/demo/admin/site/enquiries seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "mobile /seo/demo/admin/site/enquiries 0 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "mobile /seo/demo/admin/site/enquiries explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "mobile /seo/demo/admin/site/enquiries noindex"
+    },
+    {
+      "result": "pass",
+      "area": "enquiry status",
+      "detail": "mobile no fabricated enquiries"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "mobile /seo/demo/admin/site/changes HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "mobile /seo/demo/admin/site/changes width390/390"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "mobile /seo/demo/admin/site/changes 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "mobile /seo/demo/admin/site/changes seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "mobile /seo/demo/admin/site/changes 1 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "mobile /seo/demo/admin/site/changes explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "mobile /seo/demo/admin/site/changes noindex"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "mobile /seo/demo/admin/site/content/web-design HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "mobile /seo/demo/admin/site/content/web-design width390/390"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "mobile /seo/demo/admin/site/content/web-design 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "mobile /seo/demo/admin/site/content/web-design seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "mobile /seo/demo/admin/site/content/web-design 2 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "mobile /seo/demo/admin/site/content/web-design explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "mobile /seo/demo/admin/site/content/web-design noindex"
+    },
+    {
+      "result": "pass",
+      "area": "editor state",
+      "detail": "mobile content/web-design no invented saved revision"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "mobile /seo/demo/admin/site/content/website-redesign HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "mobile /seo/demo/admin/site/content/website-redesign width390/390"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "mobile /seo/demo/admin/site/content/website-redesign 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "mobile /seo/demo/admin/site/content/website-redesign seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "mobile /seo/demo/admin/site/content/website-redesign 2 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "mobile /seo/demo/admin/site/content/website-redesign explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "mobile /seo/demo/admin/site/content/website-redesign noindex"
+    },
+    {
+      "result": "pass",
+      "area": "editor state",
+      "detail": "mobile content/website-redesign no invented saved revision"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "mobile /seo/demo/admin/site/content/seo-services HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "mobile /seo/demo/admin/site/content/seo-services width390/390"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "mobile /seo/demo/admin/site/content/seo-services 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "mobile /seo/demo/admin/site/content/seo-services seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "mobile /seo/demo/admin/site/content/seo-services 2 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "mobile /seo/demo/admin/site/content/seo-services explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "mobile /seo/demo/admin/site/content/seo-services noindex"
+    },
+    {
+      "result": "pass",
+      "area": "editor state",
+      "detail": "mobile content/seo-services no invented saved revision"
+    },
+    {
+      "result": "pass",
+      "area": "route",
+      "detail": "mobile /seo/demo/admin/site/content/website-care HTTP200"
+    },
+    {
+      "result": "pass",
+      "area": "layout",
+      "detail": "mobile /seo/demo/admin/site/content/website-care width390/390"
+    },
+    {
+      "result": "pass",
+      "area": "headings",
+      "detail": "mobile /seo/demo/admin/site/content/website-care 1 H1"
+    },
+    {
+      "result": "pass",
+      "area": "navigation",
+      "detail": "mobile /seo/demo/admin/site/content/website-care seven site tabs"
+    },
+    {
+      "result": "pass",
+      "area": "read-only preview",
+      "detail": "mobile /seo/demo/admin/site/content/website-care 2 forms, 0 enabled write controls"
+    },
+    {
+      "result": "pass",
+      "area": "honest preview",
+      "detail": "mobile /seo/demo/admin/site/content/website-care explicit unconnected state"
+    },
+    {
+      "result": "pass",
+      "area": "indexability",
+      "detail": "mobile /seo/demo/admin/site/content/website-care noindex"
+    },
+    {
+      "result": "pass",
+      "area": "editor state",
+      "detail": "mobile content/website-care no invented saved revision"
+    },
+    {
+      "result": "pass",
+      "area": "browser errors",
+      "detail": "mobile: none"
+    },
+    {
+      "result": "pass",
+      "area": "authentication",
+      "detail": "/seo/admin/site redirects unauthenticated visitor to login"
+    },
+    {
+      "result": "pass",
+      "area": "private indexability",
+      "detail": "/seo/admin/site noindex"
+    },
+    {
+      "result": "pass",
+      "area": "authentication",
+      "detail": "/seo/admin/site/content redirects unauthenticated visitor to login"
+    },
+    {
+      "result": "pass",
+      "area": "private indexability",
+      "detail": "/seo/admin/site/content noindex"
+    },
+    {
+      "result": "pass",
+      "area": "authentication",
+      "detail": "/seo/admin/site/content/seo-services redirects unauthenticated visitor to login"
+    },
+    {
+      "result": "pass",
+      "area": "private indexability",
+      "detail": "/seo/admin/site/content/seo-services noindex"
+    },
+    {
+      "result": "pass",
+      "area": "authentication",
+      "detail": "/seo/admin/site/preview/seo-services redirects unauthenticated visitor to login"
+    },
+    {
+      "result": "pass",
+      "area": "private indexability",
+      "detail": "/seo/admin/site/preview/seo-services noindex"
+    },
+    {
+      "result": "pass",
+      "area": "authentication",
+      "detail": "/seo/admin/site/export redirects unauthenticated visitor to login"
+    },
+    {
+      "result": "pass",
+      "area": "private indexability",
+      "detail": "/seo/admin/site/export noindex"
+    },
+    {
+      "result": "pass",
+      "area": "invalid routes",
+      "detail": "/seo/demo/admin/site/content/unknown-service HTTP404"
+    },
+    {
+      "result": "pass",
+      "area": "invalid routes",
+      "detail": "/seo/demo/admin/site/unrecognised HTTP404"
+    },
+    {
+      "result": "pass",
+      "area": "invalid routes",
+      "detail": "/seo/demo/admin/site/operations/extra HTTP404"
+    },
+    {
+      "result": "pass",
+      "area": "invalid routes",
+      "detail": "/seo/demo/admin/site/content/seo-services/extra HTTP404"
+    }
+  ]
+}

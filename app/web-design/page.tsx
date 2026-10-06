@@ -6,15 +6,22 @@ import { ConceptCard } from "@/components/ConceptCard";
 import { Reveal } from "@/components/Reveal";
 import { concepts } from "@/data/concepts";
 import { siteLinks } from "@/data/site";
+import { notFound } from "next/navigation";
+import { getPublishedService } from "@/lib/site-content";
+import { pageMetadata } from "@/lib/site-metadata";
+import { serviceGraph } from "@/lib/public-seo/structured-data";
+import { JsonLd } from "@/components/public-content/JsonLd";
+import { ServiceBody, ServiceLinks } from "@/components/public-content/ServiceContent";
 
-export const metadata: Metadata = {
-  title: "Web Design & Interactive Concepts | Anthēon Group",
-  description: "Explore six website design concepts by Anthēon, with full interactive homepages, considered motion and distinctive visual directions.",
-  alternates: { canonical: "/web-design" },
-  openGraph: { title: "Web Design & Interactive Concepts | Anthēon Group", description: "Six distinctive website design concepts. Explore the full interactive homepages.", url: "/web-design" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const document = await getPublishedService("web-design");
+  if (!document) notFound();
+  return pageMetadata(document);
+}
 
-export default function WebDesignPage() {
+export default async function WebDesignPage() {
+  const document = await getPublishedService("web-design");
+  if (!document) notFound();
   return <>
     <Header />
     <main id="main-content" tabIndex={-1} className="web-design-page">
@@ -86,7 +93,9 @@ export default function WebDesignPage() {
           </div>
         </Reveal>
       </section>
+      <div className="site-container"><ServiceLinks current="/web-design" /><ServiceBody document={document} compact /></div>
     </main>
+    <JsonLd data={serviceGraph(document)} />
     <Footer />
   </>;
 }

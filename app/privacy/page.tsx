@@ -1,44 +1,19 @@
+import { pageMetadata } from "@/lib/site-metadata";
 import { VectorIcon } from "@/components/VectorIcon";
 import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { CookieChoicesButton } from "@/components/measurement/PublicMeasurement";
 import { siteLinks } from "@/data/site";
-
+export const metadata = pageMetadata({ title: "Privacy & cookies | Anthēon", description: "How Anthēon handles enquiries, private account information, essential storage and optional website analytics.", path: "/privacy" });
 export default function PrivacyPage() {
-  return (
-    <>
-      <Header />
-      <main id="main-content" className="privacy-page" tabIndex={-1}>
-        <section className="site-container privacy-content" aria-labelledby="privacy-title">
-          <p className="section-label">Privacy</p>
-          <h1 id="privacy-title" className="section-title">Privacy Notice</h1>
-          <div className="copy-column">
-            <p>
-              Anthēon Group keeps enquiries simple. If you contact us by email, we will use
-              the details you provide to respond to your message and manage the enquiry.
-            </p>
-            <p>
-              We do not use this website to collect payment information, operate user
-              accounts or publish mailing-list sign-up forms. Any future changes to how data
-              is collected will be reflected on this page.
-            </p>
-            <p>
-              We use Vercel Web Analytics to understand visitor numbers, page views,
-              referral sources and device types through aggregated statistics. This
-              service does not use third-party cookies. Read more about{" "}
-              <a href="https://vercel.com/docs/analytics/privacy-policy">Vercel Web Analytics privacy</a>.
-            </p>
-            <p>
-              For privacy questions, contact{" "}
-              <a href={`mailto:${siteLinks.email}`}>{siteLinks.email}</a>.
-            </p>
-          </div>
-          <Link className="text-link privacy-return" href="/">
-            Return to Anthēon Group <span aria-hidden="true"><VectorIcon name="arrow-up-right" /></span>
-          </Link>
-        </section>
-      </main>
-      <Footer />
-    </>
-  );
+  return <><Header /><main id="main-content" className="privacy-page" tabIndex={-1}><section className="site-container privacy-content" aria-labelledby="privacy-title"><p className="section-label">Your information</p><h1 id="privacy-title" className="section-title">Privacy & cookies.</h1><div className="copy-column">
+    <p>This notice explains how Anthēon uses information from this website. For privacy questions or requests, contact <a href={`mailto:${siteLinks.email}`}>{siteLinks.email}</a>.</p>
+    <h2>Enquiries</h2><p>If you email us or submit the enquiry form, we use your name, email address, selected service and message to review and respond to your request. The form stores accepted messages in a private inbox hosted by Supabase. It does not send an automatic confirmation email. Only authorised Anthēon administrators can access that inbox. If the form cannot save your message, it tells you and offers email instead.</p><p>We process enquiries to take steps you request before entering a contract, or for our legitimate interest in responding to other business correspondence. Please do not include passwords, payment details or sensitive personal information.</p>
+    <h2>Optional analytics</h2><p>When enabled, we use Google Analytics 4 only after you accept optional analytics. It helps us understand visits to our public pages, service and contact-link clicks, form starts and accepted enquiries. A contact click does not tell us whether a call or message was completed. An accepted enquiry is not a qualified lead or sale.</p><p>We do not send form contents, names, email addresses, phone numbers, query strings or private account pages through our tracking helpers. Google may process technical information such as device and browser details when its analytics service is active. Read Google’s <a href="https://policies.google.com/privacy">privacy policy</a> for information about its service. Advertising personalisation and Google signals are disabled in our implementation. Vercel Web Analytics is not loaded.</p><p>You can reject analytics and continue using the site and its forms. You can withdraw your choice here or through “Cookie choices” on public pages. Withdrawal stops further collection and clears accessible Google Analytics cookies; it does not delete information already received by Google. <CookieChoicesButton /></p>
+    <h2>Cookies and other storage</h2><ul><li><strong>Your analytics choice:</strong> stored on your device for up to 180 days so we can respect it. This preference is separate from optional analytics.</li><li><strong>Optional Google Analytics cookies:</strong> Google may set first-party cookies beginning <code>_ga</code> after acceptance. Our configured lifetime is up to 180 days, without automatic renewal.</li><li><strong>Essential functionality:</strong> the intro uses session storage to remember whether it has played. Private account and client-preview access use necessary session cookies where applicable.</li></ul><p>Browser controls can clear local storage and cookies. Doing so may reset your preferences or sign you out of private areas.</p>
+    <h2>Private accounts and service providers</h2><p>Authorised private dashboard users have account and service records stored in Supabase. Google integrations requested through the private dashboard use access-controlled credentials; these are separate from optional public website analytics. Vercel hosts the website and may process necessary request and security logs to operate and protect it. Supabase, Vercel, Google and our email provider may process data under their respective service arrangements, including outside the UK where applicable safeguards are required.</p>
+    <h2>Security, retention and your rights</h2><p>We use access restrictions, request validation and rate limits to protect the enquiry inbox. Rate-limit identifiers are hashed; form contents are not added to application logs. We review enquiry and account records and retain them only as needed to handle the request, provide the service or meet applicable record-keeping duties.</p><p>Depending on the circumstances, you can request access, correction, deletion or restriction of your information, object to processing based on legitimate interests, and withdraw analytics consent. Email us to exercise those rights. You can also raise a concern with the <a href="https://ico.org.uk/make-a-complaint/">Information Commissioner’s Office</a>.</p>
+    <p>Notice updated 6 October 2026. This notice describes the current implementation; the business owner must review the controller details, retention periods and provider arrangements before production activation.</p>
+  </div><Link className="text-link privacy-return" href="/">Return to Anthēon Group <span aria-hidden="true"><VectorIcon name="arrow-up-right" /></span></Link></section></main><Footer /></>;
 }

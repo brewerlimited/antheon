@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { concepts } from "@/data/concepts";
 import { siteLinks } from "@/data/site";
+import { serviceNavigation } from "@/data/public-content";
+import footerStyles from "./public-content/footer-links.module.css";
 import { VentureGallery } from "./VentureGallery";
 import { CityHero } from "./city/CityHero";
 import "./motion-home.css";
@@ -177,6 +179,6 @@ export function MotionHome() {
       <VentureGallery />
       <section className="motion-contact" id="contact" data-chapter="06 — WHAT'S NEXT" aria-labelledby="contact-title"><div className="contact-glow" aria-hidden="true" /><div className="contact-top motion-reveal"><p className="motion-eyebrow">05 / START SOMETHING</p><p>A venture. A website. A better way of doing things.<br />Good things start with a conversation.</p></div><h2 id="contact-title" className="motion-reveal">Have something<br /><em>worth building?</em></h2><a href={`mailto:${siteLinks.email}`} className="contact-email">{siteLinks.email}<span aria-hidden="true"><VectorIcon name="plus" /></span></a><div className="contact-bottom"><span>BUCKINGHAMSHIRE, UNITED KINGDOM</span><a href="#top">BACK TO THE TOP <VectorIcon name="arrow-up" /></a></div></section>
     </main>
-    <footer className="motion-footer"><div><span>© {new Date().getFullYear()} Anthēon Group</span><span>VENTURES. DIGITAL. DISTINCTLY ANTHĒON.</span><a href="/privacy">Privacy policy</a></div><a className="footer-wordmark" href="#top" aria-label="Anthēon — back to top">anthēon</a></footer>
+    <footer className="motion-footer"><nav className={footerStyles.links} aria-label="Services and contact">{serviceNavigation.map(item => <a key={item.href} href={item.href}>{item.label}</a>)}</nav><div><span>© {new Date().getFullYear()} Anthēon Group</span><span>VENTURES. DIGITAL. DISTINCTLY ANTHĒON.</span><a href="/privacy">Privacy policy</a></div><a className="footer-wordmark" href="#top" aria-label="Anthēon — back to top">anthēon</a></footer>
   </div>;
 }

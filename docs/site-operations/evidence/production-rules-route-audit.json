@@ -1,0 +1,9 @@
+{
+  "base": "http://localhost:3096",
+  "mode": "production rules",
+  "inspectedPages": 13,
+  "checks": 516,
+  "passed": 516,
+  "failed": 0,
+  "failures": []
+}

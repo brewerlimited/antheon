@@ -1,7 +1,14 @@
 export const siteLinks = {
-  domain: "https://antheon.co.uk",
+  domain: "https://www.antheon.co.uk",
   email: "hello@antheon.co.uk",
   linkedin: "",
+};
+
+export const siteIdentity = {
+  name: "Anthēon Group",
+  alternateName: "Anthēon",
+  description: "An independent UK venture and digital development group building businesses, digital products and selected web experiences for ambitious companies.",
+  region: "Buckinghamshire, United Kingdom",
 };
 
 export const heroImage = {

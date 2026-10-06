@@ -1,0 +1,25 @@
+{
+  "checks": [
+    "unconfigured local consent never sends optional tracking",
+    "missing credentials gives honest error and no successful enquiry",
+    "form retains user message after failed persistence",
+    "mocked accepted save displays success exactly once",
+    "no tracking for successful local mocked enquiry",
+    "mobile consent and form fit viewport",
+    "no script or replay queue before consent",
+    "accept loads one provider and one pageview despite rerenders",
+    "route changes once and hash change does not duplicate",
+    "event context bounded, no query PII in event payload",
+    "private route cannot send events",
+    "return to public route adds one valid pageview",
+    "withdrawal stops provider and clears analytics cookie"
+  ],
+  "counts": {
+    "checks": 13
+  },
+  "notes": [
+    "GA4 network is mocked; no production requests",
+    "API accepted response is mocked; unavailable-state request uses local real endpoint",
+    "Separate PostgreSQL tests verify database uniqueness and RLS"
+  ]
+}

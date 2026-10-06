@@ -1,0 +1,5 @@
+.links { display: flex; align-items: center; flex-wrap: wrap; gap: .8rem 2rem; padding-bottom: 1.8rem; margin-bottom: 1.8rem; border-bottom: 1px solid rgba(255, 255, 255, .1); font-size: .78rem; color: #a9aebb; }
+.links a { padding: .2rem 0; transition: color 220ms ease; }
+.links a:hover, .links a:focus-visible { color: #b9cbff; }
+@media (max-width: 600px) { .links { gap: .8rem 1.4rem; font-size: .74rem; } }
+@media (prefers-reduced-motion: reduce) { .links a { transition: none; } }

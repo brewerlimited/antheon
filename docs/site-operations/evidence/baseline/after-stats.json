@@ -1,0 +1,121 @@
+{
+  "label": "after",
+  "base": "http://127.0.0.1:3095",
+  "time": "2026-10-06T19:07:01.858Z",
+  "captures": [
+    {
+      "name": "topdown",
+      "requestedProgress": 0,
+      "path": "/Users/jackbrewer/Documents/Codex/2026-09-30/we/outputs/site-operations/baseline/after-topdown.png",
+      "mode": "live",
+      "phase": "0",
+      "domProgress": "0.000",
+      "scrollY": 0,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "height": 2650,
+      "stageHeight": 1000,
+      "stats": {
+        "drawCalls": 40,
+        "triangles": 27018,
+        "geometries": 38,
+        "textures": 6,
+        "pixelRatio": 1,
+        "progress": 0,
+        "instances": 1153,
+        "running": true
+      }
+    },
+    {
+      "name": "transition",
+      "requestedProgress": 0.35,
+      "path": "/Users/jackbrewer/Documents/Codex/2026-09-30/we/outputs/site-operations/baseline/after-transition.png",
+      "mode": "live",
+      "phase": "1",
+      "domProgress": "0.350",
+      "scrollY": 578,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "height": 2650,
+      "stageHeight": 1000,
+      "stats": {
+        "drawCalls": 42,
+        "triangles": 27594,
+        "geometries": 38,
+        "textures": 6,
+        "pixelRatio": 1,
+        "progress": 0.3503030303030303,
+        "instances": 1153,
+        "running": true
+      }
+    },
+    {
+      "name": "isometric",
+      "requestedProgress": 0.67,
+      "path": "/Users/jackbrewer/Documents/Codex/2026-09-30/we/outputs/site-operations/baseline/after-isometric.png",
+      "mode": "live",
+      "phase": "2",
+      "domProgress": "0.670",
+      "scrollY": 1106,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "height": 2650,
+      "stageHeight": 1000,
+      "stats": {
+        "drawCalls": 42,
+        "triangles": 27594,
+        "geometries": 38,
+        "textures": 6,
+        "pixelRatio": 1,
+        "progress": 0.6703030303030303,
+        "instances": 1153,
+        "running": true
+      }
+    },
+    {
+      "name": "handoff",
+      "requestedProgress": 0.97,
+      "path": "/Users/jackbrewer/Documents/Codex/2026-09-30/we/outputs/site-operations/baseline/after-handoff.png",
+      "mode": "live",
+      "phase": "3",
+      "domProgress": "0.970",
+      "scrollY": 1601,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "height": 2650,
+      "stageHeight": 1000,
+      "stats": {
+        "drawCalls": 42,
+        "triangles": 27594,
+        "geometries": 38,
+        "textures": 6,
+        "pixelRatio": 1,
+        "progress": 0.9703030303030303,
+        "instances": 1153,
+        "running": true
+      }
+    },
+    {
+      "name": "mobile",
+      "path": "/Users/jackbrewer/Documents/Codex/2026-09-30/we/outputs/site-operations/baseline/after-mobile.png",
+      "mode": "static",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "height": 1071,
+      "overflow": 0,
+      "poster": "http://127.0.0.1:3095/images/city/mobile.webp"
+    }
+  ],
+  "errors": [],
+  "failures": []
+}

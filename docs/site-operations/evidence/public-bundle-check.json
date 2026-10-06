@@ -1,0 +1,60 @@
+{
+  "method": "Inspect loaded homepage script bodies for backend-only markers; source imports also reviewed. Not a comprehensive security scan.",
+  "scripts": [
+    {
+      "path": "/_next/static/chunks/3469.b89a8aac21077f1f.js",
+      "bytes": 19571,
+      "unexpectedMarkers": []
+    },
+    {
+      "path": "/_next/static/chunks/3736.4ba4018a3ed05d29.js",
+      "bytes": 4172,
+      "unexpectedMarkers": []
+    },
+    {
+      "path": "/_next/static/chunks/3794-4e3500efc893e566.js",
+      "bytes": 241032,
+      "unexpectedMarkers": []
+    },
+    {
+      "path": "/_next/static/chunks/3841.4920e90cf6ba81ad.js",
+      "bytes": 18645,
+      "unexpectedMarkers": []
+    },
+    {
+      "path": "/_next/static/chunks/4bd1b696-93bf506b236d6248.js",
+      "bytes": 201055,
+      "unexpectedMarkers": []
+    },
+    {
+      "path": "/_next/static/chunks/8437-e1cbba6829c02174.js",
+      "bytes": 14253,
+      "unexpectedMarkers": []
+    },
+    {
+      "path": "/_next/static/chunks/app/layout-11ac8cf9c930c4b7.js",
+      "bytes": 7411,
+      "unexpectedMarkers": []
+    },
+    {
+      "path": "/_next/static/chunks/app/page-f1ecfba230abefed.js",
+      "bytes": 45458,
+      "unexpectedMarkers": []
+    },
+    {
+      "path": "/_next/static/chunks/b536a0f1.6940c4954792290a.js",
+      "bytes": 356588,
+      "unexpectedMarkers": []
+    },
+    {
+      "path": "/_next/static/chunks/bd904a5c.c33708391c7da83f.js",
+      "bytes": 208850,
+      "unexpectedMarkers": []
+    },
+    {
+      "path": "/_next/static/chunks/main-app-29bbc7749662bbf3.js",
+      "bytes": 516,
+      "unexpectedMarkers": []
+    }
+  ]
+}

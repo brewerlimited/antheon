@@ -14,7 +14,9 @@ const nextConfig: NextConfig = {
     ];
   },
   async headers() {
-    return [{
+    return [
+      ...(process.env.VERCEL_ENV === "production" ? [] : [{source: "/:path*", headers: [{key: "X-Robots-Tag", value: "noindex, nofollow"}]}]),
+      {
       source: "/previews/:path*",
       headers: [
         { key: "Access-Control-Allow-Origin", value: "*" },

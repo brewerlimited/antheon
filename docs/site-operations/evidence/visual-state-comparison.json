@@ -1,0 +1,140 @@
+{
+  "checks": [
+    {
+      "state": "topdown",
+      "check": "mode",
+      "same": true
+    },
+    {
+      "state": "topdown",
+      "check": "height",
+      "same": true
+    },
+    {
+      "state": "topdown",
+      "check": "viewport",
+      "same": true
+    },
+    {
+      "state": "topdown",
+      "check": "stageHeight",
+      "same": true
+    },
+    {
+      "state": "topdown",
+      "check": "scrollY",
+      "same": true
+    },
+    {
+      "state": "topdown",
+      "check": "stats",
+      "same": true
+    },
+    {
+      "state": "transition",
+      "check": "mode",
+      "same": true
+    },
+    {
+      "state": "transition",
+      "check": "height",
+      "same": true
+    },
+    {
+      "state": "transition",
+      "check": "viewport",
+      "same": true
+    },
+    {
+      "state": "transition",
+      "check": "stageHeight",
+      "same": true
+    },
+    {
+      "state": "transition",
+      "check": "scrollY",
+      "same": true
+    },
+    {
+      "state": "transition",
+      "check": "stats",
+      "same": true
+    },
+    {
+      "state": "isometric",
+      "check": "mode",
+      "same": true
+    },
+    {
+      "state": "isometric",
+      "check": "height",
+      "same": true
+    },
+    {
+      "state": "isometric",
+      "check": "viewport",
+      "same": true
+    },
+    {
+      "state": "isometric",
+      "check": "stageHeight",
+      "same": true
+    },
+    {
+      "state": "isometric",
+      "check": "scrollY",
+      "same": true
+    },
+    {
+      "state": "isometric",
+      "check": "stats",
+      "same": true
+    },
+    {
+      "state": "handoff",
+      "check": "mode",
+      "same": true
+    },
+    {
+      "state": "handoff",
+      "check": "height",
+      "same": true
+    },
+    {
+      "state": "handoff",
+      "check": "viewport",
+      "same": true
+    },
+    {
+      "state": "handoff",
+      "check": "stageHeight",
+      "same": true
+    },
+    {
+      "state": "handoff",
+      "check": "scrollY",
+      "same": true
+    },
+    {
+      "state": "handoff",
+      "check": "stats",
+      "same": true
+    },
+    {
+      "state": "mobile",
+      "check": "mode",
+      "same": true
+    },
+    {
+      "state": "mobile",
+      "check": "height",
+      "same": true
+    },
+    {
+      "state": "mobile",
+      "check": "viewport",
+      "same": true
+    }
+  ],
+  "allMatch": true
+}
