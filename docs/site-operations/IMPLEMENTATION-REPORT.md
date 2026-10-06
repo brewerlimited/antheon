@@ -1,5 +1,7 @@
 # Anthēon — search, measurement and site operations
 
+**Later release:** the owner subsequently authorised production deployment. See [the release record](RELEASE-2026-10-06.md) for the deployed revision and successful live checks. The report below records the preceding local implementation handover.
+
 **Delivered locally on 6 October 2026. No production deployment, deployment-triggering push, DNS edit, account purchase, listing submission or outreach was performed.** The current local website remains the source of truth.
 
 ## What changed
