@@ -1,0 +1,2 @@
+'use client';
+export default function SeoError({reset}:{reset:()=>void}){return <div className="seo-app seo-login"><section className="seo-login-card"><p className="seo-eyebrow">ANTHĒON WORKSPACE</p><h1>A moment to reconnect.</h1><p>We couldn’t load this part of your workspace. Your stored work has not been changed.</p><button className="seo-button" onClick={reset}>Try again ↗</button><a className="seo-text-link" href="/seo">Return to your workspace</a></section></div>;}

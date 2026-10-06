@@ -71,12 +71,12 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
   const ground = new Mesh(groundGeometry, groundMaterial);
   ground.rotation.x = -Math.PI / 2; ground.position.y = -0.06; ground.receiveShadow = true; scene.add(ground);
 
-  // Existing Anthēon sources: intro-scene.ts uViolet and globals.css warm white.
-  // Neutral albedo/key light keep the architecture charcoal; violet lives in illumination.
-  const brandViolet = new Color("#b184ff");
+  // Match the public “Made distinct.” headline through the shared brand token.
+  // Neutral albedo/key light keep the architecture charcoal; periwinkle lives in illumination.
+  const brandAccent = new Color(getComputedStyle(canvas).getPropertyValue("--antheon-periwinkle").trim() || "#b9cbff");
   const warmWhite = new Color("#f4f2ed");
-  const lavender = warmWhite.clone().lerp(brandViolet, 0.68);
-  const sky = new HemisphereLight(warmWhite.clone().lerp(brandViolet, 0.18), 0x17161a, 1.1); scene.add(sky);
+  const lavender = warmWhite.clone().lerp(brandAccent, 0.68);
+  const sky = new HemisphereLight(warmWhite.clone().lerp(brandAccent, 0.18), 0x17161a, 1.1); scene.add(sky);
   const sun = new DirectionalLight(warmWhite, 3.2);
   sun.position.set(-34, 74, 22); sun.castShadow = true;
   sun.shadow.mapSize.set(2048, 2048);
@@ -85,7 +85,7 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
   sun.shadow.camera.near = 5; sun.shadow.camera.far = 170;
   sun.shadow.normalBias = 0.045; sun.shadow.bias = -0.00012;
   sun.shadow.radius = 3; scene.add(sun);
-  const rim = new DirectionalLight(brandViolet, 2.1); rim.position.set(32, 38, -45); scene.add(rim);
+  const rim = new DirectionalLight(brandAccent, 2.1); rim.position.set(32, 38, -45); scene.add(rim);
   const fill = new DirectionalLight(warmWhite, 0.25); fill.position.set(18, 14, 36); scene.add(fill);
 
   // A tiny locally drawn studio environment gives glazing reflected sky and
@@ -99,8 +99,8 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
     gradient.addColorStop(0, "#59585b"); gradient.addColorStop(0.42, "#353437");
     gradient.addColorStop(0.55, "#1c1b1e"); gradient.addColorStop(1, "#0d0c0f");
     ctx.fillStyle = gradient; ctx.fillRect(0, 0, 512, 256);
-    ctx.fillStyle = "#c4becb"; ctx.fillRect(58, 40, 31, 110);
-    ctx.fillStyle = "#8b858f"; ctx.fillRect(322, 24, 62, 116);
+    ctx.fillStyle = "#bec2cb"; ctx.fillRect(58, 40, 31, 110);
+    ctx.fillStyle = "#85888f"; ctx.fillRect(322, 24, 62, 116);
     const sourceTexture = new CanvasTexture(environmentCanvas);
     sourceTexture.mapping = EquirectangularReflectionMapping; sourceTexture.colorSpace = SRGBColorSpace;
     const pmrem = new PMREMGenerator(renderer);
@@ -235,9 +235,9 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
   const mediaContext=mediaCanvas.getContext("2d");
   let mediaMaterial:MeshBasicMaterial|null=null;
   if(mediaContext){
-    mediaContext.fillStyle="#1b1724";mediaContext.fillRect(0,0,256,96);
+    mediaContext.fillStyle="#171b24";mediaContext.fillRect(0,0,256,96);
     for(let i=0;i<8;i++){
-      mediaContext.fillStyle=["#77658e","#b184ff","#3c344b","#b4a7c4"][i%4];
+      mediaContext.fillStyle=["#65708e","#b9cbff","#343a4b","#a7afc4"][i%4];
       mediaContext.fillRect(12+i*30,12+(i%3)*13,19,65-(i%3)*13);
     }
     const texture=new CanvasTexture(mediaCanvas);texture.colorSpace=SRGBColorSpace;textures.add(texture);
@@ -325,7 +325,7 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
       }
     }
   });
-  const routeMaterial = new MeshBasicMaterial({color:brandViolet,transparent:true,opacity:0.06,toneMapped:false}); materials.add(routeMaterial);
+  const routeMaterial = new MeshBasicMaterial({color:brandAccent,transparent:true,opacity:0.06,toneMapped:false}); materials.add(routeMaterial);
   const routes = new InstancedMesh(box,routeMaterial,routePieces.length); scene.add(routes);
   routePieces.forEach((p,i)=>{temp.position.set(p.x,p.y,p.z);temp.scale.set(p.w,p.h,p.d);temp.rotation.set(0,0,0);temp.updateMatrix();routes.setMatrixAt(i,temp.matrix);});
 
@@ -383,7 +383,7 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
   updateCars(0,0);
 
   // Added after the original seeded scene: no change to buildings, windows or traffic.
-  const surroundings = createCitySurroundings(scene, brandViolet);
+  const surroundings = createCitySurroundings(scene, brandAccent);
 
   const raycaster = new Raycaster();
   const pointer = new Vector2(10,10);

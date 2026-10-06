@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   devIndicators: false,
+  agentRules: false,
+  allowedDevOrigins: ["127.0.0.1"],
   outputFileTracingIncludes: {
     '/client-preview/gjl/[[...path]]': ['./private-previews/gjl.bundle.enc'],
   },

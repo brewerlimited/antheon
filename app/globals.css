@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  --antheon-periwinkle: #b9cbff;
   --background: #08090a;
   --background-soft: #111214;
   --foreground: #f4f2ed;

@@ -333,7 +333,7 @@ export async function createIntroScene(canvas: HTMLCanvasElement, options: Intro
       uPixelRatio: { value: renderer.getPixelRatio() },
       uWorld: { value: 0 }, uChaos: { value: 0 }, uQuiet: { value: 0 },
       uIce: { value: new Color(palette.ice) }, uBlue: { value: new Color(palette.blue) },
-      uElectric: { value: new Color("#579dff") }, uViolet: { value: new Color("#b184ff") },
+      uElectric: { value: new Color("#579dff") }, uViolet: { value: new Color("#b9cbff") },
     };
     function material(vertexShader: string, fragmentShader: string, extra: Record<string, { value: unknown }> = {}) {
       const value = new ShaderMaterial({

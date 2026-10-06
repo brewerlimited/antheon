@@ -1,0 +1,1 @@
+export default function Loading(){return <div className="seo-app seo-loading" role="status"><span className="seo-wordmark">anthēon<span>SEARCH & GROWTH</span></span><div className="seo-skeleton"/><div className="seo-skeleton"/><p>Preparing your workspace…</p></div>;}

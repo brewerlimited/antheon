@@ -7,7 +7,7 @@ import type { Scene } from "three";
 
 /** Quiet scenery outside the original precincts. No raycast targets, shadow
  * casters, random-sequence consumption or extra animation/render loop. */
-export function createCitySurroundings(scene: Scene, violet: Color) {
+export function createCitySurroundings(scene: Scene, accent: Color) {
   const activation = { value: 0 };
   const positions: number[] = [];
   const strengths: number[] = [];
@@ -45,7 +45,7 @@ export function createCitySurroundings(scene: Scene, violet: Color) {
   traceGeometry.setAttribute("traceStrength", new Float32BufferAttribute(strengths, 1));
   const traceMaterial = new ShaderMaterial({
     transparent: true, depthWrite: false,
-    uniforms: { activation, ink: { value: new Color("#8a8493").lerp(violet, .18) } },
+    uniforms: { activation, ink: { value: new Color("#848893").lerp(accent, .18) } },
     vertexShader: `attribute float traceStrength; varying float vStrength; varying vec2 vPosition;
       void main(){vStrength=traceStrength;vPosition=position.xz;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
     fragmentShader: `uniform float activation; uniform vec3 ink; varying float vStrength; varying vec2 vPosition;
@@ -63,13 +63,15 @@ export function createCitySurroundings(scene: Scene, violet: Color) {
   lightCanvas.width = lightCanvas.height = 512;
   const ctx = lightCanvas.getContext("2d");
   if (ctx) {
+    const srgb = accent.clone().convertLinearToSRGB();
+    const rgb = [srgb.r, srgb.g, srgb.b].map(value => Math.round(value * 255)).join(",");
     const pool = (x: number, z: number, w: number, d: number, alpha: number) => {
       ctx.save(); ctx.translate((x / 160 + .5) * 512, (z / 160 + .5) * 512);
       ctx.scale(w / 160 * 512, d / 160 * 512);
       const glow = ctx.createRadialGradient(0, 0, 0, 0, 0, 1);
-      glow.addColorStop(0, `rgba(177,132,255,${alpha})`);
-      glow.addColorStop(.32, `rgba(177,132,255,${alpha * .43})`);
-      glow.addColorStop(1, "rgba(177,132,255,0)");
+      glow.addColorStop(0, `rgba(${rgb},${alpha})`);
+      glow.addColorStop(.32, `rgba(${rgb},${alpha * .43})`);
+      glow.addColorStop(1, `rgba(${rgb},0)`);
       ctx.fillStyle = glow; ctx.fillRect(-1, -1, 2, 2); ctx.restore();
     };
     pool(-32, -12, 21, 12, .35); pool(-38, -5, 13, 9, .17);
@@ -84,7 +86,7 @@ export function createCitySurroundings(scene: Scene, violet: Color) {
 
   // A few unlit, distant masses suggest continuation; they cannot be selected.
   const contextGeometry = new BoxGeometry(1, 1, 1);
-  const contextMaterial = new MeshStandardMaterial({ color: 0x17151c, roughness: 1, metalness: 0, envMapIntensity: .08, transparent: true, opacity: 0, depthWrite: false });
+  const contextMaterial = new MeshStandardMaterial({ color: 0x15171c, roughness: 1, metalness: 0, envMapIntensity: .08, transparent: true, opacity: 0, depthWrite: false });
   const distant = [[48,-14,5,8,6],[56,8,6,5,3],[16,-44,5,5,7],[-22,-43,6,4,5],[-45,14,4,6,4],[46,44,6,5,3]];
   const silhouettes = new InstancedMesh(contextGeometry, contextMaterial, distant.length);
   const transform = new Object3D();
