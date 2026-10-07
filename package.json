@@ -13,7 +13,8 @@
     "prebuild": "node scripts/assemble-gjl-preview.mjs",
     "test:seo": "node --import tsx --test tests/seo/*.test.ts",
     "test:site": "node --import tsx --test tests/site/*.test.ts",
-    "check:site": "node --import tsx scripts/check-public-site.mjs"
+    "check:site": "node --import tsx scripts/check-public-site.mjs",
+    "test:recruitment": "node --import tsx --test tests/recruitment/*.test.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
