@@ -13,3 +13,15 @@ The original homepage composition, reversible GSAP image handovers, craft enlarg
 `node scripts/build-paye-preview.mjs` rebuilds the checked-in browser bundle. If GSAP is not installed in the current development dependencies, set `PAYE_DEPENDENCIES` to the original PAYE project's node_modules directory. Antheon production builds use the checked-in bundle and need no new runtime dependencies. Source photographs and font licenses are local.
 
 This release is based on `1ddee2c`, the current Pioneer portfolio production lineage. It excludes the unpublished Recruitment OS draft in the primary checkout.
+
+## Production release — 8 October 2026
+
+- Application commit: `089c84a` (mirrored to the primary checkout as `b5177d4`).
+- Deployment: `dpl_4q5ryFNGq3h8o5bFoe3oVhoAPEq7`.
+- Immutable URL: https://antheon-d0r2dbz7y-brewerlimited-4901s-projects.vercel.app
+- Published gallery: https://www.antheon.co.uk/web-design
+- Published concept: https://www.antheon.co.uk/concepts/paye
+- Local production build and TypeScript passed. Desktop scroll sequence, expanded view and mobile layout checked in the sandboxed preview.
+- Staged gallery confirmed Pioneer Bros, PAYE, Eventco order; staged JavaScript matched the locally tested bundle byte for byte.
+- Promoted successfully with Vercel CLI. Live browser confirmed second-position card and enhanced photographic reel initialized.
+- Release deployed from the production lineage; the unrelated Recruitment OS draft remains unpublished.
