@@ -63,7 +63,7 @@ export default async function ConceptPage({ params }: { params: Promise<{ slug: 
           <ol>{concept.decisions.map((decision) => <li key={decision}>{decision}</li>)}</ol>
         </section>
         <div className="site-container concept-pagination">
-          <Link className="text-link" href="/web-design"><VectorIcon name="arrow-left" /> All six designs</Link>
+          <Link className="text-link" href="/web-design"><VectorIcon name="arrow-left" /> All website designs</Link>
           <Link className="text-link" href={`/concepts/${nextConcept.slug}`}>Next: {nextConcept.name} <span aria-hidden="true"><VectorIcon name="arrow-up-right" /></span></Link>
         </div>
         <section className="section site-container concept-enquiry" aria-labelledby="enquiry-title">

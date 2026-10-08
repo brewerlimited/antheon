@@ -23,7 +23,7 @@ export function SelectedWork() {
           ))}
         </div>
         <div className="work-gallery-link">
-          <p>Six directions. One considered approach.</p>
+          <p>Different directions. One considered approach.</p>
           <Link className="button button-secondary" href="/web-design">View all website designs <span aria-hidden="true"><VectorIcon name="arrow-up-right" /></span></Link>
         </div>
         <p className="concept-disclaimer">Independent design explorations. Shown as concepts, not commissioned client projects.</p>

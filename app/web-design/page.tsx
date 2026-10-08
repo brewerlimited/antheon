@@ -4,7 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ConceptCard } from "@/components/ConceptCard";
 import { Reveal } from "@/components/Reveal";
-import { concepts } from "@/data/concepts";
+import { concepts, featuredConcepts, additionalConcepts } from "@/data/concepts";
 import { siteLinks } from "@/data/site";
 import { notFound } from "next/navigation";
 import { getPublishedService } from "@/lib/site-content";
@@ -29,14 +29,20 @@ export default async function WebDesignPage() {
         <p className="section-label">Anthēon / Web Design</p>
         <div className="work-heading">
           <h1 className="section-title" id="gallery-title">Designed to be<br />experienced.</h1>
-          <p className="work-intro">Six businesses. Six distinct directions. Open a design and explore the full homepage — scroll, hover and discover the details.</p>
+          <p className="work-intro">Different businesses. Distinctive directions. Open a design and explore the full homepage — scroll, hover and discover the details.</p>
         </div>
-        <div className="gallery-meta"><span>Selected design concepts</span><span>01 — 06</span></div>
+        <div className="gallery-meta"><span>Selected design concepts</span><span>{String(concepts.length).padStart(2, "0")} designs to explore</span></div>
       </section>
       <section className="site-container gallery-collection" aria-label="Website design concepts">
         <div className="concept-grid gallery-grid">
-          {concepts.map((concept, index) => <Reveal key={concept.slug} delay={index % 3 === 1 ? "short" : index % 3 === 2 ? "medium" : "none"}><ConceptCard concept={concept} index={index} /></Reveal>)}
+          {featuredConcepts.map((concept, index) => <Reveal key={concept.slug} delay={index % 3 === 1 ? "short" : index % 3 === 2 ? "medium" : "none"}><ConceptCard concept={concept} index={index} /></Reveal>)}
         </div>
+        <details className="more-designs">
+          <summary><span className="more-designs-closed">Show more designs <span>({additionalConcepts.length})</span></span><span className="more-designs-open">Show fewer designs</span><span className="more-designs-chevron" aria-hidden="true" /></summary>
+          <div className="concept-grid gallery-grid more-designs-grid">
+            {additionalConcepts.map((concept, index) => <Reveal key={concept.slug} delay={index % 3 === 1 ? "short" : index % 3 === 2 ? "medium" : "none"}><ConceptCard concept={concept} index={featuredConcepts.length + index} /></Reveal>)}
+          </div>
+        </details>
         <p className="concept-disclaimer">Independent design explorations. Shown as concepts, not commissioned client projects.</p>
       </section>
       <section className="site-container website-pricing" id="pricing" aria-labelledby="pricing-title">

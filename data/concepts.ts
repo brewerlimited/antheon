@@ -1,5 +1,19 @@
 export const concepts = [
   {
+    slug: "pioneer-bros",
+    name: "Pioneer Bros Scaffolding",
+    category: "Scaffolding & Construction",
+    summary: "Real work, considered motion and a clearer way to plan the access.",
+    image: "/previews/pioneer-bros/assets/pioneer/hero-scaffold.webp",
+    imageAlt: "Pioneer Bros Scaffolding design concept with original project photography, blue branding and a cinematic hero.",
+    description: "An independent website redesign concept for Pioneer Bros Scaffolding, combining its original branding and real project photography with a cinematic homepage and an interactive scaffold enquiry builder.",
+    decisions: [
+      "Original photography, blue branding and a floating glass header establish a distinctive first impression.",
+      "Alternating gallery entrances and subtle parallax bring the company’s work into focus.",
+      "A visual scaffold builder turns building and access selections into a structured enquiry brief.",
+    ],
+  },
+  {
     slug: "intimate-detail",
     name: "Intimate Detail",
     category: "Automotive",
@@ -86,4 +100,10 @@ export const concepts = [
 ] as const;
 
 export type Concept = (typeof concepts)[number];
-export const featuredConcepts = concepts.slice(0, 3);
+// Curated homepage selection stays stable as the main collection grows.
+export const featuredConcepts = ["pioneer-bros", "eventco", "hamilton-flooring"].map(
+  (slug) => concepts.find((concept) => concept.slug === slug)!,
+);
+export const additionalConcepts = concepts.filter(
+  (concept) => !featuredConcepts.some((featured) => featured.slug === concept.slug),
+);

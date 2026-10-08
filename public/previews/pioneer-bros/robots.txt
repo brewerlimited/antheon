@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /
+# Private redesign preview. Enable indexing only on the approved production domain.

@@ -4,7 +4,8 @@ import { VectorIcon } from "@/components/VectorIcon";
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { concepts } from "@/data/concepts";
+import { ConceptArtwork } from "@/components/ConceptArtwork";
+import { featuredConcepts } from "@/data/concepts";
 import { siteLinks } from "@/data/site";
 import { serviceNavigation } from "@/data/public-content";
 import footerStyles from "./public-content/footer-links.module.css";
@@ -171,9 +172,9 @@ export function MotionHome() {
         </div>
       </section>
       <section className="motion-work" id="work" data-chapter="04 — SELECTED WORK" aria-labelledby="work-title">
-        <div className="work-heading-new motion-reveal"><p className="motion-eyebrow">03 / SELECTED DESIGN EXPLORATIONS</p><h2 id="work-title">Different by<br /><em>design.</em><span className="work-asterisk" aria-hidden="true"><VectorIcon name="star" /></span></h2><div><p>A few of the ways we bring<br />a business to life online.</p><a href="/web-design" className="motion-text-link">All six concepts <span aria-hidden="true"><VectorIcon name="plus" /></span></a></div></div>
-        <div className="motion-work-stack">{[concepts[0], concepts[1], concepts[4]].map((concept, index) => <a href={`/concepts/${concept.slug}`} className={`motion-work-card work-card-${index}`} key={concept.slug}>
-          <div className="work-card-image"><Image src={concept.image} alt={concept.imageAlt} width={1600} height={1000} sizes="(max-width: 800px) 95vw, 90vw" /></div><div className="work-card-bar"><span className="work-card-index">0{index + 1}</span><h3>{concept.name}</h3><span>{concept.category}<small>INDEPENDENT CONCEPT</small></span><span className="work-open">Explore <b aria-hidden="true"><VectorIcon name="plus" /></b></span></div>
+        <div className="work-heading-new motion-reveal"><p className="motion-eyebrow">03 / SELECTED DESIGN EXPLORATIONS</p><h2 id="work-title">Different by<br /><em>design.</em><span className="work-asterisk" aria-hidden="true"><VectorIcon name="star" /></span></h2><div><p>A few of the ways we bring<br />a business to life online.</p><a href="/web-design" className="motion-text-link">All website concepts <span aria-hidden="true"><VectorIcon name="plus" /></span></a></div></div>
+        <div className="motion-work-stack">{featuredConcepts.map((concept, index) => <a href={`/concepts/${concept.slug}`} className={`motion-work-card work-card-${index}`} key={concept.slug}>
+          <div className="work-card-image"><ConceptArtwork concept={concept} wide sizes="(max-width: 800px) 95vw, 90vw" /></div><div className="work-card-bar"><span className="work-card-index">0{index + 1}</span><h3>{concept.name}</h3><span>{concept.category}<small>INDEPENDENT CONCEPT</small></span><span className="work-open">Explore <b aria-hidden="true"><VectorIcon name="plus" /></b></span></div>
         </a>)}</div><p className="motion-disclaimer">Independent design explorations, not commissioned client projects.</p>
       </section>
       <VentureGallery />

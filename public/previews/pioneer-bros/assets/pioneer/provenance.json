@@ -1,0 +1,211 @@
+{
+  "source_site": "https://www.pioneerbrosscaffolding.com/",
+  "retrieved_date": "2026-10-08",
+  "imagery_note": "Real images downloaded from Pioneer Bros website resources. No generated imagery. Only EXIF orientation normalization, resizing and WebP compression applied. Captions describe visible content and do not assert named clients or locations.",
+  "brand_colors": {
+    "primary": "#0057E1",
+    "dark_blue": "#003A96",
+    "navy": "#001D4B",
+    "pale_blue": "#E5F0FE",
+    "light_blue": "#C8E0FE"
+  },
+  "brand_color_evidence": "Existing site CSS tokens: --color_18:0,87,225; --color_19:0,58,150; --color_20:0,29,75; --color_16:229,240,254; --color_17:200,224,254.",
+  "assets": [
+    {
+      "file": "pioneer-logo.png",
+      "source_url": "https://static.wixstatic.com/media/ada8c2_061f0b7e064e4e9ab2f962c60837856d~mv2.png",
+      "source_page": "https://www.pioneerbrosscaffolding.com/",
+      "original_dimensions": [
+        1000,
+        290
+      ],
+      "output_dimensions": [
+        1000,
+        290
+      ],
+      "bytes": 31039,
+      "transform": "None. Original transparent PNG copied byte-for-byte.",
+      "description": "Original Pioneer Bros Scaffolding Limited logo, white lettering, blue and grey symbol; requires dark backdrop."
+    },
+    {
+      "file": "hero-scaffold.webp",
+      "source_url": "https://static.wixstatic.com/media/ada8c2_8e63e7647424421e9cb632b4315abef8~mv2.jpg",
+      "source_page": "https://www.pioneerbrosscaffolding.com/",
+      "original_dimensions": [
+        2007,
+        1280
+      ],
+      "oriented_dimensions": [
+        2007,
+        1280
+      ],
+      "output_dimensions": [
+        1800,
+        1148
+      ],
+      "bytes": 326874,
+      "transform": "EXIF orientation normalization, resize only when needed, WebP quality 85. No crop or retouch.",
+      "description": "Scaffolding around a brick building, from the original Pioneer Bros homepage"
+    },
+    {
+      "file": "hero-temporary-roof.webp",
+      "source_url": "https://static.wixstatic.com/media/ada8c2_d29d3f0825734c42ac08137f5467687c~mv2.jpg",
+      "source_page": "https://www.pioneerbrosscaffolding.com/gallary",
+      "original_dimensions": [
+        1600,
+        1200
+      ],
+      "oriented_dimensions": [
+        1600,
+        1200
+      ],
+      "output_dimensions": [
+        1600,
+        1200
+      ],
+      "bytes": 260588,
+      "transform": "EXIF orientation normalization, resize only when needed, WebP quality 85. No crop or retouch.",
+      "description": "Large temporary roof and access scaffolding around a stone and brick building"
+    },
+    {
+      "file": "hero-residential-roof.webp",
+      "source_url": "https://static.wixstatic.com/media/ada8c2_05d75fdd6050440094b5395a82601234~mv2.jpg",
+      "source_page": "https://www.pioneerbrosscaffolding.com/gallary",
+      "original_dimensions": [
+        1600,
+        1200
+      ],
+      "oriented_dimensions": [
+        1600,
+        1200
+      ],
+      "output_dimensions": [
+        1600,
+        1200
+      ],
+      "bytes": 366402,
+      "transform": "EXIF orientation normalization, resize only when needed, WebP quality 85. No crop or retouch.",
+      "description": "Full temporary roof scaffold around a house beneath a blue sky"
+    },
+    {
+      "file": "industrial-access.webp",
+      "source_url": "https://static.wixstatic.com/media/ada8c2_3c4bf7a571cd498985eeacd2a521c121~mv2.jpg",
+      "source_page": "https://www.pioneerbrosscaffolding.com/gallary",
+      "original_dimensions": [
+        1600,
+        1200
+      ],
+      "oriented_dimensions": [
+        1600,
+        1200
+      ],
+      "output_dimensions": [
+        1200,
+        900
+      ],
+      "bytes": 117616,
+      "transform": "EXIF orientation normalization, resize only when needed, WebP quality 85. No crop or retouch.",
+      "description": "Tube and fitting scaffolding around an industrial building"
+    },
+    {
+      "file": "commercial-frontage.webp",
+      "source_url": "https://static.wixstatic.com/media/ada8c2_32c93c4e16ab41ea80ce68a3cea4c902~mv2.png",
+      "source_page": "https://www.pioneerbrosscaffolding.com/gallary",
+      "original_dimensions": [
+        3024,
+        4032
+      ],
+      "oriented_dimensions": [
+        3024,
+        4032
+      ],
+      "output_dimensions": [
+        1200,
+        1600
+      ],
+      "bytes": 448032,
+      "transform": "EXIF orientation normalization, resize only when needed, WebP quality 85. No crop or retouch.",
+      "description": "Scaffolding along a multi-storey street frontage"
+    },
+    {
+      "file": "domestic-access.webp",
+      "source_url": "https://static.wixstatic.com/media/ada8c2_17db1ef5ec414c07a16f16043c7b6de1~mv2.png",
+      "source_page": "https://www.pioneerbrosscaffolding.com/gallary",
+      "original_dimensions": [
+        3024,
+        4032
+      ],
+      "oriented_dimensions": [
+        3024,
+        4032
+      ],
+      "output_dimensions": [
+        1200,
+        1600
+      ],
+      "bytes": 459720,
+      "transform": "EXIF orientation normalization, resize only when needed, WebP quality 85. No crop or retouch.",
+      "description": "Scaffolding around a brick and render home"
+    },
+    {
+      "file": "facade-access.webp",
+      "source_url": "https://static.wixstatic.com/media/ada8c2_043c81952b1e4a48840d665bdf4896ce~mv2.png",
+      "source_page": "https://www.pioneerbrosscaffolding.com/gallary",
+      "original_dimensions": [
+        3024,
+        4032
+      ],
+      "oriented_dimensions": [
+        3024,
+        4032
+      ],
+      "output_dimensions": [
+        1200,
+        1600
+      ],
+      "bytes": 239256,
+      "transform": "EXIF orientation normalization, resize only when needed, WebP quality 85. No crop or retouch.",
+      "description": "Scaffold access along a building facade"
+    },
+    {
+      "file": "heritage-access.webp",
+      "source_url": "https://static.wixstatic.com/media/ada8c2_7483ef36bbe14181a402e8914806ca07~mv2.png",
+      "source_page": "https://www.pioneerbrosscaffolding.com/gallary",
+      "original_dimensions": [
+        3024,
+        4032
+      ],
+      "oriented_dimensions": [
+        3024,
+        4032
+      ],
+      "output_dimensions": [
+        1200,
+        1600
+      ],
+      "bytes": 476768,
+      "transform": "EXIF orientation normalization, resize only when needed, WebP quality 85. No crop or retouch.",
+      "description": "Scaffolding around a brick building with arched blue doors"
+    },
+    {
+      "file": "chimney-access.webp",
+      "source_url": "https://static.wixstatic.com/media/ada8c2_7e85434e7bf244b0be807982196e0676~mv2.png",
+      "source_page": "https://www.pioneerbrosscaffolding.com/gallary",
+      "original_dimensions": [
+        3024,
+        4032
+      ],
+      "oriented_dimensions": [
+        3024,
+        4032
+      ],
+      "output_dimensions": [
+        1200,
+        1600
+      ],
+      "bytes": 317928,
+      "transform": "EXIF orientation normalization, resize only when needed, WebP quality 85. No crop or retouch.",
+      "description": "Scaffolding around a domestic chimney and roof edge"
+    }
+  ]
+}

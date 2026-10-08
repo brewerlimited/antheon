@@ -1,5 +1,5 @@
 import { VectorIcon } from "@/components/VectorIcon";
-import Image from "next/image";
+import { ConceptArtwork } from "./ConceptArtwork";
 import Link from "next/link";
 import type { Concept } from "@/data/concepts";
 
@@ -13,8 +13,7 @@ export function ConceptCard({ concept, index }: { concept: Concept; index: numbe
           <span>{String(index + 1).padStart(2, "0")}</span>
         </div>
         <div className="concept-image-crop">
-          <Image src={concept.image} alt={concept.imageAlt} width={1440} height={1000}
-            sizes="(max-width: 820px) calc(100vw - 40px), (max-width: 1120px) 46vw, 31vw" />
+          <ConceptArtwork concept={concept} sizes="(max-width: 820px) calc(100vw - 40px), (max-width: 1120px) 46vw, 31vw" />
           <span className="concept-live-label">Interactive homepage <span aria-hidden="true"><VectorIcon name="arrow-up-right" /></span></span>
         </div>
       </div>

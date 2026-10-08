@@ -1265,3 +1265,16 @@ section[id], [id$="-title"], #main-content { scroll-margin-top: 108px; }
 /* Fixed vector geometry prevents mobile emoji substitution. */
 .vector-icon { display: inline-block; width: 1em; height: 1em; flex-shrink: 0; vertical-align: -0.125em; }
 .tiny-cross, .intro-star, .work-asterisk { display: inline-flex; }
+
+/* A growing design collection, progressively disclosed without requiring JavaScript. */
+.more-designs{margin-top:3rem;border-top:1px solid var(--line-strong);padding-top:1.5rem}
+.more-designs>summary{display:flex;align-items:center;justify-content:center;gap:1.2rem;width:fit-content;min-height:52px;margin:auto;padding:.85rem 1.65rem;list-style:none;border:1px solid var(--line-strong);border-radius:999px;color:var(--foreground);cursor:pointer;font-size:.85rem;transition:background .2s,border-color .2s}
+.more-designs>summary::-webkit-details-marker{display:none}
+.more-designs>summary:hover{background:#91acff12;border-color:var(--gold)}
+.more-designs-closed>span{color:var(--muted);margin-left:.3rem}
+.more-designs-open,.more-designs[open] .more-designs-closed{display:none}
+.more-designs[open] .more-designs-open{display:inline}
+.more-designs-chevron{width:8px;height:8px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:rotate(45deg);transition:transform .2s;margin-top:-4px}
+.more-designs[open] .more-designs-chevron{transform:rotate(225deg);margin-top:4px}
+.more-designs-grid{padding-top:3rem}
+@media(prefers-reduced-motion:reduce){.more-designs>summary,.more-designs-chevron{transition:none}}
