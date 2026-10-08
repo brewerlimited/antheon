@@ -1,0 +1,1 @@
+export default function Label({number,children}:{number?:string;children:React.ReactNode}){return <div className="eyebrow"><span className="cross" aria-hidden="true">+</span>{number&&<span>{number} /</span>}<span>{children}</span></div>}

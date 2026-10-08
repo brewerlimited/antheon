@@ -14,6 +14,20 @@ export const concepts = [
     ],
   },
   {
+    slug: "paye",
+    name: "PAYE Stonework & Restoration",
+    category: "Heritage & Architecture",
+    summary: "Monumental photography. A continuous story of stone, craft and conservation.",
+    image: "/images/concepts/paye-hero.webp",
+    imageAlt: "PAYE website concept with distinctive sans serif typography and a monumental National Gallery photograph.",
+    description: "An independent architectural website concept for PAYE Stonework & Restoration. Real project photography moves through an uninterrupted sequence of full-screen landscapes, with restrained typography and close studies of the craft.",
+    decisions: [
+      "Five enormous landscape photographs hand directly into one another as the visitor scrolls, with project captions held in place.",
+      "Bricolage Grotesque headings and Instrument Sans reading text bring character to a warm, restrained visual identity.",
+      "A hand-carved stone detail grows to fill the screen, connecting the scale of the building to the skill of the craftsperson.",
+    ],
+  },
+  {
     slug: "intimate-detail",
     name: "Intimate Detail",
     category: "Automotive",
@@ -101,7 +115,7 @@ export const concepts = [
 
 export type Concept = (typeof concepts)[number];
 // Curated homepage selection stays stable as the main collection grows.
-export const featuredConcepts = ["pioneer-bros", "eventco", "hamilton-flooring"].map(
+export const featuredConcepts = ["pioneer-bros", "paye", "eventco"].map(
   (slug) => concepts.find((concept) => concept.slug === slug)!,
 );
 export const additionalConcepts = concepts.filter(

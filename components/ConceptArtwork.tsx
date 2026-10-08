@@ -4,7 +4,7 @@ import styles from "./ConceptArtwork.module.css";
 
 /** A lightweight branded cover; the full interactive design opens on the concept page. */
 export function ConceptArtwork({ concept, sizes, wide = false }: { concept: Concept; sizes: string; wide?: boolean }) {
-  const image = <Image src={concept.image} alt={concept.imageAlt} width={1600} height={1000} sizes={sizes} />;
+  const image = <Image src={concept.image} alt={concept.imageAlt} width={1600} height={1000} sizes={sizes} style={concept.slug === "paye" ? { objectPosition: "left top" } : undefined} />;
   if (concept.slug !== "pioneer-bros") return image;
   return <div className={`${styles.cover} ${wide ? styles.wide : ""}`}>
     {image}
