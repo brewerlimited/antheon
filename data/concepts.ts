@@ -128,10 +128,14 @@ export const concepts = [
 ] as const;
 
 export type Concept = (typeof concepts)[number];
-// Curated homepage selection stays stable as the main collection grows.
+// The web-design page and homepage stack have independently curated selections.
 export const featuredConcepts = ["pioneer-bros", "paye", "boss-dog"].map(
   (slug) => concepts.find((concept) => concept.slug === slug)!,
 );
 export const additionalConcepts = concepts.filter(
   (concept) => !featuredConcepts.some((featured) => featured.slug === concept.slug),
+);
+
+export const homepageConcepts = ["pioneer-bros", "paye", "eventco"].map(
+  (slug) => concepts.find((concept) => concept.slug === slug)!,
 );
