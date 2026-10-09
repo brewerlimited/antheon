@@ -28,6 +28,20 @@ export const concepts = [
     ],
   },
   {
+    slug: "boss-dog",
+    name: "Boss Dog",
+    category: "Automotive & Vehicle Wraps",
+    summary: "Bold type, expressive vehicle graphics and ideas in motion.",
+    image: "/images/concepts/boss-dog-hero.webp",
+    imageAlt: "Boss Dog website concept with oversized black typography and a white, red and acid-yellow Porsche.",
+    description: "An independent website redesign concept for Boss Dog, pairing an expressive automotive identity with a clear showcase of vehicle wraps, commercial graphics and craftsmanship.",
+    decisions: [
+      "Oversized typography and a striking wrapped Porsche create an unmistakable first impression.",
+      "Staggered fades and entrances give the work rhythm while keeping the hero vehicle still.",
+      "Real project photography, partner logos and clear service categories connect the identity to the craft.",
+    ],
+  },
+  {
     slug: "intimate-detail",
     name: "Intimate Detail",
     category: "Automotive",
@@ -115,7 +129,7 @@ export const concepts = [
 
 export type Concept = (typeof concepts)[number];
 // Curated homepage selection stays stable as the main collection grows.
-export const featuredConcepts = ["pioneer-bros", "paye", "eventco"].map(
+export const featuredConcepts = ["pioneer-bros", "paye", "boss-dog"].map(
   (slug) => concepts.find((concept) => concept.slug === slug)!,
 );
 export const additionalConcepts = concepts.filter(
