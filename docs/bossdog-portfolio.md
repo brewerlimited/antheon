@@ -1,6 +1,6 @@
 # Boss Dog portfolio addition — 9 October 2026
 
-Boss Dog is the third featured web design, after Pioneer Bros and PAYE. Eventco remains in Show more. The shared homepage collection uses the same order. Boss Dog also replaces the Anchor Flooring illustration and caption in the third homepage services panel (Ambition. Made real.). Anchor Flooring remains in the expanded design collection.
+Boss Dog is the third featured web design, after Pioneer Bros and PAYE. Eventco remains in Show more. The homepage card stack is curated separately and retains Pioneer Bros, PAYE and Eventco. Boss Dog also replaces the Anchor Flooring illustration and caption in the third homepage services panel (Ambition. Made real.). Anchor Flooring remains in the expanded design collection.
 
 - Concept: /concepts/boss-dog
 - Interactive homepage: /previews/boss-dog/index.html
@@ -20,3 +20,7 @@ Cover image is a screenshot of the actual homepage. The full source remains in t
 - Boss Dog standalone Site source: ff0fdefe72c7b6cc072bbecca97befb9d5fc4a8b; publication succeeded.
 
 Validation: production build and TypeScript passed; source syntax and diff checks passed. Browser checks confirmed third-position portfolio order, loaded desktop/mobile sandbox preview, scroll reveals, static Porsche and homepage services replacement. The staged animation bundle matched the local build byte for byte. Live portfolio ordering and embedded HD asset/animation initialization were confirmed; browser error logs were empty. Reduced-motion fallback was reviewed in code, not emulated.
+
+## Homepage stack correction — 9 October 2026
+
+Restored Eventco as the third card in the homepage stack. Boss Dog remains third on the web-design page and remains the image in the homepage Ambition services panel. The two collections now use separate explicit selections. Application commit: 9e4941c (primary checkout mirror: 62cb75b). Production build and TypeScript passed.
