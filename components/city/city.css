@@ -86,3 +86,9 @@
 @media(max-width:800px),(max-height:560px){.city-no-script{order:5}.city-poster{background:transparent}.city-world .city-vignette{background:none}}
 
 @media(scripting:none) and (max-width:800px), (scripting:none) and (max-height:560px){.city-heading{top:auto}.city-stage>noscript{display:contents}.city-no-script{padding-top:0}}
+
+/* Avenue is an optional layer; closing it preserves the city camera and page position. */
+.city-avenue-dialog{max-width:none;max-height:none;width:100%;height:100dvh;padding:0;margin:0;border:0;background:#06070b;color:#edf0f5;overflow:auto}
+.city-avenue-dialog::backdrop{background:#06070b}
+.city-avenue-entry{color:var(--antheon-periwinkle)!important}
+@media(max-width:1100px){.city-status-row{flex-wrap:wrap}.city-tools{flex-wrap:wrap;gap:16px}}

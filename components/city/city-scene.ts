@@ -3,7 +3,7 @@ import {
   CylinderGeometry, DirectionalLight, EquirectangularReflectionMapping, FogExp2,
   HemisphereLight, IcosahedronGeometry, InstancedBufferAttribute, InstancedMesh,
   MathUtils, Mesh, MeshBasicMaterial, MeshStandardMaterial, Object3D,
-  OrthographicCamera, PCFSoftShadowMap, PlaneGeometry, PMREMGenerator, Raycaster,
+  OrthographicCamera, PCFShadowMap, PlaneGeometry, PMREMGenerator, Raycaster,
   Scene, SRGBColorSpace, Vector2, Vector3, WebGLRenderer,
 } from "three";
 import type { Material, Texture } from "three";
@@ -16,6 +16,8 @@ type Options = {
   onReady: () => void;
   onError: () => void;
   reducedMotion?: boolean;
+  /** Optional presentation pass, used by the isolated ASCII city prototype. */
+  renderFrame?: (renderer: WebGLRenderer, scene: Scene, camera: OrthographicCamera) => void;
 };
 type Style = "stone" | "metal" | "glass" | "dark" | "paving" | "roof";
 type Piece = { x: number; y: number; z: number; w: number; h: number; d: number; angle: number; seed: number };
@@ -37,7 +39,7 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
   renderer.toneMapping = ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.18;
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = PCFSoftShadowMap;
+  renderer.shadowMap.type = PCFShadowMap;
   renderer.shadowMap.autoUpdate = false;
   renderer.shadowMap.needsUpdate = true;
   renderer.setClearColor(0x06070b, 1);
@@ -394,7 +396,7 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
   const cameraTarget = new Vector3();
   let hovered:DistrictId|null=null, selected:DistrictId|null=null;
   let progressTarget=0,progress=0,raf=0,lastTime=0,time=0;
-  let running=true,disposed=false,ready=false,pointerInside=false,dirty=true;
+  let running=true,disposed=false,ready=false,pointerInside=false,dirty=true,motionPaused=false;
   let width=1,height=1,dpr=1,slowFrames=0,frameCount=0,qualitySampleTime=0;
   const onHover = (id:DistrictId|null) => {if(id!==hovered){hovered=id;options.onHover(id);dirty=true;}};
   const move = (event:PointerEvent) => {
@@ -442,7 +444,7 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
     raf=0;if(disposed||!running)return;
     const rawDelta=lastTime?(timestamp-lastTime)/1000:1/60;
     const delta=Math.min(rawDelta,0.08);lastTime=timestamp;
-    time+=delta;
+    if(!motionPaused)time+=delta;
     progress+= (progressTarget-progress)*(reduced?1:1-Math.exp(-delta*8));
     if(Math.abs(progressTarget-progress)<0.0001)progress=progressTarget;
     pointerCurrent.lerp(pointerTarget,reduced?1:1-Math.exp(-delta*3.5));
@@ -456,7 +458,9 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
       }
     } else if(hovered)onHover(null);
     updateCars(reduced?0:time,ease(0.15,0.56,progress));
-    renderer.render(scene,camera);dirty=false;
+    if(options.renderFrame) options.renderFrame(renderer,scene,camera);
+    else renderer.render(scene,camera);
+    dirty=false;
     if(!ready){ready=true;options.onReady();}
     // Sustained slow rendering lowers resolution once, without a quality pop
     // caused by a single long task while assets elsewhere on the page load.
@@ -468,11 +472,12 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
       qualitySampleTime=0;frameCount=0;slowFrames=0;
     }
     const settling=Math.abs(progressTarget-progress)>0.0001||districtIds.some(id=>Math.abs(highlights[id].value-(id===(selected??hovered)?1:0))>0.002);
-    if(!reduced||settling||dirty)schedule();
+    if((!reduced&&!motionPaused)||settling||dirty)schedule();
   }
   function schedule(){if(!disposed&&running&&!raf)raf=requestAnimationFrame(render);}
   resize();
   return {
+    setMotionPaused(value:boolean){motionPaused=value;dirty=true;schedule();},
     setProgress(p:number){progressTarget=clamp(Number.isFinite(p)?p:0);dirty=true;schedule();},
     setActiveDistrict(id:DistrictId|null){selected=id;dirty=true;schedule();},
     setRunning(value:boolean){if(disposed)return;running=value;lastTime=0;if(value){dirty=true;schedule();}else{cancelAnimationFrame(raf);raf=0;}},
