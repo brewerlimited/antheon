@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import dynamic from "next/dynamic";
+const Avenue = dynamic(() => import("../city-lab/CityLab").then(m => m.CityLab), { ssr: false });
 import { useEffect, useRef, useState } from "react";
 import { VectorIcon } from "@/components/VectorIcon";
 import { districts, type DistrictId } from "./districts";
@@ -16,6 +18,10 @@ const smooth = (from: number, to: number, value: number) => {
 };
 
 export function CityHero() {
+  const avenueDialog = useRef<HTMLDialogElement>(null);
+  const avenueButton = useRef<HTMLButtonElement>(null);
+  const avenueOpenRef = useRef(false);
+  const [avenueOpen, setAvenueOpen] = useState(false);
   const rootRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -46,6 +52,7 @@ export function CityHero() {
     const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
     const memory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
     let disposed = false, loading = false, failed = false, visible = true;
+    let ascii: ReturnType<typeof import("../city-lab/ascii-pass").createAsciiPass> | undefined;
     let frame = 0, generation = 0, lastPhase = -1;
     let currentMode: Mode = "poster";
     let top = 0, distance = 1;
@@ -76,13 +83,14 @@ export function CityHero() {
     };
     const schedule = () => { if (!disposed && !frame) frame = requestAnimationFrame(update); };
     // A recreated renderer needs one frame before the persisted pause takes effect.
-    const shouldRun = () => visible && !document.hidden && (currentMode === "loading" || !pausedRef.current) && !document.documentElement.dataset.antheonIntro;
+    const shouldRun = () => visible && !document.hidden && (currentMode === "loading" || !pausedRef.current) && !document.documentElement.dataset.antheonIntro && !avenueOpenRef.current;
     const prefersStill = () => compact.matches || reduced.matches || connection?.saveData || (memory !== undefined && memory <= 2);
     const stopScene = () => {
       generation++;
       loading = false;
       sceneRef.current?.dispose();
       sceneRef.current = null;
+      ascii?.dispose(); ascii = undefined;
     };
     const boot = () => {
       if (disposed) return;
@@ -101,7 +109,7 @@ export function CityHero() {
       loading = true;
       const attempt = ++generation;
       changeMode("loading");
-      void import("./city-scene").then(({ createCityScene }) => {
+      void Promise.all([import("./city-scene"), import("../city-lab/ascii-pass")]).then(([{ createCityScene }, { createAsciiPass }]) => {
         if (disposed || generation !== attempt) return;
         const onError = () => {
           if (disposed || generation !== attempt) return;
@@ -109,7 +117,15 @@ export function CityHero() {
           // Disposal outside a render/context-loss callback is safe for the renderer.
           queueMicrotask(() => { if (!disposed && generation === attempt) { stopScene(); changeMode("static"); } });
         };
+        ascii = createAsciiPass();
         const scene = createCityScene(canvas, {
+          renderFrame: (renderer, world, camera) => {
+            const amount = smooth(.02, .56, progressRef.current);
+            root.dataset.representation = amount >= 1 ? "solid" : amount <= 0 ? "ascii" : "transition";
+            // Return to the original render path once resolved, preserving its exact grading.
+            if (amount >= 1) renderer.render(world, camera);
+            else { ascii?.setMix(amount); ascii?.render(renderer, world, camera); }
+          },
           onHover: id => { if (!disposed && id) { setSelected(id); setInteracted(true); } },
           onSelect: id => { if (!disposed) { setSelected(id); setInteracted(true); } },
           onReady: () => {
@@ -167,6 +183,25 @@ export function CityHero() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!avenueOpen) return;
+    const dialog = avenueDialog.current;
+    if (!dialog) return;
+    avenueOpenRef.current = true;
+    sceneRef.current?.setRunning(false);
+    const returnButton = avenueButton.current;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    dialog.showModal();
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      avenueOpenRef.current = false;
+      dialog.close();
+      sceneRef.current?.setRunning(!pausedRef.current && !document.hidden);
+      returnButton?.focus({ preventScroll: true });
+    };
+  }, [avenueOpen]);
+
   function explore(id?: DistrictId) {
     setSelected(id ?? selected); setInteracted(true);
     if (mode !== "live" || !rootRef.current || !stageRef.current || progressRef.current >= .6) return;
@@ -221,6 +256,7 @@ export function CityHero() {
           <div className="city-status-row">
             <span className="city-scroll-note"><span className="city-status-dot" />{mode === "live" ? ["SCROLL TO BRING THE CITY TO LIFE", "A CONNECTED WORLD, COMING TO LIFE", "HOVER A DISTRICT. DISCOVER THE THINKING.", "FROM POSSIBILITY TO PRACTICE"][phase] : "FOUR DISTRICTS. ONE SHARED VISION."}</span>
             <div className="city-tools">
+              <button ref={avenueButton} type="button" className="city-continue city-avenue-entry" onClick={() => setAvenueOpen(true)}>Enter the avenue <VectorIcon name="arrow-up-right" /></button>
               {mode === "live" && <button className="city-pause" type="button" onClick={togglePause} aria-pressed={paused}>{paused ? "Resume motion" : "Pause motion"}<span aria-hidden="true">{paused ? "▷" : "Ⅱ"}</span></button>}
               <a className="city-continue" href="#about">Continue to the group <VectorIcon name="arrow-down" /></a>
             </div>
@@ -231,5 +267,8 @@ export function CityHero() {
         <noscript><div className="city-no-script">{districts.map(item => <a key={item.id} href={item.href}><strong>{item.label}</strong><span>{item.description}</span></a>)}</div></noscript>
       </div>
     </section>
+    <dialog ref={avenueDialog} className="city-avenue-dialog" aria-label="Explore Possibility Avenue" onCancel={() => setAvenueOpen(false)} onClose={() => setAvenueOpen(false)}>
+      {avenueOpen && <Avenue embedded initialView="street" initialDistrict={selected === "core" ? undefined : selected} onReturn={() => setAvenueOpen(false)} />}
+    </dialog>
   </>;
 }

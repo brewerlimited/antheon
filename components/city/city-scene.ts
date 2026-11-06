@@ -3,7 +3,7 @@ import {
   CylinderGeometry, DirectionalLight, EquirectangularReflectionMapping, FogExp2,
   HemisphereLight, IcosahedronGeometry, InstancedBufferAttribute, InstancedMesh,
   MathUtils, Mesh, MeshBasicMaterial, MeshStandardMaterial, Object3D,
-  OrthographicCamera, PCFSoftShadowMap, PlaneGeometry, PMREMGenerator, Raycaster,
+  OrthographicCamera, PCFShadowMap, PlaneGeometry, PMREMGenerator, Raycaster,
   Scene, SRGBColorSpace, Vector2, Vector3, WebGLRenderer,
 } from "three";
 import type { Material, Texture } from "three";
@@ -16,6 +16,8 @@ type Options = {
   onReady: () => void;
   onError: () => void;
   reducedMotion?: boolean;
+  /** Optional presentation pass, used by the isolated ASCII city prototype. */
+  renderFrame?: (renderer: WebGLRenderer, scene: Scene, camera: OrthographicCamera) => void;
 };
 type Style = "stone" | "metal" | "glass" | "dark" | "paving" | "roof";
 type Piece = { x: number; y: number; z: number; w: number; h: number; d: number; angle: number; seed: number };
@@ -37,7 +39,7 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
   renderer.toneMapping = ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.18;
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = PCFSoftShadowMap;
+  renderer.shadowMap.type = PCFShadowMap;
   renderer.shadowMap.autoUpdate = false;
   renderer.shadowMap.needsUpdate = true;
   renderer.setClearColor(0x06070b, 1);
@@ -71,12 +73,12 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
   const ground = new Mesh(groundGeometry, groundMaterial);
   ground.rotation.x = -Math.PI / 2; ground.position.y = -0.06; ground.receiveShadow = true; scene.add(ground);
 
-  // Existing Anthēon sources: intro-scene.ts uViolet and globals.css warm white.
-  // Neutral albedo/key light keep the architecture charcoal; violet lives in illumination.
-  const brandViolet = new Color("#b184ff");
+  // Match the public “Made distinct.” headline through the shared brand token.
+  // Neutral albedo/key light keep the architecture charcoal; periwinkle lives in illumination.
+  const brandAccent = new Color(getComputedStyle(canvas).getPropertyValue("--antheon-periwinkle").trim() || "#b9cbff");
   const warmWhite = new Color("#f4f2ed");
-  const lavender = warmWhite.clone().lerp(brandViolet, 0.68);
-  const sky = new HemisphereLight(warmWhite.clone().lerp(brandViolet, 0.18), 0x17161a, 1.1); scene.add(sky);
+  const lavender = warmWhite.clone().lerp(brandAccent, 0.68);
+  const sky = new HemisphereLight(warmWhite.clone().lerp(brandAccent, 0.18), 0x17161a, 1.1); scene.add(sky);
   const sun = new DirectionalLight(warmWhite, 3.2);
   sun.position.set(-34, 74, 22); sun.castShadow = true;
   sun.shadow.mapSize.set(2048, 2048);
@@ -85,7 +87,7 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
   sun.shadow.camera.near = 5; sun.shadow.camera.far = 170;
   sun.shadow.normalBias = 0.045; sun.shadow.bias = -0.00012;
   sun.shadow.radius = 3; scene.add(sun);
-  const rim = new DirectionalLight(brandViolet, 2.1); rim.position.set(32, 38, -45); scene.add(rim);
+  const rim = new DirectionalLight(brandAccent, 2.1); rim.position.set(32, 38, -45); scene.add(rim);
   const fill = new DirectionalLight(warmWhite, 0.25); fill.position.set(18, 14, 36); scene.add(fill);
 
   // A tiny locally drawn studio environment gives glazing reflected sky and
@@ -99,8 +101,8 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
     gradient.addColorStop(0, "#59585b"); gradient.addColorStop(0.42, "#353437");
     gradient.addColorStop(0.55, "#1c1b1e"); gradient.addColorStop(1, "#0d0c0f");
     ctx.fillStyle = gradient; ctx.fillRect(0, 0, 512, 256);
-    ctx.fillStyle = "#c4becb"; ctx.fillRect(58, 40, 31, 110);
-    ctx.fillStyle = "#8b858f"; ctx.fillRect(322, 24, 62, 116);
+    ctx.fillStyle = "#bec2cb"; ctx.fillRect(58, 40, 31, 110);
+    ctx.fillStyle = "#85888f"; ctx.fillRect(322, 24, 62, 116);
     const sourceTexture = new CanvasTexture(environmentCanvas);
     sourceTexture.mapping = EquirectangularReflectionMapping; sourceTexture.colorSpace = SRGBColorSpace;
     const pmrem = new PMREMGenerator(renderer);
@@ -235,9 +237,9 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
   const mediaContext=mediaCanvas.getContext("2d");
   let mediaMaterial:MeshBasicMaterial|null=null;
   if(mediaContext){
-    mediaContext.fillStyle="#1b1724";mediaContext.fillRect(0,0,256,96);
+    mediaContext.fillStyle="#171b24";mediaContext.fillRect(0,0,256,96);
     for(let i=0;i<8;i++){
-      mediaContext.fillStyle=["#77658e","#b184ff","#3c344b","#b4a7c4"][i%4];
+      mediaContext.fillStyle=["#65708e","#b9cbff","#343a4b","#a7afc4"][i%4];
       mediaContext.fillRect(12+i*30,12+(i%3)*13,19,65-(i%3)*13);
     }
     const texture=new CanvasTexture(mediaCanvas);texture.colorSpace=SRGBColorSpace;textures.add(texture);
@@ -325,7 +327,7 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
       }
     }
   });
-  const routeMaterial = new MeshBasicMaterial({color:brandViolet,transparent:true,opacity:0.06,toneMapped:false}); materials.add(routeMaterial);
+  const routeMaterial = new MeshBasicMaterial({color:brandAccent,transparent:true,opacity:0.06,toneMapped:false}); materials.add(routeMaterial);
   const routes = new InstancedMesh(box,routeMaterial,routePieces.length); scene.add(routes);
   routePieces.forEach((p,i)=>{temp.position.set(p.x,p.y,p.z);temp.scale.set(p.w,p.h,p.d);temp.rotation.set(0,0,0);temp.updateMatrix();routes.setMatrixAt(i,temp.matrix);});
 
@@ -383,7 +385,7 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
   updateCars(0,0);
 
   // Added after the original seeded scene: no change to buildings, windows or traffic.
-  const surroundings = createCitySurroundings(scene, brandViolet);
+  const surroundings = createCitySurroundings(scene, brandAccent);
 
   const raycaster = new Raycaster();
   const pointer = new Vector2(10,10);
@@ -394,7 +396,7 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
   const cameraTarget = new Vector3();
   let hovered:DistrictId|null=null, selected:DistrictId|null=null;
   let progressTarget=0,progress=0,raf=0,lastTime=0,time=0;
-  let running=true,disposed=false,ready=false,pointerInside=false,dirty=true;
+  let running=true,disposed=false,ready=false,pointerInside=false,dirty=true,motionPaused=false;
   let width=1,height=1,dpr=1,slowFrames=0,frameCount=0,qualitySampleTime=0;
   const onHover = (id:DistrictId|null) => {if(id!==hovered){hovered=id;options.onHover(id);dirty=true;}};
   const move = (event:PointerEvent) => {
@@ -442,7 +444,7 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
     raf=0;if(disposed||!running)return;
     const rawDelta=lastTime?(timestamp-lastTime)/1000:1/60;
     const delta=Math.min(rawDelta,0.08);lastTime=timestamp;
-    time+=delta;
+    if(!motionPaused)time+=delta;
     progress+= (progressTarget-progress)*(reduced?1:1-Math.exp(-delta*8));
     if(Math.abs(progressTarget-progress)<0.0001)progress=progressTarget;
     pointerCurrent.lerp(pointerTarget,reduced?1:1-Math.exp(-delta*3.5));
@@ -456,7 +458,9 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
       }
     } else if(hovered)onHover(null);
     updateCars(reduced?0:time,ease(0.15,0.56,progress));
-    renderer.render(scene,camera);dirty=false;
+    if(options.renderFrame) options.renderFrame(renderer,scene,camera);
+    else renderer.render(scene,camera);
+    dirty=false;
     if(!ready){ready=true;options.onReady();}
     // Sustained slow rendering lowers resolution once, without a quality pop
     // caused by a single long task while assets elsewhere on the page load.
@@ -468,11 +472,12 @@ export function createCityScene(canvas: HTMLCanvasElement, options: Options) {
       qualitySampleTime=0;frameCount=0;slowFrames=0;
     }
     const settling=Math.abs(progressTarget-progress)>0.0001||districtIds.some(id=>Math.abs(highlights[id].value-(id===(selected??hovered)?1:0))>0.002);
-    if(!reduced||settling||dirty)schedule();
+    if((!reduced&&!motionPaused)||settling||dirty)schedule();
   }
   function schedule(){if(!disposed&&running&&!raf)raf=requestAnimationFrame(render);}
   resize();
   return {
+    setMotionPaused(value:boolean){motionPaused=value;dirty=true;schedule();},
     setProgress(p:number){progressTarget=clamp(Number.isFinite(p)?p:0);dirty=true;schedule();},
     setActiveDistrict(id:DistrictId|null){selected=id;dirty=true;schedule();},
     setRunning(value:boolean){if(disposed)return;running=value;lastTime=0;if(value){dirty=true;schedule();}else{cancelAnimationFrame(raf);raf=0;}},
